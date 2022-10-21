@@ -20,12 +20,12 @@ void tulisPoint(POINT P){
 /* Operasi disini dikhususkan untuk move ke lor, kidul, wetan, kulon.*/
 void moveNorth(POINT *P){
 /* Menggerakkan point ke atas sebanyak 1 titik*/
-    ORDINAT(*P)++;
+    ORDINAT(*P)--;
 }
 
 void moveSouth(POINT *P){
 /* Menggerakkan point ke bawah sebanyak 1 titik*/
-    ORDINAT(*P)--;
+    ORDINAT(*P)++;
 }
 
 void moveEast(POINT *P){

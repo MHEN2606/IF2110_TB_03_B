@@ -18,7 +18,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
 
     scanf("%d", &n);
 
-    createListFood(l);
+    createList(l);
 
     for (int i = 0; i < n; i++){
         readFood(&fd);
@@ -46,4 +46,9 @@ ListStatik copyList(ListStatik *l){
     }
 
     return lcopy;
+}
+
+int panjangList(ListStatik l){
+/* Mengembalikan panjang efektif dari l */
+    return(NEFF(l));
 }

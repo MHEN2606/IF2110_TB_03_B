@@ -31,8 +31,8 @@ matriks m*/
 
 void displayMatrix(Matrix m){
 /* Mencetak isi matriks m. */
-    for (int i = 0; i < COL(m); i++){
-        if (i != COL(m)-1){
+    for (int i = 0; i < COL(m)+2; i++){
+        if (i != COL(m)+1){
             printf("* ");
         }else{
             printf("*\n");
@@ -51,11 +51,17 @@ void displayMatrix(Matrix m){
         printf(" *\n");
     }
 
-    for (int i = 0; i < COL(m); i++){
-        if (i != COL(m)-1){
+    for (int i = 0; i < COL(m)+2; i++){
+        if (i != COL(m)+1){
             printf("* ");
         }else{
             printf("*\n");
         }
     }
+}
+
+/* *** VALIDATOR *** */
+boolean isIdxValid(Matrix m, int idb, int idc){
+/* Memeriksa apakah indeks baris idb dan indeks kolom idc berada dalam matriks m atau tidak*/
+    return(ROW(m)>idb && COL(m)>idc && idc >= 0 && idb >= 0);
 }

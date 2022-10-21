@@ -32,4 +32,8 @@ matriks m*/
 void displayMatrix(Matrix m);
 /* Mencetak isi matriks m. */
 
+/* *** VALIDATOR *** */
+boolean isIdxValid(Matrix m, int idb, int idc);
+/* Memeriksa apakah indeks baris idb dan indeks kolom idc berada dalam matriks m atau tidak */
+
 #endif

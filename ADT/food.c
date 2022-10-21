@@ -22,8 +22,8 @@ void readFood(FOOD *food){
     TIME exp,send;
     
     scanf("%d", &id);
-    scanf("%s\n", &namaMakanan);
-    scanf("%s\n", &aksi);
+    scanf("%s", &namaMakanan);
+    scanf("%s", &aksi);
 
     // dummy : kita buat langsung time exp dan send. seharusnya ada prosedur di sini
 

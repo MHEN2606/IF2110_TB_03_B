@@ -8,7 +8,7 @@
 typedef FOOD ElType;
 
 typedef struct{
-    ElType container[100];// array of ElType (aka Food)
+    ElType container[100];// array of Food
     int NEFF; // Jumlah efektif list
 }ListStatik;
 
@@ -31,5 +31,8 @@ void displayList(ListStatik *l);
 
 ListStatik copyList(ListStatik *l);
 /* Menyalin seluruh l ke l1*/
+
+int panjangList(ListStatik l);
+/* Mengembalikan panjang efektif dari l */
 
 #endif
