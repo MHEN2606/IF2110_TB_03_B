@@ -56,6 +56,16 @@ void ADVWORD(){
         IgnoreBlanks();
     }
 }
+
+void ADVLINE(){
+/* Melakukan advancement jika bertemu dengan MARK. endWord diubah menjadi False kembali*/
+
+    if(currentChar == MARK){
+        endWord = false;
+        ADV();
+        CopyWord();
+    }
+}
  
 void CopyWord(){
 /* Mengakuisisi kata, menyimpan dalam currentWord
@@ -71,6 +81,24 @@ void CopyWord(){
         i++;
     }
     currentWord.Length = i;
+}
+
+boolean isSameWord(Word w1, Word w2){
+/* Membandingkan apakah w1 = w2 */
+    if (w1.Length != w2.Length){
+        return false;
+    }else{
+        boolean same = true;
+        int i = 0;
+        while (same && i < w1.Length){
+            if(w1.TabWord[i] != w2.TabWord[i]){
+                same = false;
+            }else{
+                i++;
+            }
+        }
+        return same;
+    }
 }
  
 void LowerCase(){

@@ -20,6 +20,22 @@ typedef struct
 extern boolean endWord;
 extern Word currentWord;
 
+/* KUMPULAN COMMAND */
+Word Start = {"START", 5}; //Start lowercase untuk membedakan dengan START
+Word EXIT = {"EXIT", 4};
+Word BUY = {"BUY", 3};
+Word FRY = {"FRY", 3};
+Word DELIVERY = {"DELIVERY", 7};
+/* KURANG MOVE NORTH/SOUTH/EAST/WEST */
+Word MIX = {"MIX", 3};
+Word CHOP = {"CHOP", 4};
+Word BOIL = {"BOIL", 4};
+Word UNDO = {"UNDO", 4};
+Word REDO = {"REDO", 4};
+Word CATALOG = {"CATALOG", 7};
+Word COOKBOOK = {"COOKBOOK", 8};
+
+
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
@@ -41,6 +57,9 @@ void ADVWORD();
           Jika currentChar = MARK, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
+void ADVLINE();
+/* Melakukan advancement jika bertemu dengan MARK. endWord diubah menjadi False kembali*/
+
 void CopyWord();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
@@ -48,6 +67,9 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+boolean isSameWord(Word w1, Word w2);
+/* Membandingkan apakah w1 = w2 */
 
 void LowerCase();
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
