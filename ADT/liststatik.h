@@ -28,7 +28,7 @@ void inputListFood(ListStatik *l);
 input dilakukan dari sebuah file*/
 
 /* *** TULIS / SALIN *** */
-void displayList(ListStatik *l);
+void displayList(ListStatik l);
 /* Menuliskan isi list food*/
 
 ListStatik copyList(ListStatik *l);

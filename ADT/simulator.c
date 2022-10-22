@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-
 #include "simulator.h"
 #include "point.h"
 #include "liststatik.h"

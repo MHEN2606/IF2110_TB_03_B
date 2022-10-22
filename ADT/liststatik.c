@@ -26,7 +26,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
     // baca line pertama simpan sebagai N
     N = charToInt(currentWord);
     NEFF(*l) = N;
-    ADVWORD();
+    ADVLINE();
 
     // ulang proses memasukkan data sebanyak N kali
     while (i < N)
@@ -38,7 +38,8 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         /* Terima Nama Makanan*/
         /* Untuk nama makanan perlu dipikirkan kondisi kalo nama makanannya lebih
         dari 1 word. Misal Daging Anjing. Itu musti jadi 1 */
-        char *namaMakanan = konkatKata().TabWord;
+        char *namaMakanan = "makanan";
+        ADVWORD();
         ADVLINE();
 
         /* Terima Waktu Expired */
@@ -60,7 +61,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         s2 = charToInt(currentWord);
         ADVWORD();
         s3 = charToInt(currentWord);
-        createTime(&exp, s1,s2,s3);
+        createTime(&send, s1,s2,s3);
         ADVLINE();
 
         /* Terima Aksi */
@@ -68,7 +69,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         ADVLINE();
 
         /* Buat Food */
-        createFood(&fd, id, *namaMakanan, exp, send, *aksi);
+        createFood(&fd, id, namaMakanan, exp, send, aksi);
 
         /* Masukkan ke List */
         ELMT(*l,i) = fd;
@@ -79,10 +80,10 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
 }
 
 /* *** TULIS / SALIN *** */
-void displayList(ListStatik *l){
+void displayList(ListStatik l){
 /* Menuliskan isi list food*/
-    for (int i = 0; i < NEFF(*l); i++){
-        printf("%d. %s - %d menit\n", i, FOODNAME(ELMT(*l,i)), Minute(SEND(ELMT(*l,i))));
+    for (int i = 0; i < NEFF(l); i++){
+        printf("%d. %s - %d menit\n", i+1, FOODNAME(ELMT(l,i)), Minute(SEND(ELMT(l,i))));
     }
 }
 

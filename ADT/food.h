@@ -2,6 +2,7 @@
 #define FOOD_H
 
 #include "time.h"
+#include "wordmachine.h"
 
 #define NMAX 100
 
@@ -23,10 +24,7 @@ typedef struct{
 #define AKSI(F) (F).aksi
 
 /* *** CREATOR FOOD *** */
-void createFood(FOOD *food, int id, char namaMakanan, TIME exp, TIME send, char aksi);
+void createFood(FOOD *food, int id, char *namaMakanan, TIME exp, TIME send, char *aksi);
 /* Membuat sembarang Food */
 
-/* *** BACA *** */
-void readFood(FOOD *food);
-/* Membaca food dari sebuah file.txt lalu menjadikannya tipe food*/
 #endif

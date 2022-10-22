@@ -110,11 +110,10 @@ int charToInt (Word num){
         number += (num.TabWord[i]-48) * pow(10,power);
         power--;
     }
-    number = number + (num.Length % 2 == 0 ? 0 : 1);
     return number;
 }
 
-Word konkatKata(){
+char* konkatKata(){
 /* Melakukan Konkatenasi Kata menjadi satu string 
    Proses: Melakukan ADVKATA hingga MARK
 */
@@ -129,7 +128,9 @@ Word konkatKata(){
         len++;
         ADVWORD();
     }
-    return gabung;
+    char *kirim;
+    kirim = gabung.TabWord;
+    return kirim;
 }
 
 void LowerCase(){

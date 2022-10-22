@@ -25,7 +25,7 @@ Word Start = {"START", 5}; //Start lowercase untuk membedakan dengan START
 Word EXIT = {"EXIT", 4};
 Word BUY = {"BUY", 3};
 Word FRY = {"FRY", 3};
-Word DELIVERY = {"DELIVERY", 7};
+Word DELIVERY = {"DELIVERY", 8};
 /* KURANG MOVE NORTH/SOUTH/EAST/WEST */
 Word MIX = {"MIX", 3};
 Word CHOP = {"CHOP", 4};
@@ -74,7 +74,7 @@ boolean isSameWord(Word w1, Word w2);
 int charToInt (Word num);
 /* Mengubah char menjadi integer */
 
-Word konkatKata();
+char* konkatKata();
 /* Melakukan Konkatenasi Kata menjadi satu string 
    Proses: Melakukan ADVKATA hingga MARK
 */
