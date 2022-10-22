@@ -2,6 +2,8 @@
 #define LIST_STATIK_H
 
 #include "food.h"
+#include "charmachine.h"
+#include "wordmachine.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
 
@@ -21,7 +23,7 @@ void createList(ListStatik *l);
 /* Membuat list kosong dengan NEFF = 0*/
 
 /* *** INPUT *** */
-void inputList(ListStatik *l);
+void inputListFood(ListStatik *l);
 /* Membaca banyak makanan yang dimasukkan lalu membuat list makanan 
 input dilakukan dari sebuah file*/
 

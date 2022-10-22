@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include "wordmachine.h"
 #include "charmachine.h"
  
@@ -59,7 +60,6 @@ void ADVWORD(){
 
 void ADVLINE(){
 /* Melakukan advancement jika bertemu dengan MARK. endWord diubah menjadi False kembali*/
-
     if(currentChar == MARK){
         endWord = false;
         ADV();
@@ -100,7 +100,38 @@ boolean isSameWord(Word w1, Word w2){
         return same;
     }
 }
- 
+
+int charToInt (Word num){
+/* Mengubah char menjadi integer khusus untuk char berupa angka */
+    int i;
+    int power = num.Length-1;
+    int number = 0;
+    for (i = 0; i < num.Length; i++){
+        number += (num.TabWord[i]-48) * pow(10,power);
+        power--;
+    }
+    number = number + (num.Length % 2 == 0 ? 0 : 1);
+    return number;
+}
+
+Word konkatKata(){
+/* Melakukan Konkatenasi Kata menjadi satu string 
+   Proses: Melakukan ADVKATA hingga MARK
+*/
+    Word gabung;
+    int len = 0;
+    while (!endWord){
+        for (int i = 0; i < currentWord.Length; i++){
+            gabung.TabWord[i] = currentWord.TabWord[i];
+            len++;
+        }
+        gabung.TabWord[len] = ' ';
+        len++;
+        ADVWORD();
+    }
+    return gabung;
+}
+
 void LowerCase(){
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
  

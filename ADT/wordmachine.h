@@ -71,6 +71,14 @@ void CopyWord();
 boolean isSameWord(Word w1, Word w2);
 /* Membandingkan apakah w1 = w2 */
 
+int charToInt (Word num);
+/* Mengubah char menjadi integer */
+
+Word konkatKata();
+/* Melakukan Konkatenasi Kata menjadi satu string 
+   Proses: Melakukan ADVKATA hingga MARK
+*/
+
 void LowerCase();
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
 /* F.S. currentword menjadi lowercase di setiap karakternya */

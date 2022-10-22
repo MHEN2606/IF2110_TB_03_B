@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "liststatik.h"
+#include "charmachine.h"
+#include "wordmachine.h"
 #include "food.h"
-#include "time.h"
 
 /* *** CREATOR *** */
 void createList(ListStatik *l){
@@ -10,19 +11,70 @@ void createList(ListStatik *l){
 }
 
 /* *** INPUT *** */
-void inputList(ListStatik *l){
+void inputListFood(ListStatik *l){
 /* Membaca banyak makanan yang dimasukkan lalu membuat list makanan 
 input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
-    int n;
-    FOOD fd;
+    int N; //jumlah data yang akan dimasukkan
+    int i;
+    FOOD fd; // fd adalah food
 
-    scanf("%d", &n);
-
+    /* Buat List Food l */
     createList(l);
 
-    for (int i = 0; i < n; i++){
-        readFood(&fd);
+    STARTCONFIGWORD("../konfigurasi/makanan.txt");// buka file konfigurasi
+
+    // baca line pertama simpan sebagai N
+    N = charToInt(currentWord);
+    NEFF(*l) = N;
+    ADVWORD();
+
+    // ulang proses memasukkan data sebanyak N kali
+    while (i < N)
+    {
+        /* Terima ID Makanan */
+        int id = charToInt(currentWord);
+        ADVLINE();
+
+        /* Terima Nama Makanan*/
+        /* Untuk nama makanan perlu dipikirkan kondisi kalo nama makanannya lebih
+        dari 1 word. Misal Daging Anjing. Itu musti jadi 1 */
+        char *namaMakanan = konkatKata().TabWord;
+        ADVLINE();
+
+        /* Terima Waktu Expired */
+        TIME exp;
+        int e1,e2,e3;
+        e1 = charToInt(currentWord);
+        ADVWORD();
+        e2 = charToInt(currentWord);
+        ADVWORD();
+        e3 = charToInt(currentWord);
+        createTime(&exp, e1,e2,e3);
+        ADVLINE();
+
+        /* Terima Waktu Send*/
+        TIME send;
+        int s1,s2,s3;
+        s1 = charToInt(currentWord);
+        ADVWORD();
+        s2 = charToInt(currentWord);
+        ADVWORD();
+        s3 = charToInt(currentWord);
+        createTime(&exp, s1,s2,s3);
+        ADVLINE();
+
+        /* Terima Aksi */
+        char *aksi = currentWord.TabWord;
+        ADVLINE();
+
+        /* Buat Food */
+        createFood(&fd, id, *namaMakanan, exp, send, *aksi);
+
+        /* Masukkan ke List */
         ELMT(*l,i) = fd;
+
+        /* INCREMENT */
+        i++;
     }
 }
 
