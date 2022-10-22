@@ -17,7 +17,7 @@ typedef struct
 } Word;
 
 /* State Mesin Word */
-extern boolean EndWord;
+extern boolean endWord;
 extern Word currentWord;
 
 void IgnoreBlanks();
@@ -30,6 +30,9 @@ void STARTWORD();
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
+
+void STARTCONFIGWORD(char *filename);
+/* Memulai Konfigurasi dari Word. Melakukan Akuisisi kata */
 
 void ADVWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi

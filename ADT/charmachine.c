@@ -23,6 +23,11 @@ void START()
        ADV();
 }
 
+void startConfig(char *file){
+       pita = fopen(file, "r");
+       ADV();
+}
+
 void ADV()
 {
        /* Pita dimajukan satu karakter.

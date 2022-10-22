@@ -29,6 +29,18 @@ void STARTWORD(){
         ADVWORD();
     }
 }
+
+void STARTCONFIGWORD(char *filename){
+    /* Memulai Config dari file */
+    startConfig(filename);
+    IgnoreBlanks();
+    if(currentChar == MARK){
+        endWord = true;
+    }else{
+        endWord = false;
+        ADVWORD();
+    }
+}
  
 void ADVWORD(){
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
