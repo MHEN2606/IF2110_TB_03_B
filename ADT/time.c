@@ -30,6 +30,11 @@ int timeToSecond(TIME T){
     return (Minute(T) * 60 + Hour(T) * 3600 + Day(T) * 3600 * 24);
 }
 
+int timeToMinute(TIME T){
+/* Mengubah TIME T menjadi menit */
+    return(Minute(T) + Hour(T) * 60 + Day(T) * 60 * 24);
+}
+
 TIME secondToTime(int s){
 /* Mengubah detik s menjadi TIME */
     TIME T;

@@ -83,7 +83,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
 void displayList(ListStatik l){
 /* Menuliskan isi list food*/
     for (int i = 0; i < NEFF(l); i++){
-        printf("%d. %s - %d menit\n", i+1, FOODNAME(ELMT(l,i)), Minute(SEND(ELMT(l,i))));
+        printf("%d. %s - %d menit\n", i+1, FOODNAME(ELMT(l,i)), timeToMinute(SEND(ELMT(l,i))));
     }
 }
 

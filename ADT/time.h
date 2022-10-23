@@ -27,6 +27,9 @@ void displayTime(TIME T);
 int timeToSecond(TIME T);
 /* Mengubah TIME T menjadi detik */
 
+int timeToMinute(TIME T);
+/* Mengubah TIME T menjadi menit */
+
 TIME secondToTime(int s);
 /* Mengubah detik s menjadi TIME */
 
