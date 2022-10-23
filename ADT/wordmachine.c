@@ -113,7 +113,7 @@ int charToInt (Word num){
     return number;
 }
 
-char* konkatKata(){
+Word konkatKata(){
 /* Melakukan Konkatenasi Kata menjadi satu string 
    Proses: Melakukan ADVKATA hingga MARK
 */
@@ -121,16 +121,27 @@ char* konkatKata(){
     int len = 0;
     while (!endWord){
         for (int i = 0; i < currentWord.Length; i++){
-            gabung.TabWord[i] = currentWord.TabWord[i];
+            gabung.TabWord[len] = currentWord.TabWord[i];
             len++;
         }
-        gabung.TabWord[len] = ' ';
-        len++;
-        ADVWORD();
+        if (currentChar == BLANK){
+            gabung.TabWord[len] = ' ';
+            len++;
+            ADV();
+            CopyWord();
+        }else if (currentChar == MARK){
+            endWord = true;
+        }
     }
-    char *kirim;
-    kirim = gabung.TabWord;
-    return kirim;
+    gabung.Length = len;
+    return gabung;
+}
+
+void tulisKata(Word w){
+/* Menuliskan Kata w */
+    for (int i = 0; i < w.Length; i++){
+        printf("%c", w.TabWord[i]);
+    }
 }
 
 void LowerCase(){

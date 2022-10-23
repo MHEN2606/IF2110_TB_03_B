@@ -10,10 +10,10 @@
 
 typedef struct{
     int ID;
-    char *namaMakanan; // string nama makanan
+    Word namaMakanan; // string nama makanan
     TIME expired; // waktu expired
     TIME send; // waktu pengiriman
-    char *aksi; // Aksi yang dapat dilakukan
+    Word aksi; // Aksi yang dapat dilakukan
 } FOOD;
 
 /* *** SELEKTOR ADT FOOD *** */
@@ -24,7 +24,7 @@ typedef struct{
 #define AKSI(F) (F).aksi
 
 /* *** CREATOR FOOD *** */
-void createFood(FOOD *food, int id, char *namaMakanan, TIME exp, TIME send, char *aksi);
+void createFood(FOOD *food, int id, Word namaMakanan, TIME exp, TIME send, Word aksi);
 /* Membuat sembarang Food */
 
 #endif

@@ -38,8 +38,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         /* Terima Nama Makanan*/
         /* Untuk nama makanan perlu dipikirkan kondisi kalo nama makanannya lebih
         dari 1 word. Misal Daging Anjing. Itu musti jadi 1 */
-        char *namaMakanan = "makanan";
-        ADVWORD();
+        Word namaMakanan = konkatKata();
         ADVLINE();
 
         /* Terima Waktu Expired */
@@ -65,7 +64,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         ADVLINE();
 
         /* Terima Aksi */
-        char *aksi = currentWord.TabWord;
+        Word aksi = currentWord;
         ADVLINE();
 
         /* Buat Food */
@@ -83,7 +82,11 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
 void displayList(ListStatik l){
 /* Menuliskan isi list food*/
     for (int i = 0; i < NEFF(l); i++){
-        printf("%d. %s - %d menit\n", i+1, FOODNAME(ELMT(l,i)), timeToMinute(SEND(ELMT(l,i))));
+        printf("%d. ", i+1);
+        tulisKata(FOODNAME(ELMT(l,i)));
+        printf(" - ");
+        tulisKata(AKSI(ELMT(l,i)));
+        printf(" - %d menit\n", timeToMinute(SEND(ELMT(l,i))));
     }
 }
 

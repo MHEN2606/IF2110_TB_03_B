@@ -74,10 +74,13 @@ boolean isSameWord(Word w1, Word w2);
 int charToInt (Word num);
 /* Mengubah char menjadi integer */
 
-char* konkatKata();
-/* Melakukan Konkatenasi Kata menjadi satu string 
+Word konkatKata();
+/* Melakukan Konkatenasi beberapa Kata menjadi satu Kata
    Proses: Melakukan ADVKATA hingga MARK
 */
+
+void tulisKata(Word w);
+/* Menuliskan Kata w */
 
 void LowerCase();
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
