@@ -76,6 +76,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
         /* INCREMENT */
         i++;
     }
+    closeFile();
 }
 
 /* *** TULIS / SALIN *** */

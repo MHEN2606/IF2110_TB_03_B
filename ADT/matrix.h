@@ -9,10 +9,10 @@
 #define COL_CAP 100
 
 typedef int IdxType;
-typedef char ElType; // Elemen dari matriks adalah char (*, S, dsb.). Elemen dari peta
+typedef char Elmtype; // Elemen dari matriks adalah char (*, S, dsb.). Elemen dari peta
 
 typedef struct{
-    ElType mem[ROW_CAP][COL_CAP];
+    Elmtype mem[ROW_CAP][COL_CAP];
     int rowEff;
     int colEff;
 } Matrix;

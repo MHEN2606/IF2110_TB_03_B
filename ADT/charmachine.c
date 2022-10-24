@@ -45,3 +45,9 @@ void ADV()
               fclose(pita);
        } */
 }
+
+void closeFile()
+/* menutup pita */
+{
+       fclose(pita);
+}

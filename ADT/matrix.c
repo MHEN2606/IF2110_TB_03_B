@@ -30,17 +30,18 @@ matriks m*/
     for(int i = 0; i < ROW(*m); i++){
         for (int j = 0; j < COL(*m); j++){
             if(currentWord.TabWord[j] == '#'){
-                MAT(*m,i,j) = ' '; // empty character seharusnya bukan spasi
+                MAT(*m,i,j) = ' ';
             }else{
                 if(currentWord.TabWord[j] == 'S') {
-                    createPoint(&P,i,j);
-                } else {
-                    MAT(*m,i,j) = currentWord.TabWord[j];
+                    createPoint(P,i,j);
                 }
+                MAT(*m,i,j) = currentWord.TabWord[j];
             }
         }
+        ADVLINE();
     }
 
+    closeFile();
 }
 
 void displayMatrix(Matrix m){
