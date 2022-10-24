@@ -3,6 +3,7 @@
 #include "time.h"
 #include "wordmachine.h"
 #include <stdio.h>
+#include <stdlib.h>
 /* ********* Prototype ********* */
 boolean IsEmpty (PrioQueueTime Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
@@ -118,16 +119,20 @@ void Dequeue (PrioQueueTime * Q, infotype * X)
     if (NBElmt(*Q) == 1){
         Info(*X) = Info(InfoHead(*Q));
         Time(*X) = Time(InfoHead(*Q));
-        Head(*Q) = 0;
-        Tail(*Q) = 0;
+        Head(*Q) = Nil;
+        Tail(*Q) = Nil;
     } else {
         Info(*X) = Info(InfoHead(*Q));
         Time(*X) = Time(InfoHead(*Q));
-        Head(*Q) = (Head(*Q)%MaxEl(*Q)) + 1;
+        if (Head(*Q)==MaxEl(*Q)-1){
+            Head(*Q) = 0;
+        } else {
+            Head(*Q) = Head(*Q) + 1;
+        }
     }
 }
 /* Operasi Tambahan */
-void PrintInventory (PrioQueueTime Q)
+void PrintInventory(PrioQueueTime Q)
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
@@ -147,7 +152,6 @@ No urut. Nama makanan - Waktu
             tulisKata(Info(element));
             printf(" - ");
             displayTime(secondToTime(Time(element)));
-            printf("\n");
             num++;
         }
     }
@@ -167,8 +171,9 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
             if (isSameWord(Info(Elmt(*Q,i)),makanan)){
                 idxfound = i;
                 found = true;
-            }
+            } else{
             i++;
+            }
         }
         /*Melakukan pergeseran untuk menghapus elemen pada idxfound*/
         for(i=idxfound;i<Tail(*Q);i++){
@@ -182,8 +187,8 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
     {
         if (isSameWord(Info(InfoHead(*Q)),makanan))
         {
-            Head(*Q) = 0;
-            Tail(*Q) = 0;
+            Head(*Q) = Nil;
+            Tail(*Q) = Nil;
             Time(*out) = Time(Elmt(*Q,idxfound)); 
             Info(*out) = Info(Elmt(*Q,idxfound)); 
         }
@@ -202,8 +207,9 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
                 for(i=idxfound;i<Tail(*Q);i++){
                     Elmt(*Q,idxfound) = Elmt(*Q,idxfound+1);
                 }
-            }
+            } else {
             i++;
+            }
         }
         i = Head(*Q);
         /*Apabila ditemukan diantara head-maxEl*/
@@ -227,4 +233,5 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
         Time(*out) = Time(Elmt(*Q,idxfound)); 
         Info(*out) = Info(Elmt(*Q,idxfound)); 
     }
+}
 }

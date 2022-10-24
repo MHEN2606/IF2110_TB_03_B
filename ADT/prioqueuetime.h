@@ -78,7 +78,7 @@ void Dequeue(PrioQueueTime *Q, infotype *X);
         Q mungkin kosong */
 
 /* Operasi Tambahan */
-void prinfInventory(PrioQueueTime Q);
+void PrintInventory(PrioQueueTime Q);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
@@ -87,5 +87,8 @@ void prinfInventory(PrioQueueTime Q);
 <time-n> <elemen-n>
 #
 */
+void removeEl(PrioQueueTime *Q, Word makanan,infotype *out);
+/*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/
+/*Elemen yang dihapus dipindahkan ke dalam variabel out*/
 
 #endif

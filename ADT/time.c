@@ -15,12 +15,12 @@ void displayTime(TIME T){
     DD.MM.YY (Contoh 1.23).
     Jika nilai satuan waktu = 0, maka tidak dituliskan
 */
-    if(Day(T) == 0){
-        printf("%d.%d\n", Hour(T), Minute(T));
+    if(Day(T) == 0 && Hour(T) != 0){
+        printf("%d Jam %d Menit\n", Hour(T), Minute(T));
     }else if(Hour(T) == 0 && Day(T) == 0){
-        printf("%d\n", Minute(T));
+        printf("%d Menit\n", Minute(T));
     }else{
-        printf("%d.%d.%d\n", Day(T), Hour(T), Minute(T));
+        printf("%d Hari %d Jam %d Menit\n", Day(T), Hour(T), Minute(T));
     }
 }
 
