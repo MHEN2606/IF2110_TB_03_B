@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "matrix.h"
+#include "wordmachine.h"
+#include "point.h"
 
 /* *** KONSTRUKTOR *** */
 void createMatriks(int brs, int kol, Matrix *m){
@@ -9,20 +11,32 @@ void createMatriks(int brs, int kol, Matrix *m){
 }
 
 /* *** BACA/TULIS *** */
-void readMatrix(Matrix *m, int brs, int kol){
+void readMatrix(Matrix *m, POINT *P){
 /* Menuliskan isi Matriks dari input txt. Melakukan proses baca input.txt, menentukan ukuran input txt lalu membuat
 matriks m*/
     /* DISINI ADA BACA DARI FILENYA. PARAMETER MUNGKIN DITAMBAHKAN */
     char val;
+    int brs, kol;
+
+    STARTCONFIGWORD("../konfigurasi/map.txt");
+    brs = charToInt(currentWord);
+    ADVWORD();
+    kol = charToInt(currentWord);
+
     createMatriks(brs,kol,m);// Membuat matriks kosong dulu
+
+    ADVLINE();
 
     for(int i = 0; i < ROW(*m); i++){
         for (int j = 0; j < COL(*m); j++){
-            scanf("%c", &val);
-            if(val == '#'){
+            if(currentWord.TabWord[j] == '#'){
                 MAT(*m,i,j) = ' '; // empty character seharusnya bukan spasi
             }else{
-                MAT(*m,i,j) = val;
+                if(currentWord.TabWord[j] == 'S') {
+                    createPoint(&P,i,j);
+                } else {
+                    MAT(*m,i,j) = currentWord.TabWord[j];
+                }
             }
         }
     }

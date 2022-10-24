@@ -2,6 +2,8 @@
 #define MATRIX_h
 
 #include "boolean.h"
+#include "wordmachine.h"
+#include "point.h"
 
 #define ROW_CAP 100
 #define COL_CAP 100
@@ -25,7 +27,7 @@ void createMatriks(int brs, int kol, Matrix *m);
 /* Membuat Matriks m kosong dengan ukuran ROW = brs dan COL = kol*/
 
 /* *** BACA/TULIS *** */
-void readMatrix(Matrix *m, int brs, int kol);
+void readMatrix(Matrix *m, POINT *P);
 /* Menuliskan isi Matriks dari input txt. Melakukan proses baca input.txt, menentukan ukuran input txt lalu membuat
 matriks m*/
 
