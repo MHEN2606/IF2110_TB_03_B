@@ -6,21 +6,6 @@
 boolean endWord;
 Word currentWord;
  
-/* KUMPULAN COMMAND */
-Word Start = {"START", 5}; //Start lowercase untuk membedakan dengan START
-Word EXIT = {"EXIT", 4};
-Word BUY = {"BUY", 3};
-Word FRY = {"FRY", 3};
-Word DELIVERY = {"DELIVERY", 8};
-/* KURANG MOVE NORTH/SOUTH/EAST/WEST */
-Word MIX = {"MIX", 3};
-Word CHOP = {"CHOP", 4};
-Word BOIL = {"BOIL", 4};
-Word UNDO = {"UNDO", 4};
-Word REDO = {"REDO", 4};
-Word CATALOG = {"CATALOG", 7};
-Word COOKBOOK = {"COOKBOOK", 8};
-
 void IgnoreBlanks(){
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
