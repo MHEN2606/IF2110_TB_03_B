@@ -26,7 +26,7 @@ int main(){
         startSimulator(&sim, &map, &awal, &fd);
 
         printf("Username: %s\n", USERNAME(sim));
-        printf("Posisi: "); tulisPoint(POSISI(sim));
+        printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
