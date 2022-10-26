@@ -119,11 +119,11 @@ boolean isSameWord(Word w1, Word w2){
 int charToInt (Word num){
 /* Mengubah char menjadi integer khusus untuk char berupa angka */
     int i;
-    int power = num.Length-1;
+    int power = 1;
     int number = 0;
-    for (i = 0; i < num.Length; i++){
-        number += (num.TabWord[i]-48) * pow(10,power);
-        power--;
+    for (i = num.Length-1; i >= 0; i--){
+        number += (int)(num.TabWord[i]-48) * power;
+        power*=10;
     }
     return number;
 }

@@ -15,7 +15,7 @@ void inputListFood(ListStatik *l){
 /* Membaca banyak makanan yang dimasukkan lalu membuat list makanan 
 input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
     int N; //jumlah data yang akan dimasukkan
-    int i;
+    int i = 0;
     FOOD fd; // fd adalah food
 
     /* Buat List Food l */
