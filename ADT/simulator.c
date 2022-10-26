@@ -83,7 +83,6 @@ dibuat uppercase */
     Word BUY = {"BUY", 3}; // Mengeluarkan 3
     Word FRY = {"FRY", 3}; // Mengeluarkan 4
     Word DELIVERY = {"DELIVERY", 8}; // Mengeluarkan 5
-    /* KURANG MOVE NORTH/SOUTH/EAST/WEST */
     Word MIX = {"MIX", 3}; // Mengeluarkan 6
     Word CHOP = {"CHOP", 4}; // Mengeluarkan 7
     Word BOIL = {"BOIL", 4}; // Mengeluarkan 8
@@ -91,6 +90,11 @@ dibuat uppercase */
     Word REDO = {"REDO", 4}; // Mengeluarkan 10
     Word CATALOG = {"CATALOG", 7}; // Mengeluarkan 11
     Word COOKBOOK = {"COOKBOOK", 8}; // Mengeluarkan 12
+    Word INVENTORY = {"INVENTORY", 9}; //Mengeluarkan 13
+    Word MOVENORTH = {"MOVE NORTH", 10}; //Mengeluarkan 14
+    Word MOVESOUTH = {"MOVE SOUTH", 10}; //Mengeluarkan 15
+    Word MOVEWEST = {"MOVE WEST", 9}; //Mengeluarkan 16
+    Word MOVEEAST = {"MOVE EAST", 9}; //Mengeluarkan 17
     // 0 untuk error silakan ulangi
 
     if (isSameWord(START, command)){
@@ -117,6 +121,16 @@ dibuat uppercase */
         return 11;
     }else if(isSameWord(COOKBOOK, command)){
         return 12;
+    }else if(isSameWord(INVENTORY, command)){
+        return 13;
+    }else if(isSameWord(MOVENORTH, command)){
+        return 14;
+    }else if(isSameWord(MOVESOUTH, command)){
+        return 15;
+    }else if(isSameWord(MOVEWEST, command)){
+        return 16;
+    }else if(isSameWord(MOVEEAST, command)){
+        return 17;
     }else{
         return 0;
     }

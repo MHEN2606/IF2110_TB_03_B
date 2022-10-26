@@ -10,7 +10,7 @@ int main(){
 
     splashScreen();
 
-    printf("START/EXIT: ");
+    printf("Enter START/EXIT: ");
     scanf("%s", command);
     int startval = cmdParser(command);
 
@@ -29,24 +29,39 @@ int main(){
         printf("Posisi: "); tulisPoint(POSISI(sim));
         displayMatrix(map); printf("\n");
 
-        printf("Command: ");
+        printf("Enter Command: ");
         scanf("%s", command);
         int gameval = cmdParser(command);
 
         while(gameval != 2){
             if (gameval == 0 || gameval == 1){
                 printf("Perintah tidak valid! Silakan ulangi\n");
+            }else{
+                /* Lakukan pengurangan/penambahan waktu 
+                Manipulasi terhadap Inventory dan beberapa hal
+                lainnya */
             }
             printf("Username: %s\n", USERNAME(sim));
-            printf("Posisi: "); tulisPoint(POSISI(sim));
+            printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
             displayMatrix(map); printf("\n");
 
             /* DO SOMETHING HERE */
             if(gameval == 3){
                 printf("PERINTAH BUY GES\n");
             }
+            
+            if(gameval == 13){ // COMMAND INVENTORY
+                printf("List Makanan di Inventory\n");
+                printf("(nama - waktu sisa kedaluwarsa)\n");
+                if(IsEmpty(INV(sim))){
+                    printf("Inventory Kosong. Silakan melakukan BUY\n");
+                }else{
+                    PrintInventory(INV(sim));
+                    printf("\n");
+                }
+            }
 
-            printf("Command: ");
+            printf("Enter Command: ");
             scanf("%s", command);
             gameval = cmdParser(command);
         }
