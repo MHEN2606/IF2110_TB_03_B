@@ -1,37 +1,5 @@
-/* File: tree.h */
-/* ADT Pohon Biner dengan Representasi Berkait*/
-
-#ifndef POHONBINER_H
-#define POHONBINER_H
-
-#include "boolean.h"
 #include "tree.h"
 #include <stdio.h>
-
-#define Nil -1
-/* Nil adalah pohon kosong */
-
-/* type point */
-typedef int infotype;
-typedef int address; 
-typedef int addressList;
-typedef address BinTree;
-typedef addressList ListOfNode;  /* list linier yang elemennya adalah ElmtNode */
-typedef struct 
-{
-    infotype Info;
-    address Left;
-    address Right;
- } node;
-typedef struct
-{
-    infotype Info;
-    addressList Next;
-} ElmtNode;
-
-#define ROOT(P) (P)-> Info
-#define Left(P) (P)-> Left
-#define Right(P) (P)-> Right
 
 /* PRIMITIF */
 /* SELEKTOR */

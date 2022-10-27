@@ -116,7 +116,7 @@ biner P. Akar(P) level-nya adalah 1. POhon P tidak kosong. */
 void AddDaunTerkiri (BinTree P, infotype X);
 /* I.S. P boleh kosong */
 /* F.S. P bertambah simpulnya, dengan X sebagai simpul daun terkiri */
-void AddDaun (Bintree P, infotype X, infotype Y, boolean Kiri);
+void AddDaun (BinTree P, infotype X, infotype Y, boolean Kiri);
 /* I.S. P tidak kosong, X adalah salah satu daun Pohon Biner P */
 /* F.S. P bertambah simpulnya, dengan Y sebagai anak kiri X (jika Kiri), atau
 sebagai anak Kanan X (jika not Kiri) */
@@ -156,3 +156,4 @@ void DelBtree (BinTree P, infotype X);
 /* I.S. Pohon P tidak kosong */
 /* F.S. Nilai X yang dihapus pasti ada */
 /* Sebuah node dg nilai X dihapus */ 
+#endif

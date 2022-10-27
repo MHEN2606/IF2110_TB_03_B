@@ -6,6 +6,7 @@ int main(){
     POINT awal;
     Matrix map;
     SIMULATOR sim;
+    TIME t;
     char command[50];
 
     splashScreen();
@@ -24,14 +25,17 @@ int main(){
 
     if (startval == 1){
         startSimulator(&sim, &map, &awal, &fd);
+        createTime(&t, 0,0,0);
 
         printf("Username: %s\n", USERNAME(sim));
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
+        printf("Waktu: %d.%d\n", Hour(t), Minute(t));
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
         scanf("%s", command);
         int gameval = cmdParser(command);
+        printf("\n");
 
         while(gameval != 2){
             if (gameval == 0 || gameval == 1){
@@ -40,9 +44,11 @@ int main(){
                 /* Lakukan pengurangan/penambahan waktu 
                 Manipulasi terhadap Inventory dan beberapa hal
                 lainnya */
+                t = addTime(&t, 60);
             }
             printf("Username: %s\n", USERNAME(sim));
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
+            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
             displayMatrix(map); printf("\n");
 
             /* DO SOMETHING HERE */
@@ -64,6 +70,7 @@ int main(){
             printf("Enter Command: ");
             scanf("%s", command);
             gameval = cmdParser(command);
+            printf("\n");
         }
         printf("SEE YOU NEXT TIME :)\n");
     }else{

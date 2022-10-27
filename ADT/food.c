@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "food.h"
-#include "time.h"
 
 /* *** CREATOR FOOD *** */
 void createFood(FOOD *food, int id, Word namaMakanan, TIME exp, TIME send, Word aksi){

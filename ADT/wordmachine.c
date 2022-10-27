@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <math.h>
 #include "wordmachine.h"
-#include "charmachine.h"
  
 boolean endWord;
 Word currentWord;

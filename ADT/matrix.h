@@ -1,5 +1,5 @@
 #ifndef MATRIX_H
-#define MATRIX_h
+#define MATRIX_H
 
 #include "boolean.h"
 #include "wordmachine.h"

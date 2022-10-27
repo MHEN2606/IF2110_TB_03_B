@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include "matrix.h"
-#include "wordmachine.h"
-#include "point.h"
 
 /* *** KONSTRUKTOR *** */
 void createMatriks(int brs, int kol, Matrix *m){

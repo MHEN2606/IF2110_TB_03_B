@@ -2,11 +2,13 @@
 #define SIMULATOR_H
 
 #include "point.h"
+#include "time.h"
 #include "liststatik.h"
 #include "prioqueuetime.h"
 #include "matrix.h"
 #include "food.h"
 #include "wordmachine.h"
+#include "charmachine.h"
 #include "boolean.h"
 
 typedef struct{

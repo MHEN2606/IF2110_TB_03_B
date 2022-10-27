@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include "liststatik.h"
-#include "charmachine.h"
-#include "wordmachine.h"
-#include "food.h"
 
 /* *** CREATOR *** */
 void createList(ListStatik *l){

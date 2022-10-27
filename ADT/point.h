@@ -4,8 +4,8 @@
 #include "boolean.h"
 
 typedef struct{
-    float X;
-    float Y;
+    int X;
+    int Y;
 } POINT;
 
 /* *** SELEKTOR *** */
@@ -13,7 +13,7 @@ typedef struct{
 #define ORDINAT(P) (P).Y
 
 /* *** CREATOR *** */
-void createPoint(POINT *P, float X, float Y);
+void createPoint(POINT *P, int X, int Y);
 /* Membuat point sembarang*/
 
 /* *** KELOMPOK TULIS *** */

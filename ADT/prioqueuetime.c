@@ -1,7 +1,4 @@
 #include "prioqueuetime.h"
-#include "boolean.h"
-#include "time.h"
-#include "wordmachine.h"
 #include <stdio.h>
 #include <stdlib.h>
 /* ********* Prototype ********* */
