@@ -14,7 +14,7 @@ typedef int infotype;
 
 typedef struct 
 {
-    infotype depth;
+    // infotype depth;
     infotype info;
     Node *firstChild;
     Node *nextSibling;
@@ -40,6 +40,15 @@ Node * newSibling (Node *x, infotype data);
 /*Membuat suatu node yang merupakan sibling untuk node x*/
 Node * newChild (Node *x, infotype data);
 /*Membuat suatu node yang merupakan anak dari node x*/
+Node * find(Node *x, infotype data);
+/*Mencari suatu node yang berisi data*/
+void * findChild(Node *x, infotype data);
+/*Mengeluarkan output semua info dari node yang menjadi anak dari node "data"
+Node "data" => Node dengan INFO() = data
+FORMAT OUTPUT:
+bahan - bahan - ... (dst)
+contoh : Ayam Potong - Minyak Goreng
+*/
 
 // /* Konstruktor */
 // BinTree Tree (infotype Akar, BinTree L, BinTree R);
@@ -63,7 +72,7 @@ Node * newChild (Node *x, infotype data);
 // /* F.S. P dibentuk dari ekspresi dalam pita */
 
 // /* Predikat Penting */
-boolean IsTreeEmpty (Node P);
+// boolean IsTreeEmpty (Node P);
 /* Mengirimkan true jika pohon biner P adalah kosong P */
 // boolean IsOneElmt (BinTree P);
 // /* Mengirimkan true jika pohon biner P tidak kosong dan hanya terdiri dari atas 1

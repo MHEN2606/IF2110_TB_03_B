@@ -13,7 +13,7 @@ Node * createNode (infotype data)
         firstChild(node_baru) = NULL;
         nextSibling(node_baru) = NULL;
         Info(*node_baru) = data;
-        Depth(*node_baru) = 0;
+        // Depth(*node_baru) = 0;
     }
     return node_baru;
 }
@@ -28,7 +28,7 @@ Node * newSibling (Node *x, infotype data)
     }
     /*Hubungkan suatu node yang berisi data dengan sibling dari x*/
     nextSibling(x) = createNode(data);
-    Depth(*nextSibling(x)) = Depth(*x);
+    // Depth(*nextSibling(x)) = Depth(*x);
     return nextSibling(x);
 }
 
@@ -42,8 +42,34 @@ Node * newChild (Node *x, infotype data)
     if (firstChild(x)){
         return newSibling(firstChild(x),data);
     } else {
-        Depth(*firstChild(x)) = Depth(*x) + 1;
+        // Depth(*firstChild(x)) = Depth(*x) + 1;
         firstChild(x) = createNode(data);
         return  firstChild(x);
     }
+}
+
+Node * find(Node *x,infotype data)
+/*Mencari suatu node yang berisi data*/
+/*Mengembalikan NULL apabila data tidak ditemukan*/
+{
+    /*While digunakan untuk mencari secara horizontal (sibling)*/
+    while (x != NULL)
+    {
+        if (Info(*x)==data)
+        {
+            return x;
+        }
+        /*Mulai mencari secara vertikal (firstChild)*/
+        if(firstChild(x)!=NULL)
+        {
+            /*Skema rekursif untuk tiap node*/
+            Node *ret = find(firstChild(x),data);
+            if (ret)
+            {
+                return ret;
+            }
+        }
+        x = nextSibling(x);
+    }
+    return NULL;
 }
