@@ -2,6 +2,7 @@
 #define POINT_H
 
 #include "boolean.h"
+#include "matrix.h"
 
 typedef struct{
     int X;
@@ -24,10 +25,10 @@ void tulisPoint(POINT P);
 
 /* *** OPERASI *** */
 /* Operasi disini dikhususkan untuk move ke lor, kidul, wetan, kulon.*/
-void moveNorth(POINT *P);
+void moveNorth(POINT *P, Matrix *m);
 /* Menggerakkan point ke atas sebanyak 1 titik*/
 
-void moveSouth(POINT *P);
+void moveSouth(POINT *P, Matrix *m);
 /* Menggerakkan point ke bawah sebanyak 1 titik*/
 
 void moveEast(POINT *P);

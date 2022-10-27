@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "point.h"
+#include "matrix.h"
 
 /* *** CREATOR *** */
 void createPoint(POINT *P, int X, int Y){
@@ -18,14 +19,34 @@ void tulisPoint(POINT P){
 
 /* *** OPERASI *** */
 /* Operasi disini dikhususkan untuk move ke lor, kidul, wetan, kulon.*/
-void moveNorth(POINT *P){
+void moveNorth(POINT *P, Matrix *m){
 /* Menggerakkan point ke atas sebanyak 1 titik*/
-    ORDINAT(*P)--;
+    if (ORDINAT(*P) > 0) {
+        if (MAT(*m,ORDINAT(*P)-1,ABSIS(*P)) == ' ') {
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P)-1,ABSIS(*P)) = 'S';
+            ORDINAT(*P)--;
+        } else {
+            printf("Point S tidak dapat bergerak ke utara. Silakan coba lagi!");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!");
+    }
 }
 
-void moveSouth(POINT *P){
+void moveSouth(POINT *P, Matrix *m){
 /* Menggerakkan point ke bawah sebanyak 1 titik*/
-    ORDINAT(*P)++;
+    if (ORDINAT(*P) < ROW(*m)-1) {
+        if (MAT(*m,ORDINAT(*P)+1,ABSIS(*P)) == ' ') {
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P)+1,ABSIS(*P)) = 'S';
+            ORDINAT(*P)++;
+        } else {
+            printf("Point S tidak dapat bergerak ke selatan. Silakan coba lagi!");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!");
+    }
 }
 
 void moveEast(POINT *P){
