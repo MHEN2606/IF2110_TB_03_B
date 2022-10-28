@@ -109,26 +109,51 @@ int panjangList(ListStatik l){
 
 void buy(PrioQueueTime *q, ListStatik fd){
     int x; infotype eq;
+    ListStatik display;
+    createList(&display);
+    Word BUY = {"Buy", 3};
     printf("======================\n");
     printf("=        BUY         =\n");
     printf("======================\n");
     printf("List Bahan Makanan\n");
-    displayList(fd);
+    int j = 0;
+    for (int i = 0; i < panjangList(fd); i++){
+        if(isSameWord(BUY, AKSI(ELMT(fd,i)))){
+            ELMT(display,j) = ELMT(fd,i);
+            printf("%d. ", j+1);
+            tulisKata(FOODNAME(ELMT(display,j)));
+            printf(" (%d menit)\n", timeToMinute(SEND(ELMT(display,j))));
+            j++;
+        }
+    }
+    NEFF(display) = j;
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
-    scanf("%d", x);
-    while (x != 0) {
-        if(x < 0 || x > panjangList(fd)){
+    scanf("%d", &x);
+    while (x-1 != -1) {
+        if(x-1 < 0 || x-1 > panjangList(display)){
             printf("ID tidak valid, coba lagi!\n");
             printf("Enter command: ");
-            scanf("%d", x);
+            scanf("%d", &x);
+            printf("\n");
         }
         else
         {
-            printf("Berhasil memesan %s. %s akan diantar dalam %d menit.\n", (FOODNAME(ELMT(fd,x))), (FOODNAME(ELMT(fd,x))), timeToMinute(SEND(ELMT(fd,x))));
-            eq.time = timeToSecond(SEND(ELMT(fd,x)));
-            eq.info = FOODNAME(ELMT(fd,x));
+            printf("Berhasil memesan ");
+            tulisKata(FOODNAME(ELMT(display,x-1)));
+            printf(". ");
+            tulisKata(FOODNAME(ELMT(display,x-1)));
+            printf(" akan diantar dalam %d menit.\n", timeToMinute(SEND(ELMT(display,x-1))));
+
+            /* PROSES ENQUEUE KE Priority Queue q */
+            eq.time = timeToSecond(SEND(ELMT(display,x-1)));
+            eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
+            eq.info = FOODNAME(ELMT(display,x-1));
             Enqueue(q,eq);
+
+            printf("\n");
+            printf("Enter command: ");
+            scanf("%d", &x);
         }
     }
 }

@@ -9,6 +9,7 @@
 #include "../food/food.h"
 #include "../wordmachine/wordmachine.h"
 #include "../charmachine/charmachine.h"
+#include "../stack/stack.h"
 #include "../boolean/boolean.h"
 
 typedef struct{

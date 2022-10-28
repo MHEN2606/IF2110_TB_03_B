@@ -16,6 +16,7 @@
 typedef struct
 {
     int time;  /*waktu dalam detik*/
+    int exp; /* Waktu Expired */
     Word info; /* elemen karakter */
 } infotype;
 typedef int address; /* indeks tabel */
@@ -34,6 +35,7 @@ typedef struct
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e) (e).time
+#define ExpTime(e) (e).exp
 #define Info(e) (e).info
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL
@@ -91,4 +93,9 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out);
 /*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/
 /*Elemen yang dihapus dipindahkan ke dalam variabel out*/
 
+void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R);
+/* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit. 
+   Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
+   Elemen yang di didequeue dienqueue ke R */
+   
 #endif

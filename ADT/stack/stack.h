@@ -6,7 +6,7 @@
 #define MAXCMD 50
 #define idx_undef -1
 
-typedef char perintah;
+typedef int perintah; // lihat ekivalensi tiap commands di wordmachine
 typedef int address;
 
 typedef struct{

@@ -133,7 +133,8 @@ void PrintInventory(PrioQueueTime Q)
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
-No urut. Nama makanan - Waktu
+No urut. Nama makanan - Waktu Expired
+Waktu time pasti 0
 */
 {
     PrioQueueTime t;
@@ -148,7 +149,7 @@ No urut. Nama makanan - Waktu
             printf("%d. ",num);
             tulisKata(Info(element));
             printf(" - ");
-            displayTime(secondToTime(Time(element)));
+            displayTime(secondToTime(ExpTime(element)));
             num++;
         }
     }
@@ -231,4 +232,20 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
         Info(*out) = Info(Elmt(*Q,idxfound)); 
     }
 }
+}
+
+void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R){
+/* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit. 
+   Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
+   Elemen yang di didequeue dienqueue ke R */
+    for (int i = 0; i < NBElmt; i++){ 
+        if(Time(Elmt(*Q,i))-60 == 0){
+            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
+            infotype out;
+            removeEl(Q, Info(Elmt(*Q,i)), &out);
+            Enqueue(R, out);
+        }else{
+            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
+        }
+    }
 }

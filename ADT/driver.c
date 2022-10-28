@@ -7,6 +7,8 @@ int main(){
     Matrix map;
     SIMULATOR sim;
     TIME t;
+    STACK notification, commands, poppedCommands;
+    PrioQueueTime delivery;
     char command[50];
 
     splashScreen();
@@ -27,6 +29,10 @@ int main(){
     {
         startSimulator(&sim, &map, &awal, &fd);
         createTime(&t, 0,0,0);
+        MakeEmpty(&delivery, 100);
+        createEmptyStack(&notification);
+        createEmptyStack(&commands);
+        createEmptyStack(&poppedCommands);
 
         printf("Username: %s\n", USERNAME(sim));
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
@@ -43,99 +49,110 @@ int main(){
             {
                 printf("Perintah tidak valid! Silakan ulangi\n");
             }
-
-            if(gameval == 19)
+            else
             {
-                printf("PERINTAH WAIT\n");
-            }
+                if(gameval == 19)
+                {
+                    printf("PERINTAH WAIT\n");
+                    Push(&commands, gameval);
+                }
 
-            /* PERINTAH MOVE DIJALANKAN DI SINI */
-            if (gameval == 14) 
-            {
-                /* COMMAND 'MOVE' diterima, parse command arah */
-                char arah[50];
-                scanf("%s", arah);
-                int gerak = cmdParser(arah);
-                if(gerak < 15 || gerak > 18){
-                    printf("Perintah tidak valid!\n");
-                }else{
-                    if(gerak == 15){
-                        /* MOVE NORTH */
-                        moveNorth(&POSISI(sim), &map);
-                    }else if (gerak == 16){
-                        /* MOVE SOUTH */
-                        moveSouth(&POSISI(sim), &map);
-                    }else if (gerak == 17){
-                        /* MOVE EAST */
-                        moveEast(&POSISI(sim), &map);
+                /* PERINTAH MOVE DIJALANKAN DI SINI */
+                if (gameval == 14) 
+                {
+                    /* COMMAND 'MOVE' diterima, parse command arah */
+                    char arah[50];
+                    scanf("%s", arah);
+                    int gerak = cmdParser(arah);
+                    if(gerak < 15 || gerak > 18){
+                        printf("Perintah tidak valid!\n");
                     }else{
-                        /* MOVE WEST*/
-                        moveWest(&POSISI(sim), &map);
+                        if(gerak == 15){
+                            /* MOVE NORTH */
+                            moveNorth(&POSISI(sim), &map);
+                        }else if (gerak == 16){
+                            /* MOVE SOUTH */
+                            moveSouth(&POSISI(sim), &map);
+                        }else if (gerak == 17){
+                            /* MOVE EAST */
+                            moveEast(&POSISI(sim), &map);
+                        }else{
+                            /* MOVE WEST*/
+                            moveWest(&POSISI(sim), &map);
+                        }
+                        Push(&commands, gerak);
                     }
                 }
-            }
 
-            /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
-            if(gameval == 3)
-            {
-                if(isAdjacent(POSISI(sim), map, 'T')){
-                    buy(&INV(sim), fd);
-                }else{
-                    printf("Anda tidak berada di area command!\n");
+                /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
+                if(gameval == 3)
+                {
+                    if(isAdjacent(POSISI(sim), map, 'T')){
+                        buy(&delivery, fd);
+                        Push(&commands, gameval);
+                    }else{
+                        printf("Anda tidak berada di area command!\n");
+                    }
                 }
-            }
-            else if(gameval == 4)
-            {
-                if(isAdjacent(POSISI(sim), map, 'F')){
-                    printf("PERINTAH FRY\n");
-                }else{
-                    printf("Anda tidak berada di area command!\n");
+                else if(gameval == 4)
+                {
+                    if(isAdjacent(POSISI(sim), map, 'F')){
+                        printf("PERINTAH FRY\n");
+                        Push(&commands, gameval);
+                    }else{
+                        printf("Anda tidak berada di area command!\n");
+                    }
                 }
-            }
-            else if(gameval == 7)
-            {
-                if(isAdjacent(POSISI(sim), map, 'C')){
-                    printf("PERINTAH CHOP\n");
-                }else{
-                    printf("Anda tidak berada di area command!\n");
+                else if(gameval == 7)
+                {
+                    if(isAdjacent(POSISI(sim), map, 'C')){
+                        printf("PERINTAH CHOP\n");
+                        Push(&commands, gameval);
+                    }else{
+                        printf("Anda tidak berada di area command!\n");
+                    }
                 }
-            }
-            else if(gameval == 8)
-            {
-                if(isAdjacent(POSISI(sim), map, 'B')){
-                    printf("Perintah BOil\n");
-                }else{
-                    printf("Anda tidak berada di area command!\n");
+                else if(gameval == 8)
+                {
+                    if(isAdjacent(POSISI(sim), map, 'B')){
+                        printf("Perintah BOil\n");
+                        Push(&commands, gameval);
+                    }else{
+                        printf("Anda tidak berada di area command!\n");
+                    }
                 }
-            }
-            else if(gameval == 6)
-            {
-                if(isAdjacent(POSISI(sim), map, 'M')){
-                    printf("Perintah MIX\n");
-                }else{
-                    printf("Anda tidak berada di area command!\n");
+                else if(gameval == 6)
+                {
+                    if(isAdjacent(POSISI(sim), map, 'M')){
+                        printf("Perintah MIX\n");
+                        Push(&commands, gameval);
+                    }else{
+                        printf("Anda tidak berada di area command!\n");
+                    }
                 }
-            }
 
-            /*Catalog*/
-            if(gameval == 11)
-            {
-                printf("List Makanan\n");
-                printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
-                displayList(fd);printf("\n");
-            }
+                /*Catalog*/
+                if(gameval == 11)
+                {
+                    printf("List Makanan\n");
+                    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+                    displayList(fd);printf("\n");
+                    Push(&commands, gameval);
+                }
 
 
-            /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
-            if(gameval == 13)
-            { // COMMAND INVENTORY
-                printf("List Makanan di Inventory\n");
-                printf("(nama - waktu sisa kedaluwarsa)\n");
-                if(IsEmpty(INV(sim))){
-                    printf("Inventory Kosong. Silakan melakukan BUY\n");
-                }else{
-                    PrintInventory(INV(sim));
-                    printf("\n");
+                /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
+                if(gameval == 13)
+                { // COMMAND INVENTORY
+                    printf("List Makanan di Inventory\n");
+                    printf("(nama - waktu sisa kedaluwarsa)\n");
+                    if(IsEmpty(INV(sim))){
+                        printf("Inventory Kosong. Silakan melakukan BUY\n");
+                    }else{
+                        PrintInventory(INV(sim));
+                        printf("\n");
+                    }
+                    Push(&commands, gameval);
                 }
             }
             
