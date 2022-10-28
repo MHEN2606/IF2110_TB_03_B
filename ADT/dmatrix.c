@@ -22,4 +22,5 @@ int main() {
     moveNorth(&p,&m);
     tulisPoint(p);
     displayMatrix(m);
+    return 0;
 }
