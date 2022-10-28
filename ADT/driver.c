@@ -79,6 +79,8 @@ int main(){
             if(gameval == 3)
             {
                 printf("PERINTAH BUY\n");
+                
+
             }
             else if(gameval == 4)
             {
@@ -88,12 +90,15 @@ int main(){
             {
                 printf("PERINTAH CHOP\n");
             }
+            /*Catalog*/
             if(gameval == 11)
             {
                 printf("List Makanan\n");
                 printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
-                
+                displayList(fd);
             }
+
+
             /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
             if(gameval == 13)
             { // COMMAND INVENTORY
