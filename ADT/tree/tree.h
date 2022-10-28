@@ -12,18 +12,19 @@
 /* type point */
 typedef int infotype;
 
-typedef struct 
+struct Node
 {
     // infotype depth;
     infotype info;
-    Node *firstChild;
-    Node *nextSibling;
-} Node;
+    struct Node *firstChild;
+    struct Node *nextSibling;
+};
 
+typedef struct Node Node;
 #define Info(P) (P).info
 #define firstChild(P) (P)-> firstChild
 #define nextSibling(P) (P)-> nextSibling
-#define Depth(P) (P).depth
+// #define Depth(P) (P).depth
 
 /* PRIMITIF */
 /* SELEKTOR */
