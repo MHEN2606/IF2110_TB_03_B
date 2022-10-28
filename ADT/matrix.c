@@ -31,7 +31,7 @@ matriks m*/
                 MAT(*m,i,j) = ' ';
             }else{
                 if(currentWord.TabWord[j] == 'S') {
-                    createPoint(P,i,j);
+                    createPoint(P,j,i);
                 }
                 MAT(*m,i,j) = currentWord.TabWord[j];
             }
@@ -77,4 +77,48 @@ void displayMatrix(Matrix m){
 boolean isIdxValid(Matrix m, int idb, int idc){
 /* Memeriksa apakah indeks baris idb dan indeks kolom idc berada dalam matriks m atau tidak*/
     return(ROW(m)>idb && COL(m)>idc && idc >= 0 && idb >= 0);
+}
+
+/* *** OPERASI *** */
+/* Operasi disini dikhususkan untuk move ke lor, kidul, wetan, kulon.*/
+void moveNorth(POINT *P, Matrix *m){
+/* Menggerakkan point ke atas sebanyak 1 titik*/
+    if (ORDINAT(*P) > 0) {
+        if (MAT(*m,ORDINAT(*P)-1,ABSIS(*P)) == ' ') {
+            printf("Point S berhasil bergerak ke utara!\n");
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P)-1,ABSIS(*P)) = 'S';
+            ORDINAT(*P)--;
+        } else {
+            printf("Point S tidak dapat bergerak ke utara. Silakan coba lagi!\n");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!\n");
+    }
+}
+
+void moveSouth(POINT *P, Matrix *m){
+/* Menggerakkan point ke bawah sebanyak 1 titik*/
+    if (ORDINAT(*P) < ROW(*m)-1) {
+        if (MAT(*m,ORDINAT(*P)+1,ABSIS(*P)) == ' ') {
+            printf("Point S berhasil bergerak ke selatan!\n");
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P)+1,ABSIS(*P)) = 'S';
+            ORDINAT(*P)++;
+        } else {
+            printf("Point S tidak dapat bergerak ke selatan. Silakan coba lagi!\n");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!\n");
+    }
+}
+
+void moveEast(POINT *P){
+/* Menggerakkan point ke kiri sebanyak 1 titik*/
+    ABSIS(*P)++;
+}
+
+void moveWest(POINT *P){
+/* Menggerakkan point ke kanan sebanyak 1 titik*/
+    ABSIS(*P)--;
 }
