@@ -146,6 +146,7 @@ void moveWest(POINT *P, Matrix *m){
 }
 
 boolean isAdjacent(POINT P, Matrix m, char sym){
+/* Mengecek apakah sym ada di sekitar POINT P  */
     if (MAT(m, ORDINAT(P) + 1, ABSIS(P)) == sym){
         return true;
     }

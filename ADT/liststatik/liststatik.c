@@ -107,24 +107,28 @@ int panjangList(ListStatik l){
     return(NEFF(l));
 }
 
-void buy(PrioQueueTime*q, ListStatik fd){
+void buy(PrioQueueTime *q, ListStatik fd){
     int x; infotype eq;
-    printf("======================");
-    printf("=        BUY         =");
-    printf("======================");
+    printf("======================\n");
+    printf("=        BUY         =\n");
+    printf("======================\n");
     printf("List Bahan Makanan\n");
     displayList(fd);
     printf("Kirim 0 untuk exit.\n");
-    scanf("Enter command: %d\n", x);
-    while (x > panjangList || x < 0) {
-        printf("ID tidak valid, coba lagi!\n");
-        scanf("Enter command: %d\n", x);
-    }
-    if (x = 0) {
-    }
-    else {
-        printf("Berhasil memesan %s. %s akan diantar dalam %d menit.\n", (FOODNAME(ELMT(fd,x))), (FOODNAME(ELMT(fd,x))), timeToMinute(SEND(ELMT(fd,x))));
-        eq = {timeToSecond(SEND(ELMT(fd,x))), FOODNAME(ELMT(fd,x))};
-        Enqueue(&q,eq);
+    printf("Enter command: ");
+    scanf("%d", x);
+    while (x != 0) {
+        if(x < 0 || x > panjangList(fd)){
+            printf("ID tidak valid, coba lagi!\n");
+            printf("Enter command: ");
+            scanf("%d", x);
+        }
+        else
+        {
+            printf("Berhasil memesan %s. %s akan diantar dalam %d menit.\n", (FOODNAME(ELMT(fd,x))), (FOODNAME(ELMT(fd,x))), timeToMinute(SEND(ELMT(fd,x))));
+            eq.time = timeToSecond(SEND(ELMT(fd,x)));
+            eq.info = FOODNAME(ELMT(fd,x));
+            Enqueue(q,eq);
+        }
     }
 }

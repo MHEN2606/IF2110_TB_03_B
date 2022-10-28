@@ -53,5 +53,6 @@ void moveWest(POINT *P, Matrix *m);
 /* Menggerakkan point ke kanan sebanyak 1 titik*/
 
 boolean isAdjacent(POINT P, Matrix m, char sym);
-/* Mengecek disekitar elemen matriks */
+/* Mengecek apakah sym ada di sekitar POINT P  */
+
 #endif
