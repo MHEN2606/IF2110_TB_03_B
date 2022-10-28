@@ -144,3 +144,21 @@ void moveWest(POINT *P, Matrix *m){
         printf("Point S telah sampai di tepi. Silakan coba lagi!\n");
     }
 }
+
+boolean isAdjacent(POINT P, Matrix m, char sym){
+    if (MAT(m, ORDINAT(P) + 1, ABSIS(P)) == sym){
+        return true;
+    }
+    else if (MAT(m, ORDINAT(P), ABSIS(P) - 1) == sym){
+        return true;
+    }
+    else if (MAT(m, ORDINAT(P), ABSIS(P) + 1) == sym){
+        return true;
+    }
+    else if (MAT(m, ORDINAT(P) - 1, ABSIS(P)) == sym){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
