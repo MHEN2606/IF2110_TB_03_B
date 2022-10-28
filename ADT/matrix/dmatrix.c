@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "matrix.h"
-#include "wordmachine.h"
-#include "charmachine.h"
-#include "point.h"
+#include "../wordmachine/wordmachine.h"
+#include "../charmachine/charmachine.h"
+#include "../point/point.h"
 
 int main() {
     Matrix m;
@@ -20,6 +20,12 @@ int main() {
     tulisPoint(p);
     displayMatrix(m);
     moveNorth(&p,&m);
+    tulisPoint(p);
+    displayMatrix(m);
+    moveEast(&p,&m);
+    tulisPoint(p);
+    displayMatrix(m);
+    moveWest(&p,&m);
     tulisPoint(p);
     displayMatrix(m);
     return 0;
