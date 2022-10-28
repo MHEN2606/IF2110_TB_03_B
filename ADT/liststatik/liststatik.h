@@ -4,6 +4,7 @@
 #include "../food/food.h"
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
+#include "../prioqueuetime/prioqueuetime.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
 
@@ -36,5 +37,7 @@ ListStatik copyList(ListStatik *l);
 
 int panjangList(ListStatik l);
 /* Mengembalikan panjang efektif dari l */
+
+void buy(PrioQueueTime*q, ListStatik fd);
 
 #endif

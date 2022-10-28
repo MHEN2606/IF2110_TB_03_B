@@ -75,11 +75,6 @@ int main(){
                 }
             }
 
-            printf("Username: %s\n", USERNAME(sim));
-            printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
-            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
-            displayMatrix(map); printf("\n");
-
             /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
             if(gameval == 3)
             {
@@ -93,7 +88,12 @@ int main(){
             {
                 printf("PERINTAH CHOP\n");
             }
-            
+            if(gameval == 11)
+            {
+                printf("List Makanan\n");
+                printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+                
+            }
             /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
             if(gameval == 13)
             { // COMMAND INVENTORY
@@ -106,6 +106,11 @@ int main(){
                     printf("\n");
                 }
             }
+
+            printf("Username: %s\n", USERNAME(sim));
+            printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
+            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
+            displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");
             scanf("%s", command);
