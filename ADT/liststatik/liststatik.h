@@ -38,6 +38,7 @@ ListStatik copyList(ListStatik *l);
 int panjangList(ListStatik l);
 /* Mengembalikan panjang efektif dari l */
 
-void buy(PrioQueueTime*q, ListStatik fd);
+void buy(PrioQueueTime *q, ListStatik fd);
+/* Melakukan proses buy */
 
 #endif

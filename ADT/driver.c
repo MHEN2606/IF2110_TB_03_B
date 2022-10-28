@@ -44,8 +44,6 @@ int main(){
                 printf("Perintah tidak valid! Silakan ulangi\n");
             }
 
-            /* PERINTAH YANG BERKAITAN DENGAN MAKANAN (KHUSUS UNTUK MENAMBAH WAKTU)
-            DIJALANKAN DI SINI. JUGA YANG MEMANIPULASI WAKTU*/
             if(gameval == 19)
             {
                 printf("PERINTAH WAIT\n");
@@ -69,8 +67,10 @@ int main(){
                         moveSouth(&POSISI(sim), &map);
                     }else if (gerak == 17){
                         /* MOVE EAST */
+                        moveEast(&POSISI(sim), &map);
                     }else{
                         /* MOVE WEST*/
+                        moveWest(&POSISI(sim), &map);
                     }
                 }
             }
@@ -78,24 +78,51 @@ int main(){
             /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
             if(gameval == 3)
             {
-                printf("PERINTAH BUY\n");
-                
-
+                if(isAdjacent(POSISI(sim), map, 'T')){
+                    buy(&INV(sim), fd);
+                }else{
+                    printf("Anda tidak berada di area command!\n");
+                }
             }
             else if(gameval == 4)
             {
-                printf("PERINTAH FRY\n");
+                if(isAdjacent(POSISI(sim), map, 'F')){
+                    printf("PERINTAH FRY\n");
+                }else{
+                    printf("Anda tidak berada di area command!\n");
+                }
             }
             else if(gameval == 7)
             {
-                printf("PERINTAH CHOP\n");
+                if(isAdjacent(POSISI(sim), map, 'C')){
+                    printf("PERINTAH CHOP\n");
+                }else{
+                    printf("Anda tidak berada di area command!\n");
+                }
             }
+            else if(gameval == 8)
+            {
+                if(isAdjacent(POSISI(sim), map, 'B')){
+                    printf("Perintah BOil\n");
+                }else{
+                    printf("Anda tidak berada di area command!\n");
+                }
+            }
+            else if(gameval == 6)
+            {
+                if(isAdjacent(POSISI(sim), map, 'M')){
+                    printf("Perintah MIX\n");
+                }else{
+                    printf("Anda tidak berada di area command!\n");
+                }
+            }
+
             /*Catalog*/
             if(gameval == 11)
             {
                 printf("List Makanan\n");
                 printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
-                displayList(fd);
+                displayList(fd);printf("\n");
             }
 
 
@@ -111,6 +138,8 @@ int main(){
                     printf("\n");
                 }
             }
+            
+            printf("\n");
 
             printf("Username: %s\n", USERNAME(sim));
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
