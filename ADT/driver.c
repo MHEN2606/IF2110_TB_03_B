@@ -23,7 +23,8 @@ int main(){
         startval = cmdParser(command);
     }
 
-    if (startval == 1){
+    if (startval == 1)
+    {
         startSimulator(&sim, &map, &awal, &fd);
         createTime(&t, 0,0,0);
 
@@ -38,36 +39,20 @@ int main(){
         printf("\n");
 
         while(gameval != 2){
-            if (gameval == 0 || gameval == 1){
+            if (gameval == 0 || gameval == 1)
+            {
                 printf("Perintah tidak valid! Silakan ulangi\n");
-            }else{
-                /* Lakukan pengurangan/penambahan waktu 
-                Manipulasi terhadap Inventory dan beberapa hal
-                lainnya */
-                t = addTime(&t, 60);
-            }
-            printf("Username: %s\n", USERNAME(sim));
-            printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
-            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
-            displayMatrix(map); printf("\n");
-
-            /* DO SOMETHING HERE */
-            if(gameval == 3){
-                printf("PERINTAH BUY GES\n");
-            }
-            
-            if(gameval == 13){ // COMMAND INVENTORY
-                printf("List Makanan di Inventory\n");
-                printf("(nama - waktu sisa kedaluwarsa)\n");
-                if(IsEmpty(INV(sim))){
-                    printf("Inventory Kosong. Silakan melakukan BUY\n");
-                }else{
-                    PrintInventory(INV(sim));
-                    printf("\n");
-                }
             }
 
-            if (gameval == 14) // PERINTAH MOVE
+            /* PERINTAH YANG BERKAITAN DENGAN MAKANAN (KHUSUS UNTUK MENAMBAH WAKTU)
+            DIJALANKAN DI SINI. JUGA YANG MEMANIPULASI WAKTU*/
+            if(gameval == 19)
+            {
+                printf("PERINTAH WAIT\n");
+            }
+
+            /* PERINTAH MOVE DIJALANKAN DI SINI */
+            if (gameval == 14) 
             {
                 /* COMMAND 'MOVE' diterima, parse command arah */
                 char arah[50];
@@ -78,13 +63,47 @@ int main(){
                 }else{
                     if(gerak == 15){
                         /* MOVE NORTH */
+                        moveNorth(&POSISI(sim), &map);
                     }else if (gerak == 16){
                         /* MOVE SOUTH */
+                        moveSouth(&POSISI(sim), &map);
                     }else if (gerak == 17){
                         /* MOVE EAST */
                     }else{
                         /* MOVE WEST*/
                     }
+                }
+            }
+
+            printf("Username: %s\n", USERNAME(sim));
+            printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
+            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
+            displayMatrix(map); printf("\n");
+
+            /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
+            if(gameval == 3)
+            {
+                printf("PERINTAH BUY\n");
+            }
+            else if(gameval == 4)
+            {
+                printf("PERINTAH FRY\n");
+            }
+            else if(gameval == 7)
+            {
+                printf("PERINTAH CHOP\n");
+            }
+            
+            /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
+            if(gameval == 13)
+            { // COMMAND INVENTORY
+                printf("List Makanan di Inventory\n");
+                printf("(nama - waktu sisa kedaluwarsa)\n");
+                if(IsEmpty(INV(sim))){
+                    printf("Inventory Kosong. Silakan melakukan BUY\n");
+                }else{
+                    PrintInventory(INV(sim));
+                    printf("\n");
                 }
             }
 
