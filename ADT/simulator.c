@@ -91,10 +91,13 @@ dibuat uppercase */
     Word CATALOG = {"CATALOG", 7}; // Mengeluarkan 11
     Word COOKBOOK = {"COOKBOOK", 8}; // Mengeluarkan 12
     Word INVENTORY = {"INVENTORY", 9}; //Mengeluarkan 13
-    Word MOVENORTH = {"MOVE NORTH", 10}; //Mengeluarkan 14
-    Word MOVESOUTH = {"MOVE SOUTH", 10}; //Mengeluarkan 15
-    Word MOVEWEST = {"MOVE WEST", 9}; //Mengeluarkan 16
-    Word MOVEEAST = {"MOVE EAST", 9}; //Mengeluarkan 17
+    Word MOVE = {"MOVE", 4}; //Mengeluarkan 14
+    Word NORTH = {"NORTH", 5}; // Mengeluarkan 15
+    Word SOUTH = {"SOUTH", 5}; // Mengeluarkan 16
+    Word EAST = {"EAST", 4}; // Mengeluarkan 17
+    Word WEST = {"WEST", 4}; // Mengeluarkan 18
+    Word WAIT = {"WAIT", 4}; //Mengeluarkan 19
+
     // 0 untuk error silakan ulangi
 
     if (isSameWord(START, command)){
@@ -123,14 +126,18 @@ dibuat uppercase */
         return 12;
     }else if(isSameWord(INVENTORY, command)){
         return 13;
-    }else if(isSameWord(MOVENORTH, command)){
+    }else if(isSameWord(MOVE, command)){
         return 14;
-    }else if(isSameWord(MOVESOUTH, command)){
+    }else if(isSameWord(NORTH, command)){
         return 15;
-    }else if(isSameWord(MOVEWEST, command)){
+    }else if(isSameWord(SOUTH, command)){
         return 16;
-    }else if(isSameWord(MOVEEAST, command)){
+    }else if(isSameWord(EAST, command)){
         return 17;
+    }else if(isSameWord(WEST, command)){
+        return 18;
+    }else if(isSameWord(WAIT, command)){
+        return 19;
     }else{
         return 0;
     }

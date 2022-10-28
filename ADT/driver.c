@@ -67,6 +67,27 @@ int main(){
                 }
             }
 
+            if (gameval == 14) // PERINTAH MOVE
+            {
+                /* COMMAND 'MOVE' diterima, parse command arah */
+                char arah[50];
+                scanf("%s", arah);
+                int gerak = cmdParser(arah);
+                if(gerak < 15 || gerak > 18){
+                    printf("Perintah tidak valid!\n");
+                }else{
+                    if(gerak == 15){
+                        /* MOVE NORTH */
+                    }else if (gerak == 16){
+                        /* MOVE SOUTH */
+                    }else if (gerak == 17){
+                        /* MOVE EAST */
+                    }else{
+                        /* MOVE WEST*/
+                    }
+                }
+            }
+
             printf("Enter Command: ");
             scanf("%s", command);
             gameval = cmdParser(command);
