@@ -5,7 +5,7 @@
 #define _N_ARYTREE_
 
 #include "../boolean/boolean.h"
-
+#include "../listdinamis/listdin.h"
 // #define Nil -1
 /* Nil adalah pohon kosong */
 
