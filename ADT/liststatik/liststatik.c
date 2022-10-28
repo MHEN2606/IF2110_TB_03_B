@@ -116,7 +116,13 @@ void buy(PrioQueueTime*q, ListStatik fd){
     displayList(fd);
     printf("Kirim 0 untuk exit.\n");
     scanf("Enter command: %d\n", x);
-    if (x != 0) {
+    while (x > panjangList || x < 0) {
+        printf("ID tidak valid, coba lagi!\n");
+        scanf("Enter command: %d\n", x);
+    }
+    if (x = 0) {
+    }
+    else {
         printf("Berhasil memesan %s. %s akan diantar dalam %d menit.\n", (FOODNAME(ELMT(fd,x))), (FOODNAME(ELMT(fd,x))), timeToMinute(SEND(ELMT(fd,x))));
         eq = {timeToSecond(SEND(ELMT(fd,x))), FOODNAME(ELMT(fd,x))};
         Enqueue(&q,eq);
