@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "tree.h"
 #include <stdlib.h>
+#include "listdin.h"
 
 /*Karna Tree bentuknya tidak bisa ditebak (sama seperti linked list), 
 maka untuk membuat tree cukup menghubungkan node - node*/   
@@ -72,4 +73,15 @@ Node * find(Node *x,infotype data)
         x = nextSibling(x);
     }
     return NULL;
+}
+
+void * findChild(Node * x, infotype data)
+{
+    Node * a;
+    a = firstChild(x);
+    while (a != NULL)
+    {
+        insertLast(a, Info(*a));
+        a = nextSibling(a);
+    }
 }
