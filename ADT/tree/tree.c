@@ -81,6 +81,7 @@ void * findChild(Node * x, infotype data)
     a = firstChild(x);
     while (a != NULL)
     {
+        insertLast(a, Info(*a));
         a = nextSibling(a);
     }
 }
