@@ -45,14 +45,29 @@ int main(){
         printf("\n");
 
         while(gameval != 2){
+            /*rTime untuk mengurangi waktu pada Queue delivery dan Queue Inventory*/
+            int rTime = 0;
             if (gameval == 0 || gameval == 1)
             {
                 printf("Perintah tidak valid! Silakan ulangi\n");
             }
             else
             {
+                /*BUY CHOP MIX FRY BOIL menambah waktu 60 detik*/
+                /* !! INI MASIH BUTUH VALIDASI COMMAND VALID/GAK*/
+                if (gameval==3 || gameval == 6 || gameval == 7 || gameval == 8 || gameval == 9)
+                {
+                    t = addTime(&t,60);
+                    rTime += 60;
+                }
                 if(gameval == 19)
                 {
+                    int jam,menit,detik;
+                    scanf("%d",&jam);
+                    scanf("%d",&menit);
+                    detik = jam * 3600 + menit * 60;
+                    t = addTime(&t,detik);
+                    rTime += detik;
                     printf("PERINTAH WAIT\n");
                     Push(&commands, gameval);
                 }
@@ -81,6 +96,8 @@ int main(){
                             moveWest(&POSISI(sim), &map);
                         }
                         Push(&commands, gerak);
+                        t = addTime(&t,60);
+                        rTime += 60;
                     }
                 }
 
@@ -154,6 +171,8 @@ int main(){
                     }
                     Push(&commands, gameval);
                 }
+                /*UPDATE QUEUE INVENTORY & DELIVERY*/
+                reduceExpTime(&INV(sim),rTime);
             }
             
             printf("\n");

@@ -235,17 +235,53 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
 }
 
 void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R){
-/* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit. 
-   Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
-   Elemen yang di didequeue dienqueue ke R */
-    for (int i = 0; i < NBElmt; i++){ 
-        if(Time(Elmt(*Q,i))-60 == 0){
-            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
-            infotype out;
-            removeEl(Q, Info(Elmt(*Q,i)), &out);
-            Enqueue(R, out);
-        }else{
-            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
+// /* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit.
+//    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0
+//    Elemen yang di didequeue dienqueue ke R */
+//     for (int i = 0; i < NBElmt; i++){
+//         if(Time(Elmt(*Q,i))-60 == 0){
+//             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
+//             infotype out;
+//             removeEl(Q, Info(Elmt(*Q,i)), &out);
+//             Enqueue(R, out);
+//         }else{
+//             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
+//         }
+//     }
+}
+
+void reduceExpTime(PrioQueueTime *Q, int t)
+/*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
+/*t dalam satuan detik*/
+{
+    infotype x;
+    PrioQueueTime temp;
+    MakeEmpty(&temp,MaxEl(*Q));
+    while(!IsEmpty(*Q))
+    {
+        Dequeue(&temp,&x);
+        ExpTime(x) = ExpTime(x) - t;
+        Enqueue(&temp,x);
+    }
+    *Q = temp;
+    deleteEx(Q);
+}
+
+void deleteEx(PrioQueueTime *Q)
+/*Menghapus semua elemen yang sudah expired*/
+{
+    infotype x;
+    PrioQueueTime temp;
+    temp = *Q;
+    if (!IsEmpty(*Q))
+    {
+        while (!IsEmpty(temp))
+        {
+            Dequeue(&temp,&x);
+            if (ExpTime(x)<=0)
+            {
+                Dequeue(Q,&x);
+            }
         }
     }
 }

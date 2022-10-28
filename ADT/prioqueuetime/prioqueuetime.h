@@ -97,5 +97,15 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R);
 /* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit. 
    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
    Elemen yang di didequeue dienqueue ke R */
-   
+
+void reduceExpTime(PrioQueueTime *Q, int t);
+/*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
+/*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
+/*t dalam satuan detik*/
+
+void deleteEx(PrioQueueTime *Q);
+/*Menghapus semua elemen yang sudah expired
+Expired -> ExpTime <= 0
+*/
+
 #endif
