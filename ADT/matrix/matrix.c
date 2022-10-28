@@ -113,12 +113,34 @@ void moveSouth(POINT *P, Matrix *m){
     }
 }
 
-void moveEast(POINT *P){
+void moveEast(POINT *P, Matrix *m){
 /* Menggerakkan point ke kiri sebanyak 1 titik*/
-    ABSIS(*P)++;
+    if (ABSIS(*P) < COL(*m)-1) {
+        if (MAT(*m,ORDINAT(*P),ABSIS(*P)+1) == ' ') {
+            printf("Point S berhasil bergerak ke timur!\n");
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P),ABSIS(*P)+1) = 'S';
+            ABSIS(*P)++;
+        } else {
+            printf("Point S tidak dapat bergerak ke timur. Silakan coba lagi!\n");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!\n");
+    }
 }
 
-void moveWest(POINT *P){
+void moveWest(POINT *P, Matrix *m){
 /* Menggerakkan point ke kanan sebanyak 1 titik*/
-    ABSIS(*P)--;
+    if (ABSIS(*P) > 0) {
+        if (MAT(*m,ORDINAT(*P),ABSIS(*P)-1) == ' ') {
+            printf("Point S berhasil bergerak ke barat!\n");
+            MAT(*m,ORDINAT(*P),ABSIS(*P)) = ' ';
+            MAT(*m,ORDINAT(*P),ABSIS(*P)-1) = 'S';
+            ABSIS(*P)--;
+        } else {
+            printf("Point S tidak dapat bergerak ke barat. Silakan coba lagi!\n");
+        }
+    } else {
+        printf("Point S telah sampai di tepi. Silakan coba lagi!\n");
+    }
 }

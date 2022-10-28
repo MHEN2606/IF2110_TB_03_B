@@ -46,9 +46,9 @@ void moveNorth(POINT *P, Matrix *m);
 void moveSouth(POINT *P, Matrix *m);
 /* Menggerakkan point ke bawah sebanyak 1 titik*/
 
-void moveEast(POINT *P);
+void moveEast(POINT *P, Matrix *m);
 /* Menggerakkan point ke kiri sebanyak 1 titik*/
 
-void moveWest(POINT *P);
+void moveWest(POINT *P, Matrix *m);
 /* Menggerakkan point ke kanan sebanyak 1 titik*/
 #endif
