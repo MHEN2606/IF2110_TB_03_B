@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "boolean.h"
+#include "../boolean/boolean.h"
 
 #define MAXCMD 50
 #define idx_undef -1

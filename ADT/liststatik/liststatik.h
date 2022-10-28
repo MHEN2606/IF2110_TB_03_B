@@ -1,9 +1,9 @@
 #ifndef LIST_STATIK_H
 #define LIST_STATIK_H
 
-#include "food.h"
-#include "charmachine.h"
-#include "wordmachine.h"
+#include "../food/food.h"
+#include "../charmachine/charmachine.h"
+#include "../wordmachine/wordmachine.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
 

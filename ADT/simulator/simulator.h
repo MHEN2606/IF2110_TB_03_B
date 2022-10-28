@@ -1,15 +1,15 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
-#include "point.h"
-#include "time.h"
-#include "liststatik.h"
-#include "prioqueuetime.h"
-#include "matrix.h"
-#include "food.h"
-#include "wordmachine.h"
-#include "charmachine.h"
-#include "boolean.h"
+#include "../point/point.h"
+#include "../time/time.h"
+#include "../liststatik/liststatik.h"
+#include "../prioqueuetime/prioqueuetime.h"
+#include "../matrix/matrix.h"
+#include "../food/food.h"
+#include "../wordmachine/wordmachine.h"
+#include "../charmachine/charmachine.h"
+#include "../boolean/boolean.h"
 
 typedef struct{
     char *name;

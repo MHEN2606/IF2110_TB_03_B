@@ -1,9 +1,9 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "boolean.h"
-#include "wordmachine.h"
-#include "point.h"
+#include "../boolean/boolean.h"
+#include "../wordmachine/wordmachine.h"
+#include "../point/point.h"
 
 #define ROW_CAP 100
 #define COL_CAP 100

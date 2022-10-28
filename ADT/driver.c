@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "simulator.h"
+#include "./simulator/simulator.h"
 
 int main(){
     ListStatik fd;

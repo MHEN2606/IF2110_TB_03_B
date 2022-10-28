@@ -4,7 +4,7 @@
 #ifndef _N_ARYTREE_
 #define _N_ARYTREE_
 
-#include "boolean.h"
+#include "../boolean/boolean.h"
 
 // #define Nil -1
 /* Nil adalah pohon kosong */

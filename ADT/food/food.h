@@ -1,8 +1,8 @@
 #ifndef FOOD_H
 #define FOOD_H
 
-#include "time.h"
-#include "wordmachine.h"
+#include "../time/time.h"
+#include "../wordmachine/wordmachine.h"
 
 #define NMAX 100
 

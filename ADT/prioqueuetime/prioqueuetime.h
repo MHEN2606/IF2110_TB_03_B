@@ -6,9 +6,9 @@
 #ifndef prioqueuetime_H
 #define prioqueuetime_H
 
-#include "wordmachine.h"
-#include "boolean.h"
-#include "time.h"
+#include "../wordmachine/wordmachine.h"
+#include "../boolean/boolean.h"
+#include "../time/time.h"
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
