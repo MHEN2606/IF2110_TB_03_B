@@ -126,7 +126,7 @@ void buy(PrioQueueTime *q, ListStatik fd){
             j++;
         }
     }
-    NEFF(display) = j;
+    NEFF(display) = j-1;
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     scanf("%d", &x);
