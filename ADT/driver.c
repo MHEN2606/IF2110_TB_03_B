@@ -36,7 +36,7 @@ int main(){
 
         printf("Username: %s\n", USERNAME(sim));
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
-        printf("Waktu: %d.%d\n", Hour(t), Minute(t));
+        printf("Waktu: "); displayTimeTitik(t);
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
@@ -59,6 +59,9 @@ int main(){
                 {
                     t = addTime(&t,60);
                     rTime += 60;
+                }
+                if(gameval == 9){
+                    undo(&commands, &poppedCommands, &sim, &map, &delivery, fd);
                 }
                 if(gameval == 19)
                 {
@@ -179,7 +182,7 @@ int main(){
 
             printf("Username: %s\n", USERNAME(sim));
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
-            printf("Waktu: %d.%d\n", Hour(t), Minute(t));
+            printf("Waktu: "); displayTimeTitik(t);
             displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");
@@ -187,9 +190,9 @@ int main(){
             gameval = cmdParser(command);
             printf("\n");
         }
-        printf("SEE YOU NEXT TIME :)\n");
+        exitSimulator();
     }else{
-        printf("SEE YOU NEXT TIME :)\n");
+        exitSimulator();
     }
     return 0;
 }

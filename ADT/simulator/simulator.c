@@ -54,9 +54,13 @@ void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodl
 }
 
 /* *** STOPPER *** */
-void exitSimulator(boolean state){
+void exitSimulator(){
 /* Menerima state boolean true dan dijadikan false untuk menghentikan simulator*/
-   !state;
+   printf("THANK YOU FOR USING BNMO!\n");
+   printf("=========================\n");
+   printf("        BNMO V.2.        \n");
+   printf("13521007 - 13521004 - 13521018\n");
+   printf("13521013 - 13521026 - 13521020\n");
 }
 
 /* *** COMMAND PARSER *** */
@@ -142,4 +146,39 @@ dibuat uppercase */
         return 0;
     }
 
+}
+
+/* *** COMMANDS *** */
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd){
+/* Melakukan proses undo */
+    if(isEmpty(*S)){
+        printf("Belum ada command! Tidak bisa melakukan undo\n");
+    }else{
+        perintah v;
+        Pop(S, &v);
+        if (v == 15){
+            moveSouth(&POSISI(*sim), map);
+        }else if(v == 16){
+            moveNorth(&POSISI(*sim), map);
+        }else if(v == 17){
+            moveWest(&POSISI(*sim), map);
+        }else if(v == 18){
+            moveEast(&POSISI(*sim), map);
+        }else if(v == 11){
+            printf("List Makanan\n");
+            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+            displayList(fd);printf("\n");
+        }else if(v == 13){
+            printf("List Makanan di Inventory\n");
+            printf("(nama - waktu sisa kedaluwarsa)\n");
+            if(IsEmpty(INV(*sim))){
+                printf("Inventory Kosong. Silakan melakukan BUY\n");
+            }else{
+                PrintInventory(INV(*sim));
+                printf("\n");
+            }
+        }
+
+        Push(OUT, v);
+    }
 }

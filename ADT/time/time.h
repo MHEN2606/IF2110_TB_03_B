@@ -23,6 +23,11 @@ void displayTime(TIME T);
     Jika nilai satuan waktu = 0, maka tidak dituliskan
 */
 
+void displayTimeTitik(TIME T);
+/* Menuliskan time dalam bentuk titik.
+    Aturan sama dengan displayTime(TIME T)
+*/
+
 /* *** OPERASI KONVERSI *** */
 int timeToSecond(TIME T);
 /* Mengubah TIME T menjadi detik */

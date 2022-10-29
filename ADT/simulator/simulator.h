@@ -48,7 +48,7 @@ void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodl
 */
 
 /* *** STOPPER *** */
-void exitSimulator(boolean state);
+void exitSimulator();
 /* Menerima state boolean true dan dijadikan false untuk menghentikan simulator*/
 
 /* *** COMMAND PARSER *** */
@@ -56,4 +56,8 @@ void exitSimulator(boolean state);
 int cmdParser(char cmd[50]);
 /* Menyimpan input string menjadi sebuah Word dengan tiap character 
     dibuat uppercase */
+
+/* *** COMMANDS *** */
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd);
+/* Melakukan proses undo */
 #endif

@@ -12,7 +12,7 @@ void createTime(TIME *T, int DD, int HH, int MM){
 /* *** BACA/TULIS *** */
 void displayTime(TIME T){
 /* Menuliskan time T dalam format
-    DD.MM.YY (Contoh 1.23).
+    DD Hari MM Jam YY Menit (Contoh 1 Jam 2 Menit).
     Jika nilai satuan waktu = 0, maka tidak dituliskan
 */
     if(Day(T) == 0 && Hour(T) != 0){
@@ -21,6 +21,19 @@ void displayTime(TIME T){
         printf("%d Menit\n", Minute(T));
     }else{
         printf("%d Hari %d Jam %d Menit\n", Day(T), Hour(T), Minute(T));
+    }
+}
+
+void displayTimeTitik(TIME T){
+/* Menuliskan time dalam bentuk titik.
+    Aturan sama dengan displayTime(TIME T)
+*/
+    if(Day(T) == 0 && Hour(T) != 0){
+        printf("%d.%d\n", Hour(T), Minute(T));
+    }else if(Hour(T) == 0 && Day(T) == 0){
+        printf("0.%d\n", Minute(T));
+    }else{
+        printf("%d.%d.%d\n", Day(T), Hour(T), Minute(T));
     }
 }
 
