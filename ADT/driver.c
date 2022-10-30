@@ -183,7 +183,7 @@ int main(){
                     Push(&commands, gameval);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
-                reducedelTime(&INV(sim),rTime);
+                reduceDelTime(&INV(sim), rTime);
                 reduceExpTime(&INV(sim),rTime);
             }
             

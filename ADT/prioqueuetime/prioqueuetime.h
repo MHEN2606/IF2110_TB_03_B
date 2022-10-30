@@ -105,8 +105,19 @@ void reduceExpTime(PrioQueueTime *Q, int t);
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
+void reduceDelTime(PrioQueueTime *Q, int t);
+/*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
+/*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
+/*t dalam satuan detik*/
+
+
 void deleteEx(PrioQueueTime *Q);
-/*Menghapus semua elemen yang sudah expired
+/*Menghapus semua elemen yang sudah diantar
+Expired -> ExpTime <= 0
+*/
+
+void deleteDel(PrioQueueTime *Q);
+/*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */
 
