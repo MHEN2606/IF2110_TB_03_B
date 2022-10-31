@@ -71,3 +71,13 @@ time baru yang sudah ditambah sebanyak s detik */
     newTime = secondToTime(sekon);
     return newTime;
 }
+
+TIME reduceTime(TIME *T, int s){
+/* Waktu T dikurang sebanyak detik s */
+    TIME newTime;
+    int sekon;
+    sekon = timeToSecond(*T);
+    sekon -= s;
+    newTime = secondToTime(sekon);
+    return newTime;
+}

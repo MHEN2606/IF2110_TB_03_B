@@ -2,7 +2,7 @@
 #include "simulator.h"
 
 /* *** KONSTRUKTOR *** */
-void createUser(SIMULATOR *S, POINT origin, char *name, PrioQueueTime inv){
+void createUser(SIMULATOR *S, POINT origin, Word name, PrioQueueTime inv){
 /* Membuat User S dengan posisi POINT origin dan inventory FOODLIST inv*/
     USERNAME(*S) = name;
     POSISI(*S) = origin;
@@ -39,18 +39,17 @@ void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodl
     char name dari masukan keyboard
     priority queue inventory kosong
 */
+    PrioQueueTime inventory;
     /* ALGORITMA PROSES 1*/
     readMatrix(peta, posisi);
     inputListFood(foodlist);
     //Kurang load tree
 
     /* ALGORITMA PROSES 2*/
-    char *name;
     printf("Masukkan nama Anda: ");
-    scanf("%s", name);
-    PrioQueueTime inventory;
+    STARTWORD();
     MakeEmpty(&inventory, 100);
-    createUser(S, *posisi, name, inventory);
+    createUser(S, *posisi, currentWord, inventory);
 }
 
 /* *** STOPPER *** */
@@ -65,21 +64,13 @@ void exitSimulator(){
 
 /* *** COMMAND PARSER *** */
 /* Melakukan parsing dari input */
-int cmdParser(char cmd[50]){
-/* Menyimpan input string menjadi sebuah Word dengan tiap character 
-dibuat uppercase */
-    Word command;
-    char *t;
-    int len = 0;
-    for (t = &cmd[0]; *t != '\0'; t++){
-        command.TabWord[len] = *t;
-        /* Konversi tiap karakter lowercase jadi uppercase */
-        if(command.TabWord[len] >= 'a' && command.TabWord[len] <= 'z'){
-            command.TabWord[len] = command.TabWord[len] - 32;
+int cmdParser(Word command){
+/* Word dibuat uppercase */
+    for (int i = 0; i < command.Length; i++){
+        if(command.TabWord[i] >= 'a' && command.TabWord[i] <= 'z'){
+            command.TabWord[i] = command.TabWord[i] - 32;
         }
-        len++;
     }
-    command.Length = len;
 
     /* KUMPULAN COMMAND */
     Word START = {"START", 5}; //Mengeluarkan 1
@@ -145,11 +136,10 @@ dibuat uppercase */
     }else{
         return 0;
     }
-
 }
 
 /* *** COMMANDS *** */
-void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd){
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t){
 /* Melakukan proses undo */
     if(isEmpty(*S)){
         printf("Belum ada command! Tidak bisa melakukan undo\n");
@@ -177,6 +167,12 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
                 PrintInventory(INV(*sim));
                 printf("\n");
             }
+        }else if (v == 19){
+            int jam, menit;
+            Pop(S, &jam);
+            Pop(S, &menit);
+            int detik = jam * 3600 + menit * 60;
+            *t = reduceTime(t,detik);
         }
 
         Push(OUT, v);

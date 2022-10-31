@@ -9,20 +9,19 @@ int main(){
     TIME t;
     STACK notification, commands, poppedCommands;
     PrioQueueTime delivery;
-    char command[50];
 
     splashScreen();
 
     printf("Enter START/EXIT: ");
-    scanf("%s", command);
-    int startval = cmdParser(command);
+    STARTWORD();
+    int startval = cmdParser(currentWord);
 
     while (startval == 0 || (startval >= 3 && startval <= 12))
     {
         printf("Perintah tidak valid! Silakan Ulangi!\n");
         printf("START/EXIT: ");
-        scanf("%s", command);
-        startval = cmdParser(command);
+        STARTWORD();
+        startval = cmdParser(currentWord);
     }
 
     if (startval == 1)
@@ -34,14 +33,16 @@ int main(){
         createEmptyStack(&commands);
         createEmptyStack(&poppedCommands);
 
-        printf("Username: %s\n", USERNAME(sim));
+        printf("Username: ");
+        tulisKata(USERNAME(sim));
+        printf("\n");
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
         printf("Waktu: "); displayTimeTitik(t);
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
-        scanf("%s", command);
-        int gameval = cmdParser(command);
+        STARTWORD();
+        int gameval = cmdParser(currentWord);
         printf("\n");
 
         while(gameval != 2){
@@ -61,17 +62,21 @@ int main(){
                     rTime += 60;
                 }
                 if(gameval == 9){
-                    undo(&commands, &poppedCommands, &sim, &map, &delivery, fd);
+                    undo(&commands, &poppedCommands, &sim, &map, &delivery, fd, &t);
                 }
                 if(gameval == 19)
                 {
                     int jam,menit,detik;
-                    scanf("%d",&jam);
-                    scanf("%d",&menit);
+                    ADVWORD();
+                    jam = charToInt(currentWord);
+                    ADVWORD();
+                    menit = charToInt(currentWord);
                     detik = jam * 3600 + menit * 60;
                     t = addTime(&t,detik);
                     rTime += detik;
                     printf("PERINTAH WAIT\n");
+                    Push(&commands, menit);
+                    Push(&commands, jam);
                     Push(&commands, gameval);
                 }
 
@@ -79,9 +84,8 @@ int main(){
                 if (gameval == 14) 
                 {
                     /* COMMAND 'MOVE' diterima, parse command arah */
-                    char arah[50];
-                    scanf("%s", arah);
-                    int gerak = cmdParser(arah);
+                    ADVWORD();
+                    int gerak = cmdParser(currentWord);
                     if(gerak < 15 || gerak > 18){
                         printf("Perintah tidak valid!\n");
                     }else{
@@ -155,7 +159,7 @@ int main(){
                 if(gameval == 11)
                 {
                     printf("List Makanan\n");
-                    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+                    printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
                     displayList(fd);printf("\n");
                     Push(&commands, gameval);
                 }
@@ -164,8 +168,8 @@ int main(){
                 if (gameval == 5)
                 {
                     printf("List Makanan\n");
-                    printf("(nama - waktu sisa delivery)");
-                    PrintDelivery(delivery);
+                    printf("(nama - waktu sisa delivery)\n");
+                    PrintDelivery(delivery);printf("\n");
                     Push(&commands, gameval);
                 }
 
@@ -189,14 +193,16 @@ int main(){
             
             printf("\n");
 
-            printf("Username: %s\n", USERNAME(sim));
+            printf("Username: ");
+            tulisKata(USERNAME(sim));
+            printf("\n");
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
             printf("Waktu: "); displayTimeTitik(t);
             displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");
-            scanf("%s", command);
-            gameval = cmdParser(command);
+            STARTWORD();
+            gameval = cmdParser(currentWord);
             printf("\n");
         }
         exitSimulator();

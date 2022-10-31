@@ -42,4 +42,7 @@ TIME secondToTime(int s);
 TIME addTime(TIME *T, int s);
 /* Waktu T ditambah sebanyak detik s */
 
+TIME reduceTime(TIME *T, int s);
+/* Waktu T dikurang sebanyak detik s */
+
 #endif

@@ -129,13 +129,14 @@ void buy(PrioQueueTime *q, ListStatik fd){
     NEFF(display) = j-1;
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
-    scanf("%d", &x);
+    STARTWORD();
+    x = charToInt(currentWord);
     while (x-1 != -1) {
         if(x-1 < 0 || x-1 > panjangList(display)){
             printf("ID tidak valid, coba lagi!\n");
             printf("Enter command: ");
-            scanf("%d", &x);
-            printf("\n");
+            STARTWORD();
+            x = charToInt(currentWord);
         }
         else
         {
@@ -147,13 +148,15 @@ void buy(PrioQueueTime *q, ListStatik fd){
 
             /* PROSES ENQUEUE KE Priority Queue q */
             eq.time = timeToSecond(SEND(ELMT(display,x-1)));
+            eq.send = timeToSecond(SEND(ELMT(display,x-1)));
             eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
             eq.info = FOODNAME(ELMT(display,x-1));
             Enqueue(q,eq);
 
             printf("\n");
             printf("Enter command: ");
-            scanf("%d", &x);
+            STARTWORD();
+            x = charToInt(currentWord);
         }
     }
 }

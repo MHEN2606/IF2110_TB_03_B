@@ -36,7 +36,7 @@ typedef struct
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e) (e).time
-#define SEND(e) (e).send
+#define Send(e) (e).send
 #define ExpTime(e) (e).exp
 #define Info(e) (e).info
 #define Head(Q) (Q).HEAD
@@ -90,6 +90,12 @@ void PrintInventory(PrioQueueTime Q);
 ...
 <time-n> <elemen-n>
 #
+*/
+void PrintDelivery(PrioQueueTime Q);
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+No urut. Nama makanan - Waktu Delivery
 */
 void removeEl(PrioQueueTime *Q, Word makanan,infotype *out);
 /*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/

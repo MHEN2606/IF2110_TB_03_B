@@ -170,11 +170,11 @@ No urut. Nama makanan - Waktu Delivery
     t = Q;
     if(!IsEmpty(Q)){
         while (!IsEmpty(t)){
-            Dequeue(&t,&element);
+            Dequeue(&t, &element);
             printf("%d. ",num);
             tulisKata(Info(element));
             printf(" - ");
-            displayTime(secondToTime(SEND(element)));
+            displayTime(secondToTime(Send(element)));
             num++;
         }
     }
@@ -263,7 +263,7 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
 /* Melakukan traversal pada Queue, mengurangi time sebanyak rTime.*/
 /* Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 */
 /* Elemen yang di didequeue dienqueue ke R */
-    for (int i = 0; i < NBElmt; i++){
+    for (int i = 0; i < NBElmt(*Q); i++){
         if (Time(Elmt(*Q,i))-rTime == 0){
             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
             infotype out;
@@ -285,7 +285,7 @@ void reduceDelTime(PrioQueueTime *Q, int t)
     while(!IsEmpty(*Q))
     {
         Dequeue(&temp,&x);
-        SEND(x) = SEND(x) - t;
+        Send(x) = Send(x) - t;
         Enqueue(&temp,x);
     }
     *Q = temp;
@@ -320,7 +320,7 @@ void deleteDel(PrioQueueTime *Q)
         while (!IsEmpty(temp))
         {
             Dequeue(&temp,&x);
-            if (SEND(x)<=0)
+            if (Send(x)<=0)
             {
                 Dequeue(Q,&x);
             }

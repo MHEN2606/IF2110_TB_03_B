@@ -13,7 +13,7 @@
 #include "../boolean/boolean.h"
 
 typedef struct{
-    char *name;
+    Word name;
     POINT position;
     PrioQueueTime inventory; //list inventory
 } SIMULATOR;
@@ -24,7 +24,7 @@ typedef struct{
 #define INV(S) (S).inventory
 
 /* *** KONSTRUKTOR *** */
-void createUser(SIMULATOR *S, POINT origin, char *name, PrioQueueTime inv);
+void createUser(SIMULATOR *S, POINT origin, Word name, PrioQueueTime inv);
 /* Membuat User S dengan posisi POINT origin dan inventory FOODLIST inv*/
 
 /* *** INISIASI *** */
@@ -53,11 +53,11 @@ void exitSimulator();
 
 /* *** COMMAND PARSER *** */
 /* Melakukan parsing dari input */
-int cmdParser(char cmd[50]);
+int cmdParser(Word command);
 /* Menyimpan input string menjadi sebuah Word dengan tiap character 
     dibuat uppercase */
 
 /* *** COMMANDS *** */
-void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd);
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t);
 /* Melakukan proses undo */
 #endif
