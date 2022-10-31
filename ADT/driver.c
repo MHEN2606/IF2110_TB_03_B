@@ -16,7 +16,7 @@ int main(){
     STARTWORD();
     int startval = cmdParser(currentWord);
 
-    while (startval != 1 || startval != 2)
+    while (startval == 0 || (startval >= 3 && startval <= 19))
     {
         printf("Perintah tidak valid! Silakan Ulangi!\n");
         printf("Enter START/EXIT: ");
