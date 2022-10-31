@@ -180,7 +180,7 @@ No urut. Nama makanan - Waktu Delivery
     }
 }
 
-void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
+void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
 /*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/
 /*Elemen yang dihapus dipindahkan ke dalam variabel out*/
 {
