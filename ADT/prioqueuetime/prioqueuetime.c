@@ -260,7 +260,7 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
 }
 
 void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
-/* Melakukan traversal pada Queue, mengurangi time sebanyak rTime menit.*/
+/* Melakukan traversal pada Queue, mengurangi time sebanyak rTime.*/
 /* Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 */
 /* Elemen yang di didequeue dienqueue ke R */
     for (int i = 0; i < NBElmt; i++){
