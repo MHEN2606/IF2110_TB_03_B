@@ -16,10 +16,10 @@ int main(){
     STARTWORD();
     int startval = cmdParser(currentWord);
 
-    while (startval == 0 || (startval >= 3 && startval <= 12))
+    while (startval != 1 && startval != 2)
     {
         printf("Perintah tidak valid! Silakan Ulangi!\n");
-        printf("START/EXIT: ");
+        printf("Enter START/EXIT: ");
         STARTWORD();
         startval = cmdParser(currentWord);
     }
