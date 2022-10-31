@@ -6,20 +6,20 @@
 /*Karna Tree bentuknya tidak bisa ditebak (sama seperti linked list), 
 maka untuk membuat tree cukup menghubungkan node - node*/   
 
-Node * createNode (infotype data)
+Node * createNode (treeinfo data)
 /*Membuat dan mengembalikan suatu node baru dengan berisi firstChild dan nextSibling yang kosong*/
 {
     Node * node_baru = malloc(sizeof(Node));
     if (node_baru){
         firstChild(node_baru) = NULL;
         nextSibling(node_baru) = NULL;
-        Info(*node_baru) = data;
+        tInfo(*node_baru) = data;
         // Depth(*node_baru) = 0;
     }
     return node_baru;
 }
 
-Node * newSibling (Node *x, infotype data)
+Node * newSibling (Node *x, treeinfo data)
 /*Membuat suatu node yang merupakan sibling untuk node x*/
 {
     /*Sambungkan semua sibling dari x dahulu dg menggunakan perulangan*/
@@ -33,7 +33,7 @@ Node * newSibling (Node *x, infotype data)
     return nextSibling(x);
 }
 
-Node * newChild (Node *x, infotype data)
+Node * newChild (Node *x, treeinfo data)
 /*Membuat suatu node yang merupakan anak dari node x*/
 {
     /*Menggunakan percabangan untuk mengecek apabila node x
@@ -49,14 +49,14 @@ Node * newChild (Node *x, infotype data)
     }
 }
 
-Node * find(Node *x,infotype data)
+Node * find(Node *x,treeinfo data)
 /*Mencari suatu node yang berisi data*/
 /*Mengembalikan NULL apabila data tidak ditemukan*/
 {
     /*While digunakan untuk mencari secara horizontal (sibling)*/
     while (x != NULL)
     {
-        if (Info(*x)==data)
+        if (tInfo(*x)==data)
         {
             return x;
         }
@@ -75,15 +75,15 @@ Node * find(Node *x,infotype data)
     return NULL;
 }
 
-void * findChild(Node * x, infotype data)
-{
-    Node * a;
-    ListDin l;
-    CreateListDin(&l,10);
-    a = firstChild(x);
-    while (a != NULL)
-    {
-        insertLast(&l, Info(*a));
-        a = nextSibling(a);
-    }
-}
+// void * findChild(Node * x, treeinfo data)
+// {
+//     Node * a;
+//     ListDin l;
+//     CreateListDin(&l,10);
+//     a = firstChild(x);
+//     while (a != NULL)
+//     {
+//         insertLast(&l, Info(*a));
+//         a = nextSibling(a);
+//     }
+// }

@@ -18,6 +18,7 @@ matriks m*/
 
     STARTCONFIGWORD("../konfigurasi/map.txt");
     brs = charToInt(currentWord);
+    // printf("%d",brs);
     ADVWORD();
     kol = charToInt(currentWord);
 

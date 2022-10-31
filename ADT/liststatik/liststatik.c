@@ -87,7 +87,26 @@ void displayList(ListStatik l){
         printf(" - %d menit\n", timeToMinute(SEND(ELMT(l,i))));
     }
 }
-
+void displayResep(ListStatik l)
+{
+    // printf("START DISINI");
+    for(int i = 0 ; i<NEFF(l) ; i++)
+    {
+    // printf("%d\n",tInfo(*RINFO(l,1)));
+        Node x;
+        x = *RINFO(l,i);
+        if (firstChild(&x))
+        {
+            printf("%d\n",tInfo(*firstChild(&x)));
+            while (nextSibling(&x) != NULL)
+            {
+                printf("%d",tInfo(*nextSibling(&x)));
+                x = *nextSibling(&x);
+            }
+        }
+    }
+    // printf("END DISINI");
+}
 ListStatik copyList(ListStatik *l){
 /* Menyalin seluruh l ke l1*/
     ListStatik lcopy;
@@ -158,5 +177,37 @@ void buy(PrioQueueTime *q, ListStatik fd){
             STARTWORD();
             x = charToInt(currentWord);
         }
+    }
+}
+void readResep(ListStatik *l)
+/*Membaca file konfigurasi dari resep lalu menyimpannya ke tree
+x berperan sebagai node utama dari tree (parent)
+x memiliki beberapa child (tidak ada sibling karena pertama)*/
+{
+    Node x;
+    Node y;
+    STARTCONFIGWORD("../konfigurasi/resep.txt");
+    int n = charToInt(currentWord);
+    printf("%d",n);
+    NEFF(*l) = n;
+    ADVLINE();
+    for (int i = 0 ; i<n ; i++)
+    {
+        /*Isi LIST dengan tree*/
+        // x = *createNode(charToInt(currentWord));
+
+        RINFO(*l,i) = createNode(charToInt(currentWord));
+        printf("Masuk : %d\n",(tInfo(*RINFO(*l,i))));
+        ADVWORD();
+        int m = charToInt(currentWord);
+        // printf("Childnya sebanyak : %d\n",m);
+        ADVWORD();
+        for (int j = 0 ; j<m ; j ++)
+        {
+            newChild(RINFO(*l,i),charToInt(currentWord));
+            // printf("%d\n", charToInt(currentWord));
+            ADVWORD();
+        }
+        ADVLINE();
     }
 }
