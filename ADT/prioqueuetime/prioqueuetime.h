@@ -93,7 +93,7 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out);
 /*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/
 /*Elemen yang dihapus dipindahkan ke dalam variabel out*/
 
-void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R);
+void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime);
 /* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit. 
    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
    Elemen yang di didequeue dienqueue ke R */

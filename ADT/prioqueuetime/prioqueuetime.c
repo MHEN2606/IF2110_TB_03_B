@@ -234,20 +234,20 @@ void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
 }
 }
 
-void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R){
-// /* Melakukan traversal pada Queue, mengurangi time sebanyak 1 menit.
-//    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0
-//    Elemen yang di didequeue dienqueue ke R */
-//     for (int i = 0; i < NBElmt; i++){
-//         if(Time(Elmt(*Q,i))-60 == 0){
-//             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
-//             infotype out;
-//             removeEl(Q, Info(Elmt(*Q,i)), &out);
-//             Enqueue(R, out);
-//         }else{
-//             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-60;
-//         }
-//     }
+void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
+/* Melakukan traversal pada Queue, mengurangi time sebanyak rTime menit.*/
+/* Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 */
+/* Elemen yang di didequeue dienqueue ke R */
+    for (int i = 0; i < NBElmt; i++){
+        if (Time(Elmt(*Q,i))-rTime == 0){
+            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
+            infotype out;
+            removeEl(Q, Info(Elmt(*Q,i)), &out);
+            Enqueue(R, out);
+        } else {
+            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
+        }
+    }
 }
 
 void reduceExpTime(PrioQueueTime *Q, int t)

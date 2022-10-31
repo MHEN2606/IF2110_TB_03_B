@@ -10,22 +10,16 @@ int main() {
     readMatrix(&m,&p);
     tulisPoint(p);
     displayMatrix(m);
-    moveNorth(&p,&m);
+    moveNorth(&p,&m); //move north
     tulisPoint(p);
     displayMatrix(m);
-    moveSouth(&p,&m);
+    moveSouth(&p,&m); //move south
     tulisPoint(p);
     displayMatrix(m);
-    moveSouth(&p,&m);
+    moveEast(&p,&m); //move east
     tulisPoint(p);
     displayMatrix(m);
-    moveNorth(&p,&m);
-    tulisPoint(p);
-    displayMatrix(m);
-    moveEast(&p,&m);
-    tulisPoint(p);
-    displayMatrix(m);
-    moveWest(&p,&m);
+    moveWest(&p,&m); //move west
     tulisPoint(p);
     displayMatrix(m);
     return 0;
