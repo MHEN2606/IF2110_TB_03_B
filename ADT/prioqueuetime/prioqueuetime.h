@@ -16,6 +16,7 @@
 typedef struct
 {
     int time;  /*waktu dalam detik*/
+    int send; /*Waktu Delivery*/
     int exp; /* Waktu Expired */
     Word info; /* elemen karakter */
 } infotype;
@@ -35,6 +36,7 @@ typedef struct
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e) (e).time
+#define SEND(e) (e).send
 #define ExpTime(e) (e).exp
 #define Info(e) (e).info
 #define Head(Q) (Q).HEAD
@@ -103,8 +105,19 @@ void reduceExpTime(PrioQueueTime *Q, int t);
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
+void reduceDelTime(PrioQueueTime *Q, int t);
+/*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
+/*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
+/*t dalam satuan detik*/
+
+
 void deleteEx(PrioQueueTime *Q);
-/*Menghapus semua elemen yang sudah expired
+/*Menghapus semua elemen yang sudah diantar
+Expired -> ExpTime <= 0
+*/
+
+void deleteDel(PrioQueueTime *Q);
+/*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */
 

@@ -160,6 +160,14 @@ int main(){
                     Push(&commands, gameval);
                 }
 
+                
+                if (gameval == 5)
+                {
+                    printf("List Makanan\n");
+                    printf("(nama - waktu sisa delivery)");
+                    PrintDelivery(delivery);
+                    Push(&commands, gameval);
+                }
 
                 /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
                 if(gameval == 13)
@@ -175,6 +183,7 @@ int main(){
                     Push(&commands, gameval);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
+                reduceDelTime(&INV(sim), rTime);
                 reduceExpTime(&INV(sim),rTime);
             }
             

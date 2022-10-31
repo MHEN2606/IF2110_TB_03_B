@@ -155,6 +155,31 @@ Waktu time pasti 0
     }
 }
 
+void PrintDelivery(PrioQueueTime Q)
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+No urut. Nama makanan - Waktu Delivery
+*/
+{
+    PrioQueueTime t;
+    infotype element;
+    TIME temp;
+    int num;
+    num =  1;
+    t = Q;
+    if(!IsEmpty(Q)){
+        while (!IsEmpty(t)){
+            Dequeue(&t,&element);
+            printf("%d. ",num);
+            tulisKata(Info(element));
+            printf(" - ");
+            displayTime(secondToTime(SEND(element)));
+            num++;
+        }
+    }
+}
+
 void removeEl(PrioQueueTime *Q, Word makanan,infotype *out)
 /*Menghapus suatu elemen dengan info=makanan lalu menggeser Queue*/
 /*Elemen yang dihapus dipindahkan ke dalam variabel out*/
@@ -250,6 +275,23 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
     }
 }
 
+void reduceDelTime(PrioQueueTime *Q, int t)
+/*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
+/*t dalam satuan detik*/
+{
+    infotype x;
+    PrioQueueTime temp;
+    MakeEmpty(&temp,MaxEl(*Q));
+    while(!IsEmpty(*Q))
+    {
+        Dequeue(&temp,&x);
+        SEND(x) = SEND(x) - t;
+        Enqueue(&temp,x);
+    }
+    *Q = temp;
+    deleteDel(Q);
+}
+
 void reduceExpTime(PrioQueueTime *Q, int t)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
@@ -265,6 +307,25 @@ void reduceExpTime(PrioQueueTime *Q, int t)
     }
     *Q = temp;
     deleteEx(Q);
+}
+
+void deleteDel(PrioQueueTime *Q)
+/*Menghapus semua elemen yang sudah diantar*/
+{
+    infotype x;
+    PrioQueueTime temp;
+    temp = *Q;
+    if (!IsEmpty(*Q))
+    {
+        while (!IsEmpty(temp))
+        {
+            Dequeue(&temp,&x);
+            if (SEND(x)<=0)
+            {
+                Dequeue(Q,&x);
+            }
+        }
+    }
 }
 
 void deleteEx(PrioQueueTime *Q)
