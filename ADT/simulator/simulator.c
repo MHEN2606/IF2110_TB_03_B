@@ -173,6 +173,14 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
             Pop(S, &menit);
             int detik = jam * 3600 + menit * 60;
             *t = reduceTime(t,detik);
+        }else if(v == 3){
+            int N;
+            Pop(S, &N);
+            for(int i = 0; i < N; i++){
+                // Dequeue 3 kali elemen pada delivery
+                infotype m;
+                Dequeue(delivery, &m);
+            }
         }
 
         Push(OUT, v);

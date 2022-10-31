@@ -75,9 +75,9 @@ int main(){
                     t = addTime(&t,detik);
                     rTime += detik;
                     printf("PERINTAH WAIT\n");
-                    Push(&commands, menit);
-                    Push(&commands, jam);
-                    Push(&commands, gameval);
+                    Push(&commands, menit); //push y
+                    Push(&commands, jam); // push x
+                    Push(&commands, gameval); // push wait
                 }
 
                 /* PERINTAH MOVE DIJALANKAN DI SINI */
@@ -112,7 +112,10 @@ int main(){
                 if(gameval == 3)
                 {
                     if(isAdjacent(POSISI(sim), map, 'T')){
+                        int length = NBElmt(delivery);
                         buy(&delivery, fd);
+                        length = NBElmt(delivery) - length;
+                        Push(&commands, length); // push berapa elemen yang ditambahkan
                         Push(&commands, gameval);
                     }else{
                         printf("Anda tidak berada di area command!\n");
@@ -169,7 +172,14 @@ int main(){
                 {
                     printf("List Makanan\n");
                     printf("(nama - waktu sisa delivery)\n");
-                    PrintDelivery(delivery);printf("\n");
+                    if(IsEmpty(delivery))
+                    {
+                        printf("Delivery Kosong. Silakan melakukan BUY\n");
+                    }
+                    else
+                    {
+                        PrintDelivery(delivery);printf("\n");
+                    }
                     Push(&commands, gameval);
                 }
 
