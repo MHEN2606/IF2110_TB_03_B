@@ -169,7 +169,7 @@ void buy(PrioQueueTime *q, ListStatik fd){
             eq.time = timeToSecond(SEND(ELMT(display,x-1)));
             eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
             eq.info = FOODNAME(ELMT(display,x-1));
-            Enqueue(q,eq);
+            Enqueue(q,eq,true);
 
             printf("\n");
             printf("Enter command: ");

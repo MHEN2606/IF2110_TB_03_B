@@ -55,7 +55,7 @@ void DeAlokasi(PrioQueueTime * Q)
     free((*Q).T);
 }
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueueTime * Q, infotype X)
+void Enqueue (PrioQueueTime * Q, infotype X, boolean select)
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan EXP TIME */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
@@ -88,21 +88,43 @@ void Enqueue (PrioQueueTime * Q, infotype X)
         } else {
             comp = Tail(*Q)-1;
         }
-
-        while(ExpTime(Elmt(*Q,idx))<ExpTime(Elmt(*Q,comp)))
+        // Select = True => Urut berdasarkan send time; Select = False => Urut berdasarkan exp time
+        if (select)
         {
-            temp = Elmt(*Q,idx);
-            Elmt(*Q,idx) = Elmt(*Q,idx-1);
-            Elmt(*Q,idx-1) = temp;
-            if (idx == 0){
-                idx = MaxEl(*Q)-1;
-            } else{
-                idx--;
+            while(Time(Elmt(*Q,idx))<Time(Elmt(*Q,comp)))
+            {
+                temp = Elmt(*Q,idx);
+                Elmt(*Q,idx) = Elmt(*Q,idx-1);
+                Elmt(*Q,idx-1) = temp;
+                if (idx == 0){
+                    idx = MaxEl(*Q)-1;
+                } else{
+                    idx--;
+                }
+                if(comp==0){
+                    comp = MaxEl(*Q)-1;
+                } else{
+                    comp--;
+                }
             }
-            if(comp==0){
-                comp = MaxEl(*Q)-1;
-            } else{
-                comp--;
+        }
+        else
+        {
+            while(ExpTime(Elmt(*Q,idx))<ExpTime(Elmt(*Q,comp)))
+            {
+                temp = Elmt(*Q,idx);
+                Elmt(*Q,idx) = Elmt(*Q,idx-1);
+                Elmt(*Q,idx-1) = temp;
+                if (idx == 0){
+                    idx = MaxEl(*Q)-1;
+                } else{
+                    idx--;
+                }
+                if(comp==0){
+                    comp = MaxEl(*Q)-1;
+                } else{
+                    comp--;
+                }
             }
         }
     }
@@ -270,7 +292,7 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
             infotype out;
             removeEl(Q, Info(Elmt(*Q,i)), &out);
-            Enqueue(R, out);
+            Enqueue(R, out, false);
         } else {
             Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
         }
@@ -286,9 +308,9 @@ void reduceDelTime(PrioQueueTime *Q, int t)
     MakeEmpty(&temp,MaxEl(*Q));
     while(!IsEmpty(*Q))
     {
-        Dequeue(&temp,&x);
+        Dequeue(Q,&x);
         Time(x) = Time(x) - t;
-        Enqueue(&temp,x);
+        Enqueue(&temp,x,true);
     }
     *Q = temp;
     deleteDel(Q);
@@ -303,9 +325,9 @@ void reduceExpTime(PrioQueueTime *Q, int t)
     MakeEmpty(&temp,MaxEl(*Q));
     while(!IsEmpty(*Q))
     {
-        Dequeue(&temp,&x);
+        Dequeue(Q,&x);
         ExpTime(x) = ExpTime(x) - t;
-        Enqueue(&temp,x);
+        Enqueue(&temp,x,false);
     }
     *Q = temp;
     deleteEx(Q);
