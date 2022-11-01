@@ -167,7 +167,6 @@ void buy(PrioQueueTime *q, ListStatik fd){
 
             /* PROSES ENQUEUE KE Priority Queue q */
             eq.time = timeToSecond(SEND(ELMT(display,x-1)));
-            eq.send = timeToSecond(SEND(ELMT(display,x-1)));
             eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
             eq.info = FOODNAME(ELMT(display,x-1));
             Enqueue(q,eq);

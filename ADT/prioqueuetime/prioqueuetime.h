@@ -16,7 +16,7 @@
 typedef struct
 {
     int time;  /*waktu dalam detik*/
-    int send; /*Waktu Delivery*/
+    // int send; /*Waktu Delivery*/
     int exp; /* Waktu Expired */
     Word info; /* elemen karakter */
 } infotype;
@@ -36,7 +36,7 @@ typedef struct
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e) (e).time
-#define Send(e) (e).send
+// #define Send(e) (e).send
 #define ExpTime(e) (e).exp
 #define Info(e) (e).info
 #define Head(Q) (Q).HEAD

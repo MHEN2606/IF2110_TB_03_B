@@ -56,7 +56,7 @@ void DeAlokasi(PrioQueueTime * Q)
 }
 /* *** Primitif Add/Delete *** */
 void Enqueue (PrioQueueTime * Q, infotype X)
-/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan EXP TIME */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
@@ -89,7 +89,7 @@ void Enqueue (PrioQueueTime * Q, infotype X)
             comp = Tail(*Q)-1;
         }
 
-        while(Time(Elmt(*Q,idx))<Time(Elmt(*Q,comp)))
+        while(ExpTime(Elmt(*Q,idx))<ExpTime(Elmt(*Q,comp)))
         {
             temp = Elmt(*Q,idx);
             Elmt(*Q,idx) = Elmt(*Q,idx-1);
@@ -115,12 +115,12 @@ void Dequeue (PrioQueueTime * Q, infotype * X)
 {
     if (NBElmt(*Q) == 1){
         Info(*X) = Info(InfoHead(*Q));
-        Time(*X) = Time(InfoHead(*Q));
+        ExpTime(*X) = ExpTime(InfoHead(*Q));
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     } else {
         Info(*X) = Info(InfoHead(*Q));
-        Time(*X) = Time(InfoHead(*Q));
+        ExpTime(*X) = ExpTime(InfoHead(*Q));
         if (Head(*Q)==MaxEl(*Q)-1){
             Head(*Q) = 0;
         } else {
@@ -174,7 +174,7 @@ No urut. Nama makanan - Waktu Delivery
             printf("%d. ",num);
             tulisKata(Info(element));
             printf(" - ");
-            displayTime(secondToTime(Send(element)));
+            displayTime(secondToTime(Time(element)));
             num++;
         }
     }
@@ -285,7 +285,7 @@ void reduceDelTime(PrioQueueTime *Q, int t)
     while(!IsEmpty(*Q))
     {
         Dequeue(&temp,&x);
-        Send(x) = Send(x) - t;
+        Time(x) = Time(x) - t;
         Enqueue(&temp,x);
     }
     *Q = temp;
@@ -310,7 +310,9 @@ void reduceExpTime(PrioQueueTime *Q, int t)
 }
 
 void deleteDel(PrioQueueTime *Q)
-/*Menghapus semua elemen yang sudah diantar*/
+/*Menghapus semua elemen yang sudah diantar
+sudah diantar -> Time = 0
+*/
 {
     infotype x;
     PrioQueueTime temp;
@@ -320,7 +322,7 @@ void deleteDel(PrioQueueTime *Q)
         while (!IsEmpty(temp))
         {
             Dequeue(&temp,&x);
-            if (Send(x)<=0)
+            if (Time(x)<=0)
             {
                 Dequeue(Q,&x);
             }
