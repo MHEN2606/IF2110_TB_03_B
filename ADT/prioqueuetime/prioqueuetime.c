@@ -116,11 +116,13 @@ void Dequeue (PrioQueueTime * Q, infotype * X)
     if (NBElmt(*Q) == 1){
         Info(*X) = Info(InfoHead(*Q));
         ExpTime(*X) = ExpTime(InfoHead(*Q));
+        Time(*X) = Time(InfoHead(*Q));
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     } else {
         Info(*X) = Info(InfoHead(*Q));
         ExpTime(*X) = ExpTime(InfoHead(*Q));
+        Time(*X) = Time(InfoHead(*Q));
         if (Head(*Q)==MaxEl(*Q)-1){
             Head(*Q) = 0;
         } else {
