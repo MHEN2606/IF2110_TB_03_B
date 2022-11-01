@@ -33,11 +33,13 @@ int main(){
         createEmptyStack(&commands);
         createEmptyStack(&poppedCommands);
 
+        printf("\n");
         printf("Username: ");
         tulisKata(USERNAME(sim));
         printf("\n");
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
         printf("Waktu: "); displayTimeTitik(t);
+        printf("Notifikasi: "); printf("-\n");
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
@@ -208,6 +210,7 @@ int main(){
             printf("\n");
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
             printf("Waktu: "); displayTimeTitik(t);
+            printf("Notifikasi: "); printf("-\n");
             displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");
