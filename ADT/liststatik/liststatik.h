@@ -11,19 +11,19 @@
 
 typedef FOOD ElType;
 typedef struct Node * rType;
-#define RINFO(l,i) (l).resep[(i)]
-
 
 typedef struct{
-    Node * resep[100]; //array of Tree
-    ElType container[100];// array of Food
+    union{
+        ElType container[100];
+        Node * resep[100];
+    } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
 
 /* *** SELEKTOR *** */
-#define ELMT(l,i) (l).container[(i)]
+#define ELMT(l,i) (l).ltype.container[(i)]
 #define NEFF(l) (l).NEFF
-#define RINFO(l,i) (l).resep[(i)]
+#define RINFO(l,i) (l).ltype.resep[(i)]
 
 /* *** CREATOR *** */
 void createList(ListStatik *l);
@@ -33,6 +33,8 @@ void createList(ListStatik *l);
 void inputListFood(ListStatik *l);
 /* Membaca banyak makanan yang dimasukkan lalu membuat list makanan 
 input dilakukan dari sebuah file*/
+void readResep(ListStatik *l);
+/* Membaca resep dari sebuah file konfigurasi dan disimpan dalam bentuk list */
 
 /* *** TULIS / SALIN *** */
 void displayList(ListStatik l);
@@ -47,6 +49,5 @@ int panjangList(ListStatik l);
 
 void buy(PrioQueueTime *q, ListStatik fd);
 /* Melakukan proses buy */
-void readResep(ListStatik *l);
 
 #endif

@@ -188,7 +188,7 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
     Node y;
     STARTCONFIGWORD("../konfigurasi/resep.txt");
     int n = charToInt(currentWord);
-    printf("%d",n);
+    //printf("%d",n);
     NEFF(*l) = n;
     ADVLINE();
     for (int i = 0 ; i<n ; i++)
@@ -197,7 +197,7 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
         // x = *createNode(charToInt(currentWord));
 
         RINFO(*l,i) = createNode(charToInt(currentWord));
-        printf("Masuk : %d\n",(tInfo(*RINFO(*l,i))));
+        //printf("Masuk : %d\n",(tInfo(*RINFO(*l,i))));
         ADVWORD();
         int m = charToInt(currentWord);
         // printf("Childnya sebanyak : %d\n",m);

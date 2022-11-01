@@ -2,7 +2,7 @@
 #include "./simulator/simulator.h"
 
 int main(){
-    ListStatik fd;
+    ListStatik fd, resep;
     POINT awal;
     Matrix map;
     SIMULATOR sim;
@@ -26,7 +26,7 @@ int main(){
 
     if (startval == 1)
     {
-        startSimulator(&sim, &map, &awal, &fd);
+        startSimulator(&sim, &map, &awal, &fd, &resep);
         createTime(&t, 0,0,0);
         MakeEmpty(&delivery, 100);
         createEmptyStack(&notification);

@@ -75,7 +75,7 @@ printf("                                                ,@&((((#                
 printf("\n");
 }
 
-void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodlist){
+void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodlist, ListStatik *resep){
 /* Start Simulator terdiri dari beberapa proses:
     Proses 1:
     Melakukan load dari file konfigurasi.
@@ -94,7 +94,7 @@ void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodl
     /* ALGORITMA PROSES 1*/
     readMatrix(peta, posisi);
     inputListFood(foodlist);
-    //Kurang load tree
+    readResep(resep);
 
     /* ALGORITMA PROSES 2*/
     printf("Masukkan nama Anda: ");

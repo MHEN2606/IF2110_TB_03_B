@@ -10,6 +10,7 @@
 #include "../wordmachine/wordmachine.h"
 #include "../charmachine/charmachine.h"
 #include "../stack/stack.h"
+#include "../tree/tree.h"
 #include "../boolean/boolean.h"
 
 typedef struct{
@@ -31,7 +32,7 @@ void createUser(SIMULATOR *S, POINT origin, Word name, PrioQueueTime inv);
 void splashScreen();
 /* Mencetak Splash Screen Gambar BMO :) */
 
-void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodlist);
+void startSimulator(SIMULATOR *S, Matrix *peta, POINT *posisi, ListStatik *foodlist, ListStatik *resep);
 /* Start Simulator terdiri dari beberapa proses:
     Proses 1:
     Melakukan load dari file konfigurasi.
