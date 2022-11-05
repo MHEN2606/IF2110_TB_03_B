@@ -200,7 +200,7 @@ int main(){
                     Push(&commands, gameval);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
-                reduceDelTime(&INV(sim), rTime);
+                reduceDelTime(&delivery, &INV(sim),rTime);
                 reduceExpTime(&INV(sim),rTime);
             }
             

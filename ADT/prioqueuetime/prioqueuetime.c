@@ -299,7 +299,7 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
     }
 }
 
-void reduceDelTime(PrioQueueTime *Q, int t)
+void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, int t)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
 {
@@ -313,7 +313,7 @@ void reduceDelTime(PrioQueueTime *Q, int t)
         Enqueue(&temp,x,true);
     }
     *Q = temp;
-    deleteDel(Q);
+    deleteDel(Q, NQ);
 }
 
 void reduceExpTime(PrioQueueTime *Q, int t)
@@ -333,9 +333,10 @@ void reduceExpTime(PrioQueueTime *Q, int t)
     deleteEx(Q);
 }
 
-void deleteDel(PrioQueueTime *Q)
+void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ)
 /*Menghapus semua elemen yang sudah diantar
 sudah diantar -> Time = 0
+Memindahkan ke NQ (New Queue)
 */
 {
     infotype x;
@@ -349,6 +350,7 @@ sudah diantar -> Time = 0
             if (Time(x)<=0)
             {
                 Dequeue(Q,&x);
+                Enqueue(NQ, x, false);
             }
         }
     }
