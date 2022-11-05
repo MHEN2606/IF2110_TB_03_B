@@ -232,6 +232,19 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
                 infotype m;
                 Dequeue(delivery, &m);
             }
+        }else if (v==4){
+            printf("List Makanan\n");
+            printf("(nama - waktu sisa delivery)\n");
+            if(IsEmpty(*delivery))
+            {
+                printf("Delivery Kosong. Silakan melakukan BUY\n");
+            }
+            else
+            {
+                PrintDelivery(*delivery);printf("\n");
+            }
+        }else if (v == 11){
+            /* Perintah Display Cook Book*/
         }
 
         Push(OUT, v);
