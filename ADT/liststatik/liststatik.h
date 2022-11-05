@@ -49,5 +49,12 @@ int panjangList(ListStatik l);
 
 void buy(PrioQueueTime *q, ListStatik fd);
 /* Melakukan proses buy */
-
+Word findFdAksi(int N, ListStatik l);
+/*Mengembalikan aksi dari makanan dengan id = N*/
+Word findFdName(int N, ListStatik l);
+/*Mengembalikan nama makanan dengan id = N*/
+void bukuResep(ListStatik l, ListStatik f);
+/*  ListStatik *l = list yang berisi tree yang mengandung resep
+    ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
+*/
 #endif

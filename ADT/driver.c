@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "./simulator/simulator.h"
-
 int main(){
     ListStatik fd, resep;
     POINT awal;
@@ -168,8 +167,10 @@ int main(){
                     displayList(fd);printf("\n");
                     Push(&commands, gameval);
                 }
-
-                
+                if(gameval == 12)
+                {
+                    bukuResep(resep,fd);
+                }
                 if (gameval == 5)
                 {
                     printf("List Makanan\n");

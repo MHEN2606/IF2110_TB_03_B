@@ -81,6 +81,7 @@ void displayList(ListStatik l){
 /* Menuliskan isi list food*/
     for (int i = 0; i < NEFF(l); i++){
         printf("%d. ", i+1);
+        printf("%d",ID(ELMT(l,i)));
         tulisKata(FOODNAME(ELMT(l,i)));
         printf(" - ");
         tulisKata(AKSI(ELMT(l,i)));
@@ -92,17 +93,17 @@ void displayResep(ListStatik l)
     // printf("START DISINI");
     for(int i = 0 ; i<NEFF(l) ; i++)
     {
-    // printf("%d\n",tInfo(*RINFO(l,1)));
+    // printf("%d\n",tInfo(*RINFO(l,2)));
         Node x;
         x = *RINFO(l,i);
         if (firstChild(&x))
         {
-            printf("%d\n",tInfo(*firstChild(&x)));
-            while (nextSibling(&x) != NULL)
-            {
-                printf("%d",tInfo(*nextSibling(&x)));
-                x = *nextSibling(&x);
-            }
+            printf("%d\n",tInfo(x));
+            // while (nextSibling(&x) != NULL)
+            // {
+            //     printf("%d",tInfo(*nextSibling(&x)));
+            //     x = *nextSibling(&x);
+            // }
         }
     }
     // printf("END DISINI");
@@ -208,5 +209,63 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
             ADVWORD();
         }
         ADVLINE();
+    }
+}
+
+Word findFdName(int N, ListStatik l)
+/*Mengembalikan nama makanan dengan id = N*/
+{
+    int i;
+    for (i = 0; i<NEFF(l) ; i++)
+    {
+        if(ID(ELMT(l,i)) == N)
+        {
+            return FOODNAME(ELMT(l,i));
+        }
+    }
+}
+Word findFdAksi(int N, ListStatik l)
+/*Mengembalikan aksi dari makanan dengan id = N*/
+{
+    int i;
+    for (i = 0; i<NEFF(l) ; i++)
+    {
+        if(ID(ELMT(l,i)) == N)
+        {
+            return AKSI(ELMT(l,i));
+        }
+    }
+}
+void bukuResep(ListStatik l, ListStatik f)
+/*  ListStatik *l = list yang berisi tree yang mengandung resep
+    ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
+*/
+{
+    int i,number,tempInt;
+    Word tempWord;
+    Node *tempNode;
+    printf("List Resep\n");
+    printf("(aksi yang diperlukan - bahan...)\n");
+    for(i = 0 ; i<NEFF(l);i++)
+    {
+        printf("   %d.",i+1);
+        tempInt = tInfo(*RINFO(l,i));
+        tempWord = findFdName(tempInt,f);
+        tulisKata(tempWord);
+        printf("\n");
+        tempWord = findFdAksi(tempInt,f);
+        printf("     ");
+        tulisKata(tempWord);
+        // printf("-");
+        tempNode = firstChild(RINFO(l,i));
+        while(tempNode != NULL)
+        {
+            printf(" - ");
+            tempInt = tInfo(*tempNode);
+            tempWord = findFdName(tempInt,f);
+            tulisKata(tempWord);
+            tempNode = nextSibling(tempNode);
+        }
+        printf("\n");
     }
 }
