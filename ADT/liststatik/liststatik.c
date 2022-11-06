@@ -170,6 +170,7 @@ void buy(PrioQueueTime *q, ListStatik fd){
             eq.time = timeToSecond(SEND(ELMT(display,x-1)));
             eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
             eq.info = FOODNAME(ELMT(display,x-1));
+            eq.id = ID(ELMT(display, x-1));
             Enqueue(q,eq,true);
 
             printf("\n");
@@ -233,6 +234,18 @@ Word findFdAksi(int N, ListStatik l)
         if(ID(ELMT(l,i)) == N)
         {
             return AKSI(ELMT(l,i));
+        }
+    }
+}
+TIME findFdExp(int N, ListStatik l)
+/*Mengembalikan waktu exp dari makanan dengan id = N*/
+{
+    int i;
+    for (i = 0; i<NEFF(l) ; i++)
+    {
+        if(ID(ELMT(l,i)) == N)
+        {
+            return EXP(ELMT(l,i));
         }
     }
 }

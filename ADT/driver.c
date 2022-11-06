@@ -63,7 +63,7 @@ int main(){
                     rTime += 60;
                 }
                 if(gameval == 9){
-                    undo(&commands, &poppedCommands, &sim, &map, &delivery, fd, &t);
+                    undo(&commands, &poppedCommands, &sim, &map, &delivery, fd, &t, resep);
                 }
                 if(gameval == 19)
                 {
@@ -170,6 +170,7 @@ int main(){
                 if(gameval == 12)
                 {
                     bukuResep(resep,fd);
+                    Push(&commands, gameval);
                 }
                 if (gameval == 5)
                 {
@@ -200,8 +201,8 @@ int main(){
                     Push(&commands, gameval);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
-                reduceDelTime(&delivery, &INV(sim),rTime);
-                reduceExpTime(&INV(sim),rTime);
+                reduceDelTime(&delivery, &INV(sim), &commands, rTime);
+                reduceExpTime(&INV(sim),&commands,rTime);
             }
             
             printf("\n");

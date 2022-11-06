@@ -299,7 +299,7 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
     }
 }
 
-void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, int t)
+void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
 {
@@ -313,10 +313,10 @@ void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, int t)
         Enqueue(&temp,x,true);
     }
     *Q = temp;
-    deleteDel(Q, NQ);
+    deleteDel(Q, NQ, commands);
 }
 
-void reduceExpTime(PrioQueueTime *Q, int t)
+void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
 {
@@ -330,16 +330,18 @@ void reduceExpTime(PrioQueueTime *Q, int t)
         Enqueue(&temp,x,false);
     }
     *Q = temp;
-    deleteEx(Q);
+    deleteEx(Q, commands);
 }
 
-void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ)
+void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands)
 /*Menghapus semua elemen yang sudah diantar
 sudah diantar -> Time = 0
 Memindahkan ke NQ (New Queue)
 */
 {
     infotype x;
+    int count;
+    count = 0;
     PrioQueueTime temp;
     temp = *Q;
     if (!IsEmpty(*Q))
@@ -351,15 +353,21 @@ Memindahkan ke NQ (New Queue)
             {
                 Dequeue(Q,&x);
                 Enqueue(NQ, x, false);
+                count++;
+                //Push(commands, IDFood(x));
             }
         }
+        //Push(commands, count);
+        //Push(commands, 20);
     }
 }
 
-void deleteEx(PrioQueueTime *Q)
+void deleteEx(PrioQueueTime *Q, STACK *commands)
 /*Menghapus semua elemen yang sudah expired*/
 {
     infotype x;
+    int count;
+    count = 0;
     PrioQueueTime temp;
     temp = *Q;
     if (!IsEmpty(*Q))
@@ -370,7 +378,11 @@ void deleteEx(PrioQueueTime *Q)
             if (ExpTime(x)<=0)
             {
                 Dequeue(Q,&x);
+                count++;
+                //Push(commands, IDFood(x));
             }
         }
+        //Push(commands, count);
+        //Push(commands, 21);
     }
 }

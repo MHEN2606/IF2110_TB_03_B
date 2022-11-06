@@ -190,7 +190,7 @@ int cmdParser(Word command){
 }
 
 /* *** COMMANDS *** */
-void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t){
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep){
 /* Melakukan proses undo */
     if(isEmpty(*S)){
         printf("Belum ada command! Tidak bisa melakukan undo\n");
@@ -232,7 +232,7 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
                 infotype m;
                 Dequeue(delivery, &m);
             }
-        }else if (v==4){
+        }else if (v==5){
             printf("List Makanan\n");
             printf("(nama - waktu sisa delivery)\n");
             if(IsEmpty(*delivery))
@@ -243,8 +243,41 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
             {
                 PrintDelivery(*delivery);printf("\n");
             }
-        }else if (v == 11){
+        }else if (v == 12){
             /* Perintah Display Cook Book*/
+            bukuResep(resep,fd);
+        // }else if (v == 20){
+        //     /* Perintah Terjadi Proses Delesi pada Queue Delivery */
+        //     int N;
+        //     Pop(S, &N);
+        //     int i;
+        //     for(i = 0; i < N; i++){
+        //         int id;
+        //         infotype eq;
+        //         Pop(S, &id);
+        //         eq.info = findFdName(id, fd);
+        //         eq.time = 60;
+        //         eq.exp = timeToSecond(findFdExp(id,fd));
+        //         eq.id = id;
+        //         Enqueue(delivery, eq, true);
+        //     }
+        //     undo(S, OUT, sim, map, delivery, fd, t, resep);
+        // }else if (v == 21){
+        //     /* Perintah Terjadi Proses Delesi pada Queue Inventory */
+        //     int N;
+        //     Pop(S, &N);
+        //     int i;
+        //     for(i = 0; i < N; i++){
+        //         int id;
+        //         infotype eq;
+        //         Pop(S, &id);
+        //         eq.info = findFdName(id, fd);
+        //         eq.time = 0;
+        //         eq.exp = 60;
+        //         eq.id = id;
+        //         Enqueue(&INV(*sim), eq, false);
+        //     }
+        //     undo(S, OUT, sim, map, delivery, fd, t, resep);
         }
 
         Push(OUT, v);

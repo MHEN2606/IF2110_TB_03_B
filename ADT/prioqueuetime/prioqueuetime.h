@@ -9,6 +9,7 @@
 #include "../wordmachine/wordmachine.h"
 #include "../boolean/boolean.h"
 #include "../time/time.h"
+#include "../stack/stack.h"
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
@@ -17,6 +18,7 @@ typedef struct
 {
     int time;  /*waktu delivery dalam detik*/
     int exp; /* Waktu Expired */
+    int id; /* ID Makanan */
     Word info; /* elemen karakter */
 } infotype;
 typedef int address; /* indeks tabel */
@@ -36,6 +38,7 @@ typedef struct
 /* Jika e adalah infotype dan Q adalah PrioQueueTime, maka akses elemen : */
 #define Time(e) (e).time
 #define ExpTime(e) (e).exp
+#define IDFood(e) (e).id
 #define Info(e) (e).info
 #define Head(Q) (Q).HEAD
 #define Tail(Q) (Q).TAIL
@@ -104,23 +107,23 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime);
    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
    Elemen yang di didequeue dienqueue ke R */
 
-void reduceExpTime(PrioQueueTime *Q, int t);
+void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t);
 /*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
-void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, int t);
+void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t);
 /*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
 
-void deleteEx(PrioQueueTime *Q);
+void deleteEx(PrioQueueTime *Q, STACK *commands);
 /*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */
 
-void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ);
+void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands);
 /*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */

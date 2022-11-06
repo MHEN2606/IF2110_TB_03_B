@@ -59,6 +59,6 @@ int cmdParser(Word command);
     dibuat uppercase */
 
 /* *** COMMANDS *** */
-void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t);
+void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep);
 /* Melakukan proses undo */
 #endif
