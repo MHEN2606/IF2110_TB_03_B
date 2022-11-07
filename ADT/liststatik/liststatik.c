@@ -282,3 +282,24 @@ void bukuResep(ListStatik l, ListStatik f)
         printf("\n");
     }
 }
+
+void chop(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word CHOP = {"Chop", 4};
+    printf("======================\n");
+    printf("==      CHOP        ==\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: ");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, CHOP)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+        }
+    }}
