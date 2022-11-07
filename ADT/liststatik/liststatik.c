@@ -303,3 +303,25 @@ void chop(ListStatik fc, ListStatik f){
             tulisKata(tempName);
         }
     }}
+
+void mix(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word MIX = {"Mix", 3};
+    printf("======================\n");
+    printf("=        MIX         =\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: ");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, MIX)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+        }
+    }
+}
