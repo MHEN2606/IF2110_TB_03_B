@@ -386,3 +386,26 @@ void deleteEx(PrioQueueTime *Q, STACK *commands)
         //Push(commands, 21);
     }
 }
+
+boolean updateInv(PrioQueueTime *P, PrioQueueTime *Q, int id)
+/*Fungsi mencari suatu food di dalam prioqueue inventory
+mengembalikan true apabila terdapat id yang sama dengan "id"
+menghapus elemen yang memiliki id == "id" dan melakukan enqueue ke
+dalam prioqueue q.
+*/
+{
+    PrioQueueTime temp;
+    temp = *P;
+    infotype X,out;
+    while (!IsEmpty(temp))
+    {
+        Dequeue(&temp,&X);
+        if (IDFood(X)==id)
+        {
+            Enqueue(&Q,X,false);
+            removeEl(&Q,Info(X),&out);
+            return true;
+        }
+    }
+    return false;
+}
