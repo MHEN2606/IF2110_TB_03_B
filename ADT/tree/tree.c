@@ -49,31 +49,31 @@ Node * newChild (Node *x, treeinfo data)
     }
 }
 
-Node * find(Node *x,treeinfo data)
-/*Mencari suatu node yang berisi data*/
-/*Mengembalikan NULL apabila data tidak ditemukan*/
-{
-    /*While digunakan untuk mencari secara horizontal (sibling)*/
-    while (x != NULL)
-    {
-        if (tInfo(*x)==data)
-        {
-            return x;
-        }
-        /*Mulai mencari secara vertikal (firstChild)*/
-        if(firstChild(x)!=NULL)
-        {
-            /*Skema rekursif untuk tiap node*/
-            Node *ret = find(firstChild(x),data);
-            if (ret)
-            {
-                return ret;
-            }
-        }
-        x = nextSibling(x);
-    }
-    return NULL;
-}
+// Node * find(Node *x,treeinfo data)
+// /*Mencari suatu node yang berisi data*/
+// /*Mengembalikan NULL apabila data tidak ditemukan*/
+// {
+//     /*While digunakan untuk mencari secara horizontal (sibling)*/
+//     while (x != NULL)
+//     {
+//         if (tInfo(*x)==data)
+//         {
+//             return x;
+//         }
+//         /*Mulai mencari secara vertikal (firstChild)*/
+//         if(firstChild(x)!=NULL)
+//         {
+//             /*Skema rekursif untuk tiap node*/
+//             Node *ret = find(firstChild(x),data);
+//             if (ret)
+//             {
+//                 return ret;
+//             }
+//         }
+//         x = nextSibling(x);
+//     }
+//     return NULL;
+// }
 
 // void * findChild(Node * x, treeinfo data)
 // {
