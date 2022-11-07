@@ -302,7 +302,36 @@ void chop(ListStatik fc, ListStatik f){
             printf("   %d.",count);
             tulisKata(tempName);
         }
-    }}
+    }  
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    }
+
+void fry(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word FRY = {"Fry", 3};
+    printf("======================\n");
+    printf("==       FRY        ==\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: ");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, FRY)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+        }
+    }
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    }
 
 void mix(ListStatik fc, ListStatik f){
     int tempInfo;
