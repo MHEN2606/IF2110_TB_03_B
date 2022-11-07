@@ -127,5 +127,10 @@ void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands);
 /*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */
-
+boolean updateInv(PrioQueueTime *P, PrioQueueTime *Q, int id);
+/*Fungsi mencari suatu food di dalam prioqueue inventory
+mengembalikan true apabila terdapat id yang sama dengan "id"
+menghapus elemen yang memiliki id == "id" dan melakukan enqueue ke
+dalam prioqueue q.
+*/
 #endif

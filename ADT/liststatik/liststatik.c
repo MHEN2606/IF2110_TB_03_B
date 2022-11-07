@@ -354,3 +354,30 @@ void mix(ListStatik fc, ListStatik f){
         }
     }
 }
+
+ListStatik findChild(int id, ListStatik resep)
+/*Membuat suatu list statik yang berisi child dari
+makanan dengan id = "id"*/
+{
+    ListStatik L;
+    Node temp;
+    createList(&L);
+    int i;
+    for(i = 0 ; i<NEFF(resep);i++)
+    {
+        if(id == tInfo(*RINFO(resep,i)))
+        {
+            temp = *RINFO(resep,i);
+        }
+    }
+
+    i = 0;
+    temp = *firstChild(&temp);
+    NEFF(L) = 1;
+    IINFO(L,i) = tInfo(temp);
+    while (nextSibling(&temp))
+    {
+        IINFO(L,i) = tInfo(temp);
+        NEFF(L)++;
+    }
+}
