@@ -16,6 +16,7 @@ typedef struct{
     union{
         ElType container[100];
         Node * resep[100];
+        int num[100];
     } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
@@ -24,6 +25,7 @@ typedef struct{
 #define ELMT(l,i) (l).ltype.container[(i)]
 #define NEFF(l) (l).NEFF
 #define RINFO(l,i) (l).ltype.resep[(i)]
+#define IINFO(l,i) (l).ltype.num[(i)]
 
 /* *** CREATOR *** */
 void createList(ListStatik *l);
@@ -59,4 +61,7 @@ void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
+ListStatik findChild(int id, ListStatik resep);
+/*Membuat suatu list statik yang berisi child dari
+makanan dengan id = "id"*/
 #endif
