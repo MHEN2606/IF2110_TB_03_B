@@ -36,7 +36,7 @@ Node * newChild (Node *x, treeinfo data);
 /*Membuat suatu node yang merupakan anak dari node x*/
 Node * find(Node *x, treeinfo data);
 /*Mencari suatu node yang berisi data*/
-void * findChild(Node *x, treeinfo data);
+// void * findChild(Node *x, treeinfo data);
 /*Mengeluarkan output semua info dari node yang menjadi anak dari node "data"
 Node "data" => Node dengan INFO() = data
 FORMAT OUTPUT:
