@@ -498,6 +498,40 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
+void boil(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word BOIL = {"Boil", 4};
+    printf("======================\n");
+    printf("=        BOIL         =\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, BOIL)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+            printf("\n");
+        }
+    }
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
+    }
+}
+
 ListStatik findChild(int id, ListStatik resep)
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
