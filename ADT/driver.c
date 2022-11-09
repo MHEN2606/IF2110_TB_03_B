@@ -138,7 +138,7 @@ int main(){
                 else if(gameval == 7)
                 {
                     if(isAdjacent(POSISI(sim), map, 'C')){
-                        chop(resep, fd);
+                        chop(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;
@@ -160,7 +160,7 @@ int main(){
                 else if(gameval == 6)
                 {
                     if(isAdjacent(POSISI(sim), map, 'M')){
-                        mix(resep, fd);
+                        mix(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;

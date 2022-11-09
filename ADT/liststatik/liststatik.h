@@ -55,15 +55,15 @@ Word findFdAksi(int N, ListStatik l);
 /*Mengembalikan aksi dari makanan dengan id = N*/
 Word findFdName(int N, ListStatik l);
 /*Mengembalikan nama makanan dengan id = N*/
-TIME findFdExp(int N, ListStatik l);
+int findFdExp(int N, ListStatik l);
 /*Mengembalikan waktu exp dari makanan dengan id = N*/
 void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
-void chop(ListStatik fc, ListStatik f);
+void chop(ListStatik fc, ListStatik f, PrioQueueTime *q);
 void fry(ListStatik fc, ListStatik f);
-void mix(ListStatik fc, ListStatik f);
+void mix(ListStatik fc, ListStatik f, PrioQueueTime *q);
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
