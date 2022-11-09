@@ -403,9 +403,12 @@ makanan dengan id = "id"*/
     temp = *firstChild(&temp);
     NEFF(L) = 1;
     IINFO(L,i) = tInfo(temp);
-    while (nextSibling(&temp))
+    while (nextSibling(&temp) != NULL)
     {
+        i++;
+        temp = *nextSibling(&temp);
         IINFO(L,i) = tInfo(temp);
         NEFF(L)++;
     }
+    return L;
 }
