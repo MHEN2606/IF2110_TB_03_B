@@ -284,6 +284,50 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
     }
 }
 
+
+// void redo (STACK *S, STACK *OUT, SIMULATOR sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep)
+// {   
+//     // if (isEmpty(*S)){
+//     //     printf("Belum ada command! Tidak bisa melakukan redo\n");
+//     // }
+//     // else{
+//     //     perintah v;
+
+//     //     //if (undo(*S,*OUT,*sim,*map,*delivery,fd,*t,resep))  {
+
+//     //     }
+    
+//     if (isEmpty(*S))
+//     {
+//         printf("Belum melakukan undo! Tidak ada yang bisa di-redo\n");
+//     }
+//     else{
+//         if (undo(&S,&OUT,&sim,&map,&delivery,fd,&t,resep)){
+
+//         }
+//         perintah v;
+//         Push(S, &v);
+//         if (v == 15)
+//         {
+//             moveNorth(&POSISI(*sim), map);
+//         }
+//         else if (v == 16)
+//         {
+//             moveSouth(&POSISI(*sim), map);
+//         }
+//         else if (v == 17){
+//             moveEast(&POSISI(*sim), map);
+//         }
+//         else if (v == 18)
+//         {
+//             moveWest(&POSISI(*sim), map);
+//         }
+   
+
+// }
+
+    
+
 // void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep){
 // /* Melakukan proses undo */
 //     if(isEmpty(*S)){
