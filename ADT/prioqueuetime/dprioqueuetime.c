@@ -14,10 +14,11 @@ int main()
     STACK S;
     infotype a,b,c;
     Word a1 = {"ikan",4};
-    PrioQueueTime P,D,tp;
+    PrioQueueTime P,D,tp,O;
     MakeEmpty(&tp,10);
     MakeEmpty(&P,10);
     MakeEmpty(&D,10);
+    MakeEmpty(&O,10);
     ExpTime(a) = 500;
     Time(a) = 500;
     IDFood(a) = 1;
@@ -86,5 +87,19 @@ int main()
     printf("DELIVERY\n");
     printf("--------------\n");
     PrintDelivery(D);
+
+    printf("--------------\n");
+    printf("Inventory awal\n");
+    printf("--------------\n");
+    PrintInventory(P);
+    boolean cek = updateInv(&P,&O,2);
+    printf("--------------\n");
+    printf("Cek inventory setelah kode makanan 2 diupdate\n");
+    printf("--------------\n");
+    PrintInventory(P);
+    printf("--------------\n");
+    printf("Temporary queue\n");
+    printf("--------------\n");
+    PrintInventory(O);
     return 0;
 }
