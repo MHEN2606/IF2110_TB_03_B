@@ -213,22 +213,35 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
     /*Bagi menjadi dua bagian, yaitu ketika head<tail atau sebaliknya*/
     if (Head(*Q)<Tail(*Q)){
         i = Head(*Q);
+        // printf("%d\n",i);
+        // printf("%d",Tail(*Q));
+        // tulisKata(Info(Elmt(*Q,i)));
         /*Mencari index yang sesuai*/
-        while(i<Tail(*Q)&&!found){
+        while(i<=Tail(*Q)&&!found){
+            // printf("%d",i);
             if (isSameWord(Info(Elmt(*Q,i)),makanan)){
                 idxfound = i;
+                // printf("Wah idnya ketemu nih %d",idxfound);
                 found = true;
-            } else{
-            i++;
+            } 
+            else
+            {
+                i++;
             }
         }
+        Time(*out) = Time(Elmt(*Q,idxfound)); 
+        Info(*out) = Info(Elmt(*Q,idxfound));
+        // tulisKata(Info(Elmt(*Q,i))); 
+        // tulisKata(Info(Elmt(*Q,idxfound)));
         /*Melakukan pergeseran untuk menghapus elemen pada idxfound*/
-        for(i=idxfound;i<Tail(*Q);i++){
-            Elmt(*Q,idxfound) = Elmt(*Q,idxfound+1);
+        if (idxfound != Tail(*Q))
+        {
+            for(i=idxfound;i<Tail(*Q);i++)
+            {
+                Elmt(*Q,i) = Elmt(*Q,i+1);
+            }
         }
         Tail(*Q)--;
-        Time(*out) = Time(Elmt(*Q,idxfound)); 
-        Info(*out) = Info(Elmt(*Q,idxfound)); 
     } 
     else if (Head(*Q)==Tail(*Q))
     {
@@ -252,7 +265,7 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
                 idxfound = i;
                 found = true;
                 for(i=idxfound;i<Tail(*Q);i++){
-                    Elmt(*Q,idxfound) = Elmt(*Q,idxfound+1);
+                    Elmt(*Q,i) = Elmt(*Q,i+1);
                 }
             } else {
             i++;
@@ -265,11 +278,11 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
                 idxfound = i;
                 found = true;
                 for(i=idxfound;i<MaxEl(*Q);i++){
-                    Elmt(*Q,idxfound-1) = Elmt(*Q,idxfound);
+                    Elmt(*Q,i-1) = Elmt(*Q,i);
                 }
                 Elmt(*Q,MaxEl(*Q)-1) = Elmt(*Q,0);
                 for(i=0;i<Tail(*Q);i++){
-                    Elmt(*Q,idxfound) = Elmt(*Q,idxfound+1);
+                    Elmt(*Q,i) = Elmt(*Q,i+1);
                 }
         }
         if (Tail(*Q)==0){
@@ -281,22 +294,6 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
         Info(*out) = Info(Elmt(*Q,idxfound)); 
     }
 }
-}
-
-void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime){
-/* Melakukan traversal pada Queue, mengurangi time sebanyak rTime.*/
-/* Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 */
-/* Elemen yang di didequeue dienqueue ke R */
-    for (int i = 0; i < NBElmt(*Q); i++){
-        if (Time(Elmt(*Q,i))-rTime == 0){
-            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
-            infotype out;
-            removeEl(Q, Info(Elmt(*Q,i)), &out);
-            Enqueue(R, out, false);
-        } else {
-            Time(Elmt(*Q,i)) = Time(Elmt(*Q,i))-rTime;
-        }
-    }
 }
 
 void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t)
@@ -394,18 +391,18 @@ menghapus elemen yang memiliki id == "id" dan melakukan enqueue ke
 dalam prioqueue q.
 */
 {
-    PrioQueueTime temp;
-    temp = *P;
-    infotype X,out;
-    while (!IsEmpty(temp))
-    {
-        Dequeue(&temp,&X);
-        if (IDFood(X)==id)
-        {
-            Enqueue(&Q,X,false);
-            removeEl(&Q,Info(X),&out);
-            return true;
-        }
-    }
+    // PrioQueueTime temp;
+    // temp = *P;
+    // infotype X,out;
+    // while (!IsEmpty(temp))
+    // {
+    //     Dequeue(&temp,&X);
+    //     if (IDFood(X)==id)
+    //     {
+    //         Enqueue(&Q,X,false);
+    //         removeEl(&Q,Info(X),&out);
+    //         return true;
+    //     }
+    // }
     return false;
 }
