@@ -535,7 +535,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
                 tulisKata(Info(Q));
-                printf(" telah dibuat\n");
+                printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
             } else {
                 Word Info = findFdName(tpInfo,f);
