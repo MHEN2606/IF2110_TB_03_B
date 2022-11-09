@@ -283,3 +283,97 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
         Push(OUT, v);
     }
 }
+
+// void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep){
+// /* Melakukan proses undo */
+//     if(isEmpty(*S)){
+//         printf("Belum ada command! Tidak bisa melakukan undo\n");
+//     }else{
+//         perintah v;
+//         Pop(S, &v);
+//         if (v == 15){
+//             moveSouth(&POSISI(*sim), map);
+//         }else if(v == 16){
+//             moveNorth(&POSISI(*sim), map);
+//         }else if(v == 17){
+//             moveWest(&POSISI(*sim), map);
+//         }else if(v == 18){
+//             moveEast(&POSISI(*sim), map);
+//         }else if(v == 11){
+//             printf("List Makanan\n");
+//             printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+//             displayList(fd);printf("\n");
+//         }else if(v == 13){
+//             printf("List Makanan di Inventory\n");
+//             printf("(nama - waktu sisa kedaluwarsa)\n");
+//             if(IsEmpty(INV(*sim))){
+//                 printf("Inventory Kosong. Silakan melakukan BUY\n");
+//             }else{
+//                 PrintInventory(INV(*sim));
+//                 printf("\n");
+//             }
+//         }else if (v == 19){
+//             int jam, menit;
+//             Pop(S, &jam);
+//             Pop(S, &menit);
+//             int detik = jam * 3600 + menit * 60;
+//             *t = reduceTime(t,detik);
+//         }else if(v == 3){
+//             int N;
+//             Pop(S, &N);
+//             for(int i = 0; i < N; i++){
+//                 // Dequeue 3 kali elemen pada delivery
+//                 infotype m;
+//                 Dequeue(delivery, &m);
+//             }
+//         }else if (v==5){
+//             printf("List Makanan\n");
+//             printf("(nama - waktu sisa delivery)\n");
+//             if(IsEmpty(*delivery))
+//             {
+//                 printf("Delivery Kosong. Silakan melakukan BUY\n");
+//             }
+//             else
+//             {
+//                 PrintDelivery(*delivery);printf("\n");
+//             }
+//         }else if (v == 12){
+//             /* Perintah Display Cook Book*/
+//             bukuResep(resep,fd);
+//         // }else if (v == 20){
+//         //     /* Perintah Terjadi Proses Delesi pada Queue Delivery */
+//         //     int N;
+//         //     Pop(S, &N);
+//         //     int i;
+//         //     for(i = 0; i < N; i++){
+//         //         int id;
+//         //         infotype eq;
+//         //         Pop(S, &id);
+//         //         eq.info = findFdName(id, fd);
+//         //         eq.time = 60;
+//         //         eq.exp = timeToSecond(findFdExp(id,fd));
+//         //         eq.id = id;
+//         //         Enqueue(delivery, eq, true);
+//         //     }
+//         //     undo(S, OUT, sim, map, delivery, fd, t, resep);
+//         // }else if (v == 21){
+//         //     /* Perintah Terjadi Proses Delesi pada Queue Inventory */
+//         //     int N;
+//         //     Pop(S, &N);
+//         //     int i;
+//         //     for(i = 0; i < N; i++){
+//         //         int id;
+//         //         infotype eq;
+//         //         Pop(S, &id);
+//         //         eq.info = findFdName(id, fd);
+//         //         eq.time = 0;
+//         //         eq.exp = 60;
+//         //         eq.id = id;
+//         //         Enqueue(&INV(*sim), eq, false);
+//         //     }
+//         //     undo(S, OUT, sim, map, delivery, fd, t, resep);
+//         }
+
+//         Push(OUT, v);
+//     }
+// } 
