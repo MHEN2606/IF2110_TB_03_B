@@ -311,6 +311,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
         }
     }  
     NEFF(display) = count;
+    printf("\n");
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     STARTWORD();
@@ -318,7 +319,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
     while (x-1 != -1) {
         if (x < 0 || x > panjangList(display)) {
             printf("Pilihan tidak valid, coba lagi!\n");
-            printf("Kirim 0 untuk exit.\n");
+            printf("\n");
             printf("Enter command: ");
             STARTWORD();
             x = charToInt(currentWord);
@@ -338,17 +339,14 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                     Enqueue(&R,S,false);
                 }
             }
-            printf("%d\n",count);
             infotype Q;
             if (count == panjangList(l)) {
-                printf("bs");
                 ExpTime(Q) = findFdExp(tpInfo,f);
-                printf("1. %d\n", ExpTime(Q));
                 IDFood(Q) = tpInfo;
-                printf("2. %d\n", IDFood(Q));
                 Info(Q) = findFdName(tpInfo,f);
-                tulisKata(Info(Q));
                 Enqueue(q,Q,false);
+                tulisKata(Info(Q));
+                printf(" berhasil dibuat.\n");
             } else {
                 Word Info = findFdName(tpInfo,f);
                 printf("Gagal membuat ");
@@ -369,6 +367,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                     Enqueue(q,Q,false);
                 }
             }
+            printf("\n");
             printf("Enter command: ");
             STARTWORD();
             x = charToInt(currentWord);
@@ -437,6 +436,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
         }
     }
     NEFF(display) = count;
+    printf("\n");
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     STARTWORD();
@@ -444,7 +444,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
     while (x-1 != -1) {
         if (x < 0 || x > panjangList(display)) {
             printf("Pilihan tidak valid, coba lagi!\n");
-            printf("Kirim 0 untuk exit.\n");
+            printf("\n");
             printf("Enter command: ");
             STARTWORD();
             x = charToInt(currentWord);
@@ -471,6 +471,8 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
                 Enqueue(q,Q,false);
+                tulisKata(Info(Q));
+                printf(" berhasil dibuat.\n");
             } else {
                 Word Info = findFdName(tpInfo,f);
                 printf("Gagal membuat ");
@@ -491,6 +493,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                     Enqueue(q,Q,false);
                 }
             }
+            printf("\n");
             printf("Enter command: ");
             STARTWORD();
             x = charToInt(currentWord);

@@ -402,7 +402,8 @@ dalam prioqueue q.
         if (IDFood(X)==id)
         {
             Enqueue(Q,X,false);
-            removeEl(P,Info(X),&out);
+            Dequeue(P,&X);
+            // removeEl(P,Info(X),&out);
             return true;
         }
     }
