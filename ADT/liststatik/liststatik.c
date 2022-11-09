@@ -306,7 +306,15 @@ void chop(ListStatik fc, ListStatik f){
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
     }
+}
 
 void fry(ListStatik fc, ListStatik f){
     int tempInfo;
@@ -316,7 +324,7 @@ void fry(ListStatik fc, ListStatik f){
     printf("==       FRY        ==\n");
     printf("======================\n");
     int count = 0;
-    printf("List Bahan Makanan yang Bisa Dibuat: ");
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
     for (int i = 0; i < NEFF(fc); i++)
     {
         tempInfo = tInfo(*RINFO(fc, i)); 
@@ -325,13 +333,21 @@ void fry(ListStatik fc, ListStatik f){
             count++;
             tempName = findFdName(tempInfo, f);
             printf("   %d.",count);
-            tulisKata(tempName);
+            tulisKata(tempName);printf("\n");
         }
     }
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
     }
+}
 
 void mix(ListStatik fc, ListStatik f){
     int tempInfo;
@@ -341,7 +357,7 @@ void mix(ListStatik fc, ListStatik f){
     printf("=        MIX         =\n");
     printf("======================\n");
     int count = 0;
-    printf("List Bahan Makanan yang Bisa Dibuat: ");
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
     for (int i = 0; i < NEFF(fc); i++)
     {
         tempInfo = tInfo(*RINFO(fc, i)); 
@@ -351,7 +367,19 @@ void mix(ListStatik fc, ListStatik f){
             tempName = findFdName(tempInfo, f);
             printf("   %d.",count);
             tulisKata(tempName);
+            printf("\n");
         }
+    }
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
     }
 }
 

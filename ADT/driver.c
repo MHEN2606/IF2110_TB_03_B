@@ -129,7 +129,7 @@ int main(){
                 else if(gameval == 4)
                 {
                     if(isAdjacent(POSISI(sim), map, 'F')){
-                        printf("PERINTAH FRY\n");
+                        fry(resep, fd);
                         Push(&commands, gameval);
                     }else{
                         printf("Anda tidak berada di area command!\n");
@@ -138,7 +138,7 @@ int main(){
                 else if(gameval == 7)
                 {
                     if(isAdjacent(POSISI(sim), map, 'C')){
-                        printf("PERINTAH CHOP\n");
+                        chop(resep, fd);
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;
@@ -160,7 +160,7 @@ int main(){
                 else if(gameval == 6)
                 {
                     if(isAdjacent(POSISI(sim), map, 'M')){
-                        printf("Perintah MIX\n");
+                        mix(resep, fd);
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;

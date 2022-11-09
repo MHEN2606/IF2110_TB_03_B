@@ -61,6 +61,9 @@ void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
+void chop(ListStatik fc, ListStatik f);
+void fry(ListStatik fc, ListStatik f);
+void mix(ListStatik fc, ListStatik f);
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
