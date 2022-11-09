@@ -421,3 +421,301 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
 //         Push(OUT, v);
 //     }
 // } 
+void buy(PrioQueueTime *q, ListStatik fd){
+    int x; infotype eq;
+    ListStatik display;
+    createList(&display);
+    Word BUY = {"Buy", 3};
+    printf("======================\n");
+    printf("=        BUY         =\n");
+    printf("======================\n");
+    printf("List Bahan Makanan\n");
+    int j = 0;
+    for (int i = 0; i < panjangList(fd); i++){
+        if(isSameWord(BUY, AKSI(ELMT(fd,i)))){
+            ELMT(display,j) = ELMT(fd,i);
+            printf("%d. ", j+1);
+            tulisKata(FOODNAME(ELMT(display,j)));
+            printf(" (%d menit)\n", timeToMinute(SEND(ELMT(display,j))));
+            j++;
+        }
+    }
+    NEFF(display) = j-1;
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    x = charToInt(currentWord);
+    while (x-1 != -1) {
+        if(x-1 < 0 || x-1 > panjangList(display)){
+            printf("ID tidak valid, coba lagi!\n");
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        }
+        else
+        {
+            printf("Berhasil memesan ");
+            tulisKata(FOODNAME(ELMT(display,x-1)));
+            printf(". ");
+            tulisKata(FOODNAME(ELMT(display,x-1)));
+            printf(" akan diantar dalam %d menit.\n", timeToMinute(SEND(ELMT(display,x-1))));
+
+            /* PROSES ENQUEUE KE Priority Queue q */
+            eq.time = timeToSecond(SEND(ELMT(display,x-1)));
+            eq.exp = timeToSecond(EXP(ELMT(display,x-1)));
+            eq.info = FOODNAME(ELMT(display,x-1));
+            eq.id = ID(ELMT(display, x-1));
+            Enqueue(q,eq,true);
+
+            printf("\n");
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        }
+    }
+}
+void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
+    int tempInfo;
+    PrioQueueTime temp, R;
+    MakeEmpty(&temp,100);
+    MakeEmpty(&R,100);
+    ListStatik display, l;
+    createList(&display);
+    Word tempAksi, tempName;
+    Word CHOP = {"Chop", 4};
+    printf("======================\n");
+    printf("==      CHOP        ==\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, CHOP)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+            printf("\n");
+            IINFO(display,count-1) = tempInfo;
+        }
+    }  
+    NEFF(display) = count;
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while (x-1 != -1) {
+        if (x < 0 || x > panjangList(display)) {
+            printf("Pilihan tidak valid, coba lagi!\n");
+            printf("Kirim 0 untuk exit.\n");
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        } else {
+            int tpInfo = IINFO(display,x-1);
+            l = findChild(tpInfo, fc);
+            int count = 0;
+            infotype S;
+            for (int i = 0; i < panjangList(l); i++){
+                int idChild = IINFO(l,i);
+                if (updateInv(q,&temp,idChild)) {
+                    count++;
+                } else {
+                    ExpTime(S) = findFdExp(idChild,f);
+                    IDFood(S) = idChild;
+                    Info(S) = findFdName(idChild,f);
+                    Enqueue(&R,S,false);
+                }
+            }
+            infotype Q;
+            if (count == panjangList(l)) {
+                ExpTime(Q) = findFdExp(tpInfo,f);
+                IDFood(Q) = tpInfo;
+                Info(Q) = findFdName(tpInfo,f);
+                tulisKata(Info(Q));
+                printf(" telah dibuat\n");
+                Enqueue(q,Q,false);
+            } else {
+                Word Info = findFdName(tpInfo,f);
+                printf("Gagal membuat ");
+                tulisKata(Info);
+                printf(" karena kamu tidak memiliki bahan berikut:\n");
+                int count = 0;
+                while(!IsEmpty(R)) {
+                    count++;
+                    Dequeue(&R,&Q);
+                    Word tpName = Info(Q);
+                    printf("   %d.",count);
+                    tulisKata(tpName);
+                    printf("\n");
+                }
+                while(!IsEmpty(temp)) {
+                    count++;
+                    Dequeue(&temp,&Q);
+                    Enqueue(q,Q,false);
+                }
+            }
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        }
+    }
+}
+
+void fry(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word FRY = {"Fry", 3};
+    printf("======================\n");
+    printf("==       FRY        ==\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, FRY)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);printf("\n");
+        }
+    }
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
+    }
+}
+
+void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
+    int tempInfo;
+    PrioQueueTime temp, R;
+    MakeEmpty(&temp,100);
+    MakeEmpty(&R,100);
+    ListStatik display, l;
+    createList(&display);
+    Word tempAksi, tempName;
+    Word MIX = {"Mix", 3};
+    printf("======================\n");
+    printf("=        MIX         =\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, MIX)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+            printf("\n");
+            IINFO(display,count-1) = tempInfo;
+        }
+    }
+    NEFF(display) = count;
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while (x-1 != -1) {
+        if (x < 0 || x > panjangList(display)) {
+            printf("Pilihan tidak valid, coba lagi!\n");
+            printf("Kirim 0 untuk exit.\n");
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        } else {
+            int tpInfo = IINFO(display,x-1);
+            l = findChild(tpInfo, fc);
+            int count = 0;
+            infotype S;
+            for (int i = 0; i < panjangList(l); i++){
+                int idChild = IINFO(l,i);
+                if (updateInv(q,&temp,idChild)) {
+                    count++;
+                } else {
+                    ExpTime(S) = findFdExp(idChild,f);
+                    IDFood(S) = idChild;
+                    Info(S) = findFdName(idChild,f);
+                    Enqueue(&R,S,false);
+                }
+            }
+
+            infotype Q;
+            if (count == panjangList(l)) {
+                ExpTime(Q) = findFdExp(tpInfo,f);
+                IDFood(Q) = tpInfo;
+                Info(Q) = findFdName(tpInfo,f);
+                Enqueue(q,Q,false);
+            } else {
+                Word Info = findFdName(tpInfo,f);
+                printf("Gagal membuat ");
+                tulisKata(Info);
+                printf(" karena kamu tidak memiliki bahan berikut:\n");
+                int count = 0;
+                while(!IsEmpty(R)) {
+                    count++;
+                    Dequeue(&R,&Q);
+                    Word tpName = Info(Q);
+                    printf("   %d.",count);
+                    tulisKata(tpName);
+                    printf("\n");
+                }
+                while(!IsEmpty(temp)) {
+                    count++;
+                    Dequeue(&temp,&Q);
+                    Enqueue(q,Q,false);
+                }
+            }
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        }
+    }
+}
+
+void boil(ListStatik fc, ListStatik f){
+    int tempInfo;
+    Word tempAksi, tempName;
+    Word BOIL = {"Boil", 4};
+    printf("======================\n");
+    printf("=        BOIL         =\n");
+    printf("======================\n");
+    int count = 0;
+    printf("List Bahan Makanan yang Bisa Dibuat: \n");
+    for (int i = 0; i < NEFF(fc); i++)
+    {
+        tempInfo = tInfo(*RINFO(fc, i)); 
+        tempAksi = findFdAksi(tempInfo, f);
+        if(isSameWord(tempAksi, BOIL)){
+            count++;
+            tempName = findFdName(tempInfo, f);
+            printf("   %d.",count);
+            tulisKata(tempName);
+            printf("\n");
+        }
+    }
+    printf("Kirim 0 untuk exit.\n");
+    printf("Enter command: ");
+    STARTWORD();
+    int x = charToInt(currentWord);
+    while(x != 0){
+        /* VALIDASI INPUT*/
+        printf("Kirim 0 untuk exit.\n");
+        printf("Enter command: ");
+        STARTWORD();
+        int x = charToInt(currentWord);
+    }
+}

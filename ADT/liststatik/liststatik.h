@@ -4,7 +4,6 @@
 #include "../food/food.h"
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
-#include "../prioqueuetime/prioqueuetime.h"
 #include "../tree/tree.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
@@ -13,7 +12,6 @@ typedef FOOD ElType;
 typedef struct Node * rType;
 typedef struct
 {
-    int id;
     Word aksi;
     Word foodname;
 }Notifikasi;
@@ -35,6 +33,8 @@ typedef struct{
 #define RINFO(l,i) (l).ltype.resep[(i)]
 #define IINFO(l,i) (l).ltype.num[(i)]
 #define NTF(l,i) (l).ltype.notif[(i)]
+#define AKSINOTIF(n) (n).aksi
+#define NAMANOTIF(n) (n).foodname
 
 /* *** CREATOR *** */
 void createList(ListStatik *l);
@@ -57,9 +57,6 @@ ListStatik copyList(ListStatik *l);
 
 int panjangList(ListStatik l);
 /* Mengembalikan panjang efektif dari l */
-
-void buy(PrioQueueTime *q, ListStatik fd);
-/* Melakukan proses buy */
 Word findFdAksi(int N, ListStatik l);
 /*Mengembalikan aksi dari makanan dengan id = N*/
 Word findFdName(int N, ListStatik l);
@@ -70,20 +67,17 @@ void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
-void chop(ListStatik fc, ListStatik f, PrioQueueTime *q);
-void fry(ListStatik fc, ListStatik f);
-void mix(ListStatik fc, ListStatik f, PrioQueueTime *q);
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
-void createNotification(ListStatik *n);
+void createNotificationList(ListStatik *n);
 /* Membuat list yang berisi notifikasi */
 
 void destruktor(ListStatik *n);
 /* Menghapus semua elemen yang berada di list */
 
-void expNotif();
-/* Menampilkan bahan makanan yang sudah expired */
+void displayNotif(ListStatik *notif);
+/* Menampilkan isi notifikasi */
 
 void insertNotif(ListStatik *n, Notifikasi val);
 /* Menambahkan elemen kedalam list notif*/

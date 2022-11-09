@@ -10,6 +10,7 @@
 #include "../boolean/boolean.h"
 #include "../time/time.h"
 #include "../stack/stack.h"
+#include "../liststatik/liststatik.h"
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
@@ -107,23 +108,23 @@ void traversalDecreaseTime(PrioQueueTime *Q, PrioQueueTime *R, int rTime);
    Melakukan dequeue elemen jika ada elemen time pada Q sudah 0 
    Elemen yang di didequeue dienqueue ke R */
 
-void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t);
+void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t, ListStatik *notifikasi);
 /*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
-void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t);
+void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t, ListStatik *notifikasi);
 /*Mengurangi semua exp time yang berada di dalam Queue sebanyak t*/
 /*Melakukan dequeue pada semua elemen yang mempunyai ExpTime<=0*/
 /*t dalam satuan detik*/
 
 
-void deleteEx(PrioQueueTime *Q, STACK *commands);
+void deleteEx(PrioQueueTime *Q, STACK *commands, ListStatik *notifikasi);
 /*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */
 
-void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands);
+void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, ListStatik *notifikasi);
 /*Menghapus semua elemen yang sudah diantar
 Expired -> ExpTime <= 0
 */

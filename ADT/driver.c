@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "./simulator/simulator.h"
 int main(){
-    ListStatik fd, resep;
+    ListStatik fd, resep, notification;
     POINT awal;
     Matrix map;
     SIMULATOR sim;
     TIME t;
-    STACK notification, commands, poppedCommands;
+    STACK commands, poppedCommands;
     PrioQueueTime delivery;
 
     splashScreen();
@@ -28,7 +28,7 @@ int main(){
         startSimulator(&sim, &map, &awal, &fd, &resep);
         createTime(&t, 0,0,0);
         MakeEmpty(&delivery, 100);
-        createEmptyStack(&notification);
+        createNotificationList(&notification);
         createEmptyStack(&commands);
         createEmptyStack(&poppedCommands);
 
@@ -38,7 +38,7 @@ int main(){
         printf("\n");
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
         printf("Waktu: "); displayTimeTitik(t);
-        printf("Notifikasi: "); printf("-\n");
+        displayNotif(&notification);
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
@@ -211,8 +211,8 @@ int main(){
                     Push(&commands, gameval);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
-                reduceDelTime(&delivery, &INV(sim), &commands, rTime);
-                reduceExpTime(&INV(sim),&commands,rTime);
+                reduceExpTime(&INV(sim),&commands,rTime, &notification);
+                reduceDelTime(&delivery, &INV(sim), &commands, rTime,&notification);
             }
             
             printf("\n");
@@ -222,7 +222,7 @@ int main(){
             printf("\n");
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
             printf("Waktu: "); displayTimeTitik(t);
-            printf("Notifikasi: "); printf("-\n");
+            displayNotif(&notification);
             displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");

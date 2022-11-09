@@ -299,7 +299,7 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
 }
 }
 
-void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t)
+void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t, ListStatik *notifikasi)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
 {
@@ -313,10 +313,10 @@ void reduceDelTime(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, int t)
         Enqueue(&temp,x,true);
     }
     *Q = temp;
-    deleteDel(Q, NQ, commands);
+    deleteDel(Q, NQ, commands, notifikasi);
 }
 
-void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t)
+void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t, ListStatik *notifikasi)
 /*Mengurangi semua waktu yang berada di dalam Queue sebanyak t*/
 /*t dalam satuan detik*/
 {
@@ -330,16 +330,18 @@ void reduceExpTime(PrioQueueTime *Q, STACK *commands, int t)
         Enqueue(&temp,x,false);
     }
     *Q = temp;
-    deleteEx(Q, commands);
+    deleteEx(Q, commands, notifikasi);
 }
 
-void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands)
+void deleteDel(PrioQueueTime *Q, PrioQueueTime *NQ, STACK *commands, ListStatik *notifikasi)
 /*Menghapus semua elemen yang sudah diantar
 sudah diantar -> Time = 0
 Memindahkan ke NQ (New Queue)
 */
 {
     infotype x;
+    Notifikasi not;
+    Word delivery = {"delivery", 8};
     int count;
     count = 0;
     PrioQueueTime temp;
@@ -354,6 +356,9 @@ Memindahkan ke NQ (New Queue)
                 Dequeue(Q,&x);
                 Enqueue(NQ, x, false);
                 count++;
+                not.foodname=Info(x);
+                not.aksi= delivery;
+                insertNotif(notifikasi, not);
                 //Push(commands, IDFood(x));
             }
         }
@@ -362,10 +367,12 @@ Memindahkan ke NQ (New Queue)
     }
 }
 
-void deleteEx(PrioQueueTime *Q, STACK *commands)
+void deleteEx(PrioQueueTime *Q, STACK *commands, ListStatik *notifikasi)
 /*Menghapus semua elemen yang sudah expired*/
 {
     infotype x;
+    Notifikasi not;
+    Word expired = {"expired", 7};
     int count;
     count = 0;
     PrioQueueTime temp;
@@ -379,6 +386,9 @@ void deleteEx(PrioQueueTime *Q, STACK *commands)
             {
                 Dequeue(Q,&x);
                 count++;
+                not.foodname=Info(x);
+                not.aksi= expired;
+                insertNotif(notifikasi, not);
                 //Push(commands, IDFood(x));
             }
         }
