@@ -247,6 +247,7 @@ void removeEl(PrioQueueTime *Q, Word makanan, infotype *out)
     } 
     else if (Head(*Q)==Tail(*Q))
     {
+        idxfound = 0;
         if (isSameWord(Info(InfoHead(*Q)),makanan))
         {
             Head(*Q) = Nil;
@@ -396,16 +397,16 @@ dalam prioqueue q.
     PrioQueueTime temp;
     temp = *P;
     infotype X,out;
+    boolean found = false;
     while (!IsEmpty(temp))
     {
         Dequeue(&temp,&X);
         if (IDFood(X)==id)
         {
             Enqueue(Q,X,false);
-            Dequeue(P,&X);
-            // removeEl(P,Info(X),&out);
-            return true;
+            removeEl(P,Info(X),&out);
+            found = true;
         }
     }
-    return false;
+    return found;
 }
