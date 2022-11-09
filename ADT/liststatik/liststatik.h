@@ -11,12 +11,20 @@
 
 typedef FOOD ElType;
 typedef struct Node * rType;
+typedef struct
+{
+    int id;
+    Word aksi;
+    Word foodname;
+}Notifikasi;
+
 
 typedef struct{
     union{
         ElType container[100];
         Node * resep[100];
         int num[100];
+        Notifikasi notif[100];
     } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
@@ -26,6 +34,7 @@ typedef struct{
 #define NEFF(l) (l).NEFF
 #define RINFO(l,i) (l).ltype.resep[(i)]
 #define IINFO(l,i) (l).ltype.num[(i)]
+#define NTF(l,i) (l).ltype.notif[(i)]
 
 /* *** CREATOR *** */
 void createList(ListStatik *l);
@@ -67,4 +76,15 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q);
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
+void createNotification(ListStatik *n);
+/* Membuat list yang berisi notifikasi */
+
+void destruktor(ListStatik *n);
+/* Menghapus semua elemen yang berada di list */
+
+void expNotif();
+/* Menampilkan bahan makanan yang sudah expired */
+
+void insertNotif(ListStatik *n, Notifikasi val);
+/* Menambahkan elemen kedalam list notif*/
 #endif
