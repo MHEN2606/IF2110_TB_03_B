@@ -564,3 +564,46 @@ makanan dengan id = "id"*/
     }
     return L;
 }
+void createNotification(ListStatik *n){
+    NEFF(*n) = 0;
+}
+
+void destruktor(ListStatik *n){
+    NEFF(*n) = 0;
+}
+
+void insertNotif(ListStatik *n, Notifikasi val)
+{
+   int len = panjangList(*n);
+   for (int i = len-1; i >= 0; i--) {
+      NTF(*n, i+1) = NTF(*n, i);
+   }
+
+   NTF(*n, 0) = val;
+
+}
+
+void displayNotif(ListStatik nExp, ListStatik nDel){
+    ListStatik ntf;
+    createNotification(&ntf);
+    int i = 0;
+    int j = 0;
+    int count = 1;
+    while (NEFF(nExp) != NULL || NEFF(nDel) != NULL){
+        if (NEFF(nExp) != NULL)
+        {
+            printf(" %d. ", &count);
+            printf("%s telah kadaluwarsa", &NTF(nExp, i));
+            count = count + 1;
+            i++;
+        }
+        if (NEFF(nDel) != NULL)
+        {
+            printf(" %d. ", &count);
+            printf("%s sudah diterima oleh BNMO!", &NTF(nDel, j));
+            count = count + 1;
+            j++;
+        }
+    }
+    destruktor(&ntf);
+}
