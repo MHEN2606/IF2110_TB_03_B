@@ -57,13 +57,15 @@ int main(){
             {
                 /*BUY CHOP MIX FRY BOIL menambah waktu 60 detik*/
                 /* !! INI MASIH BUTUH VALIDASI COMMAND VALID/GAK*/
-                if (gameval==3 || gameval == 6 || gameval == 7 || gameval == 8 || gameval == 9)
-                {
-                    t = addTime(&t,60);
-                    rTime += 60;
-                }
+                //if (gameval==3 || gameval == 6 || gameval == 7 || gameval == 8 || gameval == 9)
+                //{
+                 //   t = addTime(&t,60);
+                //    rTime += 60;
+                //}
                 if(gameval == 9){
                     undo(&commands, &poppedCommands, &sim, &map, &delivery, fd, &t, resep);
+                    t = addTime(&t,60);
+                    rTime += 60;
                 }
                 if(gameval == 19)
                 {
@@ -118,6 +120,8 @@ int main(){
                         length = NBElmt(delivery) - length;
                         Push(&commands, length); // push berapa elemen yang ditambahkan
                         Push(&commands, gameval);
+                        t = addTime(&t,60);
+                        rTime += 60;
                     }else{
                         printf("Anda tidak berada di area command!\n");
                     }
@@ -136,6 +140,8 @@ int main(){
                     if(isAdjacent(POSISI(sim), map, 'C')){
                         printf("PERINTAH CHOP\n");
                         Push(&commands, gameval);
+                        t = addTime(&t,60);
+                        rTime += 60;
                     }else{
                         printf("Anda tidak berada di area command!\n");
                     }
@@ -145,6 +151,8 @@ int main(){
                     if(isAdjacent(POSISI(sim), map, 'B')){
                         printf("Perintah BOil\n");
                         Push(&commands, gameval);
+                         t = addTime(&t,60);
+                        rTime += 60;
                     }else{
                         printf("Anda tidak berada di area command!\n");
                     }
@@ -154,6 +162,8 @@ int main(){
                     if(isAdjacent(POSISI(sim), map, 'M')){
                         printf("Perintah MIX\n");
                         Push(&commands, gameval);
+                        t = addTime(&t,60);
+                        rTime += 60;
                     }else{
                         printf("Anda tidak berada di area command!\n");
                     }
