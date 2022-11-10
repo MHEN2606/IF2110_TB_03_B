@@ -129,7 +129,7 @@ int main(){
                 else if(gameval == 4)
                 {
                     if(isAdjacent(POSISI(sim), map, 'F')){
-                        fry(resep, fd);
+                        fry(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                     }else{
                         printf("Anda tidak berada di area command!\n");
@@ -149,7 +149,7 @@ int main(){
                 else if(gameval == 8)
                 {
                     if(isAdjacent(POSISI(sim), map, 'B')){
-                        printf("Perintah BOil\n");
+                        boil(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                          t = addTime(&t,60);
                         rTime += 60;

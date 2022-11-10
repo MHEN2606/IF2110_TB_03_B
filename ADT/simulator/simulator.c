@@ -564,7 +564,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-void fry(ListStatik fc, ListStatik f){
+void fry(ListStatik fc, ListStatik f, PrioQueueTime *q){
     int tempInfo;
     Word tempAksi, tempName;
     Word FRY = {"Fry", 3};
@@ -658,6 +658,8 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 ExpTime(Q) = findFdExp(tpInfo,f);
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
+                tulisKata(Info(Q));
+                printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
             } else {
                 Word Info = findFdName(tpInfo,f);
@@ -686,7 +688,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-void boil(ListStatik fc, ListStatik f){
+void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
     int tempInfo;
     Word tempAksi, tempName;
     Word BOIL = {"Boil", 4};
