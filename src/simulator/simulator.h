@@ -12,6 +12,7 @@
 #include "../stack/stack.h"
 #include "../tree/tree.h"
 #include "../boolean/boolean.h"
+#include "../kulkas/kulkas.h"
 
 typedef struct{
     Word name;

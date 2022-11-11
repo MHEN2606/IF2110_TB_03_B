@@ -45,26 +45,26 @@ void displayKulkas(Kulkas k)
         printf("| ");
         for (j = 0; j < MAKS_KOLOM; j++)
         {
-            if(j == MAKS_KOLOM-1)
+            if(j != MAKS_KOLOM-1)
             {
                 if(IDFood(IsiKulkas(k,i,j)) == ID_KOSONG)
                 {
-                    printf(" ");
+                    printf("kos ");
                 }
                 else
                 {
-                    printf("%d", IDFood(IsiKulkas(k,i,j)));
+                    printf("%d ", IDFood(IsiKulkas(k,i,j)));
                 }
             }
             else
             {
                 if(IDFood(IsiKulkas(k,i,j)) == ID_KOSONG)
                 {
-                    printf(" \n");
+                    printf("kos");
                 }
                 else
                 {
-                    printf("%d\n", IDFood(IsiKulkas(k,i,j)));
+                    printf("%d", IDFood(IsiKulkas(k,i,j)));
                 }
             }
         }
@@ -95,6 +95,31 @@ boolean isValid(int i, int j)
     return(i < MAKS_BARIS && j < MAKS_KOLOM);
 }
 
+boolean isKulkasKosong(Kulkas k)
+/* Melihat apakah kulkas kosong atau tidak.
+   Semua ID pada ElKulkas kosong */
+{
+    boolean kosong;
+    kosong = true;
+    int i,j;
+    while(i < MAKS_BARIS && kosong)
+    {
+        while(j < MAKS_KOLOM && kosong)
+        {
+            if(IDFood(IsiKulkas(k, i, j)) != ID_KOSONG)
+            {
+                kosong = false;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        i++;
+    }
+    return kosong;
+}
+
 /* OPERATOR */
 void insertFood(Kulkas *k, PrioQueueTime *inv)
 /* Memasukkan makanan dari inventory ke kulkas 
@@ -123,6 +148,14 @@ void insertFood(Kulkas *k, PrioQueueTime *inv)
             }
         }
         i++;
+    }
+    if(found)
+    {
+        printf("Proses memasukkan makanan berhasil!\n");
+    }
+    else
+    {
+        printf("Proses memasukkan gagal karena kulkas penuh!\n");
     }
 }
 

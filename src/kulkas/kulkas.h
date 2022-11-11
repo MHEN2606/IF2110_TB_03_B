@@ -44,6 +44,10 @@ boolean isValid(int i, int j);
 /* Melihat apakah baris i dan kolom j 
     valid pada kulkas atau tidak */
 
+boolean isKulkasKosong(Kulkas k);
+/* Melihat apakah kulkas kosong atau tidak.
+   Semua ID pada ElKulkas kosong */
+
 /* OPERATOR */
 void insertFood(Kulkas *k, PrioQueueTime *inv);
 /* Memasukkan makanan dari inventory ke kulkas 

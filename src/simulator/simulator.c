@@ -143,6 +143,7 @@ int cmdParser(Word command){
     Word EAST = {"EAST", 4}; // Mengeluarkan 17
     Word WEST = {"WEST", 4}; // Mengeluarkan 18
     Word WAIT = {"WAIT", 4}; //Mengeluarkan 19
+    Word KULKAS = {"KULKAS", 6}; // Mengeluarkan 20
 
     // 0 untuk error silakan ulangi
 
@@ -184,6 +185,8 @@ int cmdParser(Word command){
         return 18;
     }else if(isSameWord(WAIT, command)){
         return 19;
+    }else if(isSameWord(KULKAS,command)){
+        return 20;
     }else{
         return 0;
     }
