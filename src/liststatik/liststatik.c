@@ -269,9 +269,7 @@ void destruktor(ListStatik *n){
 
 void insertNotif(ListStatik *n, Notifikasi val)
 {
-    int i;
-    i = NEFF(*n);
-    NTF(*n,i+1) = val;
+    NTF(*n,NEFF(*n)) = val;
     NEFF(*n)++;
 }
 
@@ -289,7 +287,7 @@ void displayNotif(ListStatik *notif){
         int i;
         int count;
         count = 0;
-        for (i = 1; i<=NEFF(*notif); i++){
+        for (i = 0; i<NEFF(*notif); i++){
             printf("%d. ", ++count);
             tulisKata(NAMANOTIF(NTF(*notif,i)));
             if(isSameWord(AKSINOTIF(NTF(*notif,i)),delivery))

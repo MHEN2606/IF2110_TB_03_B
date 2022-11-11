@@ -38,7 +38,7 @@ int main(){
         printf("\n");
         printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
         printf("Waktu: "); displayTimeTitik(t);
-        displayNotif(&notification);
+        displayNotif(&notification);printf("\n");
         displayMatrix(map); printf("\n");
 
         printf("Enter Command: ");
@@ -55,17 +55,24 @@ int main(){
             }
             else
             {
-                /*BUY CHOP MIX FRY BOIL menambah waktu 60 detik*/
-                /* !! INI MASIH BUTUH VALIDASI COMMAND VALID/GAK*/
-                //if (gameval==3 || gameval == 6 || gameval == 7 || gameval == 8 || gameval == 9)
-                //{
-                 //   t = addTime(&t,60);
-                //    rTime += 60;
-                //}
-                if(gameval == 9){
+                /* CEK APAKAH STACK UNDO DAN REDO SUDAH PENUH */
+                if(isFull(commands))
+                {
+                    clearStack(&commands);
+                }
+                if(isFull(poppedCommands))
+                {
+                    clearStack(&poppedCommands);
+                }
+
+                /* BAGIAN PERINTAH BNMO */
+                if(gameval == 9)
+                {
                     undo(&commands, &poppedCommands, &sim, &map, &delivery, fd, &t, resep);
-                    t = addTime(&t,60);
-                    rTime += 60;
+                }
+                if(gameval == 10)
+                {
+                    redo(&poppedCommands, &commands, &sim, &map, &delivery, fd, &t, resep);
                 }
                 if(gameval == 19)
                 {
@@ -77,7 +84,6 @@ int main(){
                     detik = jam * 3600 + menit * 60;
                     t = addTime(&t,detik);
                     rTime += detik;
-                    printf("PERINTAH WAIT\n");
                     Push(&commands, menit); //push y
                     Push(&commands, jam); // push x
                     Push(&commands, gameval); // push wait
@@ -114,7 +120,8 @@ int main(){
                 /* PERINTAH YANG BERKAITAN DENGAN MAKANAN DIJALANKAN DI SINI */
                 if(gameval == 3)
                 {
-                    if(isAdjacent(POSISI(sim), map, 'T')){
+                    if(isAdjacent(POSISI(sim), map, 'T'))
+                    {
                         int length = NBElmt(delivery);
                         buy(&delivery, fd);
                         length = NBElmt(delivery) - length;
@@ -122,54 +129,70 @@ int main(){
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;
-                    }else{
+                    }
+                    else
+                    {
                         printf("Anda tidak berada di area command!\n");
                     }
                 }
                 else if(gameval == 4)
                 {
-                    if(isAdjacent(POSISI(sim), map, 'F')){
+                    if(isAdjacent(POSISI(sim), map, 'F'))
+                    {
                         fry(resep, fd, &INV(sim));
                         Push(&commands, gameval);
-                    }else{
+                        t = addTime(&t,60);
+                        rTime += 60;
+                    }
+                    else
+                    {
                         printf("Anda tidak berada di area command!\n");
                     }
                 }
                 else if(gameval == 7)
                 {
-                    if(isAdjacent(POSISI(sim), map, 'C')){
+                    if(isAdjacent(POSISI(sim), map, 'C'))
+                    {
                         chop(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;
-                    }else{
+                    }
+                    else
+                    {
                         printf("Anda tidak berada di area command!\n");
                     }
                 }
                 else if(gameval == 8)
                 {
-                    if(isAdjacent(POSISI(sim), map, 'B')){
+                    if(isAdjacent(POSISI(sim), map, 'B'))
+                    {
                         boil(resep, fd, &INV(sim));
                         Push(&commands, gameval);
-                         t = addTime(&t,60);
+                        t = addTime(&t,60);
                         rTime += 60;
-                    }else{
+                    }
+                    else
+                    {
                         printf("Anda tidak berada di area command!\n");
                     }
                 }
                 else if(gameval == 6)
                 {
-                    if(isAdjacent(POSISI(sim), map, 'M')){
+                    if(isAdjacent(POSISI(sim), map, 'M'))
+                    {
                         mix(resep, fd, &INV(sim));
                         Push(&commands, gameval);
                         t = addTime(&t,60);
                         rTime += 60;
-                    }else{
+                    }
+                    else
+                    {
                         printf("Anda tidak berada di area command!\n");
                     }
                 }
 
-                /*Catalog*/
+                /* Catalog */
                 if(gameval == 11)
                 {
                     printf("List Makanan\n");
@@ -177,11 +200,13 @@ int main(){
                     displayList(fd);printf("\n");
                     Push(&commands, gameval);
                 }
+                /* Buku Resep */
                 if(gameval == 12)
                 {
                     bukuResep(resep,fd);
                     Push(&commands, gameval);
                 }
+                /* Delivery */
                 if (gameval == 5)
                 {
                     printf("List Makanan\n");
@@ -197,14 +222,17 @@ int main(){
                     Push(&commands, gameval);
                 }
 
-                /* PERINTAH YANG BERKAITAN DENGAN DISPLAY DIJALANKAN DI SINI*/
+                /* Inventory */
                 if(gameval == 13)
-                { // COMMAND INVENTORY
+                {
                     printf("List Makanan di Inventory\n");
                     printf("(nama - waktu sisa kedaluwarsa)\n");
-                    if(IsEmpty(INV(sim))){
+                    if(IsEmpty(INV(sim)))
+                    {
                         printf("Inventory Kosong. Silakan melakukan BUY\n");
-                    }else{
+                    }
+                    else
+                    {
                         PrintInventory(INV(sim));
                         printf("\n");
                     }
@@ -213,6 +241,14 @@ int main(){
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
                 reduceExpTime(&INV(sim),&commands,rTime, &notification);
                 reduceDelTime(&delivery, &INV(sim), &commands, rTime,&notification);
+
+                /* Cek apakah command yang diberikan sama dengan top dari redo.
+                Jika berbeda, maka redo dikosongkan */
+                if(gameval != 9 && gameval != 10)
+                {
+                    if(TOP(poppedCommands) != gameval)
+                        clearStack(&poppedCommands);
+                }
             }
             
             printf("\n");
@@ -222,7 +258,7 @@ int main(){
             printf("\n");
             printf("BNMO di Posisi: "); tulisPoint(POSISI(sim));
             printf("Waktu: "); displayTimeTitik(t);
-            displayNotif(&notification);
+            displayNotif(&notification);printf("\n");
             displayMatrix(map); printf("\n");
 
             printf("Enter Command: ");

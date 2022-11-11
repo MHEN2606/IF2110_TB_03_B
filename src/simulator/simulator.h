@@ -61,7 +61,8 @@ int cmdParser(Word command);
 /* *** COMMANDS *** */
 void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep);
 /* Melakukan proses undo */
-
+void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep);
+/* Melakukan proses redo */
 void buy(PrioQueueTime *q, ListStatik fd);
 /* Melakukan proses buy */
 void chop(ListStatik fc, ListStatik f, PrioQueueTime *q);

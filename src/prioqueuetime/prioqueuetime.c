@@ -359,11 +359,11 @@ Memindahkan ke NQ (New Queue)
                 not.foodname=Info(x);
                 not.aksi= delivery;
                 insertNotif(notifikasi, not);
-                //Push(commands, IDFood(x));
+                Push(commands, IDFood(x));
             }
         }
-        //Push(commands, count);
-        //Push(commands, 20);
+        Push(commands, count);
+        Push(commands, 20);
     }
 }
 
@@ -389,11 +389,11 @@ void deleteEx(PrioQueueTime *Q, STACK *commands, ListStatik *notifikasi)
                 not.foodname=Info(x);
                 not.aksi= expired;
                 insertNotif(notifikasi, not);
-                //Push(commands, IDFood(x));
+                Push(commands, IDFood(x));
             }
         }
-        //Push(commands, count);
-        //Push(commands, 21);
+        Push(commands, count);
+        Push(commands, 21);
     }
 }
 
