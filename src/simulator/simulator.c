@@ -432,7 +432,8 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
-                while(!IsEmpty(temp)) {
+                while(!IsEmpty(temp)) 
+                {
                     Dequeue(&temp,&Q);
                 }
             } else {
@@ -558,7 +559,8 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
-                while(!IsEmpty(temp)) {
+                while(!IsEmpty(temp)) 
+                {
                     Dequeue(&temp,&Q);
                 }
             } else {
