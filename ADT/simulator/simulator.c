@@ -500,7 +500,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
             printf("\n");
             IINFO(display,count-1) = tempInfo;
         }
-    }  
+    }
     NEFF(display) = count;
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
@@ -537,6 +537,9 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
+                while(!IsEmpty(temp)) {
+                    Dequeue(&temp,&Q);
+                }
             } else {
                 Word Info = findFdName(tpInfo,f);
                 printf("Gagal membuat ");
@@ -552,7 +555,6 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                     printf("\n");
                 }
                 while(!IsEmpty(temp)) {
-                    count++;
                     Dequeue(&temp,&Q);
                     Enqueue(q,Q,false);
                 }
@@ -661,6 +663,9 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
+                while(!IsEmpty(temp)) {
+                    Dequeue(&temp,&Q);
+                }
             } else {
                 Word Info = findFdName(tpInfo,f);
                 printf("Gagal membuat ");
@@ -676,7 +681,6 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                     printf("\n");
                 }
                 while(!IsEmpty(temp)) {
-                    count++;
                     Dequeue(&temp,&Q);
                     Enqueue(q,Q,false);
                 }
