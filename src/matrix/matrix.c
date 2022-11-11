@@ -16,7 +16,7 @@ matriks m*/
     char val;
     int brs, kol;
 
-    STARTCONFIGWORD("../konfigurasi/map.txt");
+    STARTCONFIGWORD("../config/map.txt");
     brs = charToInt(currentWord);
     ADVWORD();
     kol = charToInt(currentWord);

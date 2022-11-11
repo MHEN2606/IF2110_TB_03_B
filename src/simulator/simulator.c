@@ -14,7 +14,7 @@ void splashScreen(){
 /* Mencetak Splash Screen Gambar BMO :) */
     /* FILE * fptr;
 
-    fptr = fopen("../konfigurasi/splash.txt", "r");
+    fptr = fopen("../config/splash.txt", "r");
 
     char pic_content[255];
 
