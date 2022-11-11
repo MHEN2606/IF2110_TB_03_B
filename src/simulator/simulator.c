@@ -14,7 +14,7 @@ void splashScreen(){
 /* Mencetak Splash Screen Gambar BMO :) */
     /* FILE * fptr;
 
-    fptr = fopen("../konfigurasi/splash.txt", "r");
+    fptr = fopen("../config/splash.txt", "r");
 
     char pic_content[255];
 
@@ -246,38 +246,39 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
         }else if (v == 12){
             /* Perintah Display Cook Book*/
             bukuResep(resep,fd);
-        // }else if (v == 20){
-        //     /* Perintah Terjadi Proses Delesi pada Queue Delivery */
-        //     int N;
-        //     Pop(S, &N);
-        //     int i;
-        //     for(i = 0; i < N; i++){
-        //         int id;
-        //         infotype eq;
-        //         Pop(S, &id);
-        //         eq.info = findFdName(id, fd);
-        //         eq.time = 60;
-        //         eq.exp = timeToSecond(findFdExp(id,fd));
-        //         eq.id = id;
-        //         Enqueue(delivery, eq, true);
-        //     }
-        //     undo(S, OUT, sim, map, delivery, fd, t, resep);
-        // }else if (v == 21){
-        //     /* Perintah Terjadi Proses Delesi pada Queue Inventory */
-        //     int N;
-        //     Pop(S, &N);
-        //     int i;
-        //     for(i = 0; i < N; i++){
-        //         int id;
-        //         infotype eq;
-        //         Pop(S, &id);
-        //         eq.info = findFdName(id, fd);
-        //         eq.time = 0;
-        //         eq.exp = 60;
-        //         eq.id = id;
-        //         Enqueue(&INV(*sim), eq, false);
-        //     }
-        //     undo(S, OUT, sim, map, delivery, fd, t, resep);
+        }else if (v == 20){
+            /* Perintah Terjadi Proses Delesi pada Queue Delivery */
+            int N;
+            Pop(S, &N);
+            int i;
+            for(i = 0; i < N; i++){
+                int id;
+                infotype eq, bin;
+                Pop(S, &id);
+                eq.info = findFdName(id, fd);
+                eq.time = 60;
+                eq.exp = findFdExp(id,fd);
+                eq.id = id;
+                removeEl(&INV(*sim), eq.info, &bin);
+                Enqueue(delivery, eq, true);
+            }
+            undo(S, OUT, sim, map, delivery, fd, t, resep);
+        }else if (v == 21){
+            /* Perintah Terjadi Proses Delesi pada Queue Inventory */
+            int N;
+            Pop(S, &N);
+            int i;
+            for(i = 0; i < N; i++){
+                int id;
+                infotype eq;
+                Pop(S, &id);
+                eq.info = findFdName(id, fd);
+                eq.time = 0;
+                eq.exp = 60;
+                eq.id = id;
+                Enqueue(&INV(*sim), eq, false);
+            }
+            undo(S, OUT, sim, map, delivery, fd, t, resep);
         }
 
         Push(OUT, v);
@@ -285,142 +286,36 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
 }
 
 
-// void redo (STACK *S, STACK *OUT, SIMULATOR sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep)
-// {   
-//     // if (isEmpty(*S)){
-//     //     printf("Belum ada command! Tidak bisa melakukan redo\n");
-//     // }
-//     // else{
-//     //     perintah v;
+void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep)
+{   
+    if (isEmpty(*S))
+    {
+        printf("Belum melakukan undo atau perintah sudah ter-overwrite! Tidak ada yang bisa di-redo\n");
+    }
+    else
+    {
+        perintah v;
+        Pop(S, &v);
+        if (v == 15)
+        {
+            moveNorth(&POSISI(*sim), map);
+        }
+        else if (v == 16)
+        {
+            moveSouth(&POSISI(*sim), map);
+        }
+        else if (v == 17)
+        {
+            moveEast(&POSISI(*sim), map);
+        }
+        else if (v == 18)
+        {
+            moveWest(&POSISI(*sim), map);
+        }
+        Push(OUT, v);
+    }
+}
 
-//     //     //if (undo(*S,*OUT,*sim,*map,*delivery,fd,*t,resep))  {
-
-//     //     }
-    
-//     if (isEmpty(*S))
-//     {
-//         printf("Belum melakukan undo! Tidak ada yang bisa di-redo\n");
-//     }
-//     else{
-//         if (undo(&S,&OUT,&sim,&map,&delivery,fd,&t,resep)){
-
-//         }
-//         perintah v;
-//         Push(S, &v);
-//         if (v == 15)
-//         {
-//             moveNorth(&POSISI(*sim), map);
-//         }
-//         else if (v == 16)
-//         {
-//             moveSouth(&POSISI(*sim), map);
-//         }
-//         else if (v == 17){
-//             moveEast(&POSISI(*sim), map);
-//         }
-//         else if (v == 18)
-//         {
-//             moveWest(&POSISI(*sim), map);
-//         }
-   
-
-// }
-
-    
-
-// void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *delivery, ListStatik fd, TIME *t, ListStatik resep){
-// /* Melakukan proses undo */
-//     if(isEmpty(*S)){
-//         printf("Belum ada command! Tidak bisa melakukan undo\n");
-//     }else{
-//         perintah v;
-//         Pop(S, &v);
-//         if (v == 15){
-//             moveSouth(&POSISI(*sim), map);
-//         }else if(v == 16){
-//             moveNorth(&POSISI(*sim), map);
-//         }else if(v == 17){
-//             moveWest(&POSISI(*sim), map);
-//         }else if(v == 18){
-//             moveEast(&POSISI(*sim), map);
-//         }else if(v == 11){
-//             printf("List Makanan\n");
-//             printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
-//             displayList(fd);printf("\n");
-//         }else if(v == 13){
-//             printf("List Makanan di Inventory\n");
-//             printf("(nama - waktu sisa kedaluwarsa)\n");
-//             if(IsEmpty(INV(*sim))){
-//                 printf("Inventory Kosong. Silakan melakukan BUY\n");
-//             }else{
-//                 PrintInventory(INV(*sim));
-//                 printf("\n");
-//             }
-//         }else if (v == 19){
-//             int jam, menit;
-//             Pop(S, &jam);
-//             Pop(S, &menit);
-//             int detik = jam * 3600 + menit * 60;
-//             *t = reduceTime(t,detik);
-//         }else if(v == 3){
-//             int N;
-//             Pop(S, &N);
-//             for(int i = 0; i < N; i++){
-//                 // Dequeue 3 kali elemen pada delivery
-//                 infotype m;
-//                 Dequeue(delivery, &m);
-//             }
-//         }else if (v==5){
-//             printf("List Makanan\n");
-//             printf("(nama - waktu sisa delivery)\n");
-//             if(IsEmpty(*delivery))
-//             {
-//                 printf("Delivery Kosong. Silakan melakukan BUY\n");
-//             }
-//             else
-//             {
-//                 PrintDelivery(*delivery);printf("\n");
-//             }
-//         }else if (v == 12){
-//             /* Perintah Display Cook Book*/
-//             bukuResep(resep,fd);
-//         // }else if (v == 20){
-//         //     /* Perintah Terjadi Proses Delesi pada Queue Delivery */
-//         //     int N;
-//         //     Pop(S, &N);
-//         //     int i;
-//         //     for(i = 0; i < N; i++){
-//         //         int id;
-//         //         infotype eq;
-//         //         Pop(S, &id);
-//         //         eq.info = findFdName(id, fd);
-//         //         eq.time = 60;
-//         //         eq.exp = timeToSecond(findFdExp(id,fd));
-//         //         eq.id = id;
-//         //         Enqueue(delivery, eq, true);
-//         //     }
-//         //     undo(S, OUT, sim, map, delivery, fd, t, resep);
-//         // }else if (v == 21){
-//         //     /* Perintah Terjadi Proses Delesi pada Queue Inventory */
-//         //     int N;
-//         //     Pop(S, &N);
-//         //     int i;
-//         //     for(i = 0; i < N; i++){
-//         //         int id;
-//         //         infotype eq;
-//         //         Pop(S, &id);
-//         //         eq.info = findFdName(id, fd);
-//         //         eq.time = 0;
-//         //         eq.exp = 60;
-//         //         eq.id = id;
-//         //         Enqueue(&INV(*sim), eq, false);
-//         //     }
-//         //     undo(S, OUT, sim, map, delivery, fd, t, resep);
-//         }
-
-//         Push(OUT, v);
-//     }
-// } 
 void buy(PrioQueueTime *q, ListStatik fd){
     int x; infotype eq;
     ListStatik display;
@@ -694,10 +589,15 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
 
 void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
     int tempInfo;
+    PrioQueueTime temp, R;
+    MakeEmpty(&temp,100);
+    MakeEmpty(&R,100);
+    ListStatik display, l;
+    createList(&display);
     Word tempAksi, tempName;
     Word BOIL = {"Boil", 4};
     printf("======================\n");
-    printf("=        BOIL         =\n");
+    printf("=       BOIL         =\n");
     printf("======================\n");
     int count = 0;
     printf("List Bahan Makanan yang Bisa Dibuat: \n");
@@ -711,17 +611,71 @@ void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
             printf("   %d.",count);
             tulisKata(tempName);
             printf("\n");
+            IINFO(display,count-1) = tempInfo;
         }
     }
+    NEFF(display) = count;
     printf("Kirim 0 untuk exit.\n");
     printf("Enter command: ");
     STARTWORD();
     int x = charToInt(currentWord);
-    while(x != 0){
-        /* VALIDASI INPUT*/
-        printf("Kirim 0 untuk exit.\n");
-        printf("Enter command: ");
-        STARTWORD();
-        int x = charToInt(currentWord);
+    while (x-1 != -1) {
+        if (x < 0 || x > panjangList(display)) {
+            printf("Pilihan tidak valid, coba lagi!\n");
+            printf("Kirim 0 untuk exit.\n");
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        } else {
+            int tpInfo = IINFO(display,x-1);
+            l = findChild(tpInfo, fc);
+            int count = 0;
+            infotype S;
+            for (int i = 0; i < panjangList(l); i++){
+                int idChild = IINFO(l,i);
+                if (updateInv(q,&temp,idChild)) {
+                    count++;
+                } else {
+                    ExpTime(S) = findFdExp(idChild,f);
+                    IDFood(S) = idChild;
+                    Info(S) = findFdName(idChild,f);
+                    Enqueue(&R,S,false);
+                }
+            }
+
+            infotype Q;
+            if (count == panjangList(l)) {
+                ExpTime(Q) = findFdExp(tpInfo,f);
+                IDFood(Q) = tpInfo;
+                Info(Q) = findFdName(tpInfo,f);
+                tulisKata(Info(Q));
+                printf(" telah dibuat\n\n");
+                Enqueue(q,Q,false);
+            } else {
+                Word Info = findFdName(tpInfo,f);
+                printf("Gagal membuat ");
+                tulisKata(Info);
+                printf(" karena kamu tidak memiliki bahan berikut:\n");
+                int count = 0;
+                while(!IsEmpty(R)) {
+                    count++;
+                    Dequeue(&R,&Q);
+                    Word tpName = Info(Q);
+                    printf("   %d.",count);
+                    tulisKata(tpName);
+                    printf("\n");
+                }
+                while(!IsEmpty(temp)) {
+                    count++;
+                    Dequeue(&temp,&Q);
+                    Enqueue(q,Q,false);
+                }
+            }
+            printf("Enter command: ");
+            STARTWORD();
+            x = charToInt(currentWord);
+        }
     }
 }
+
+

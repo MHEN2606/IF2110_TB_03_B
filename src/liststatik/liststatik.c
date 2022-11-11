@@ -18,7 +18,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
     /* Buat List Food l */
     createList(l);
 
-    STARTCONFIGWORD("../konfigurasi/makanan.txt");// buka file konfigurasi
+    STARTCONFIGWORD("../config/makanan.txt");// buka file konfigurasi
 
     // baca line pertama simpan sebagai N
     N = charToInt(currentWord);
@@ -81,7 +81,6 @@ void displayList(ListStatik l){
 /* Menuliskan isi list food*/
     for (int i = 0; i < NEFF(l); i++){
         printf("%d. ", i+1);
-        printf("%d",ID(ELMT(l,i)));
         tulisKata(FOODNAME(ELMT(l,i)));
         printf(" - ");
         tulisKata(AKSI(ELMT(l,i)));
@@ -134,7 +133,7 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
 {
     Node x;
     Node y;
-    STARTCONFIGWORD("../konfigurasi/resep.txt");
+    STARTCONFIGWORD("../config/resep.txt");
     int n = charToInt(currentWord);
     //printf("%d",n);
     NEFF(*l) = n;
@@ -269,9 +268,7 @@ void destruktor(ListStatik *n){
 
 void insertNotif(ListStatik *n, Notifikasi val)
 {
-    int i;
-    i = NEFF(*n);
-    NTF(*n,i+1) = val;
+    NTF(*n,NEFF(*n)) = val;
     NEFF(*n)++;
 }
 

@@ -30,3 +30,14 @@ void Pop(STACK *S, perintah *v){
     *v = InfoTop(*S);
     TOP(*S)--;
 }
+
+/* *** DESTRUKTOR *** */
+void clearStack(STACK *S)
+/* Menghapus keseluruhan isi STACK. Membuat TOP(S) menjadi idx_undef */
+{
+    perintah v;
+    while(TOP(*S) != idx_undef)
+    {
+        Pop(S, &v);
+    }
+}

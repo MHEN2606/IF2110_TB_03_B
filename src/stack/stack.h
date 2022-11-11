@@ -36,4 +36,8 @@ void Push(STACK *S, perintah v);
 void Pop(STACK *S, perintah *v);
 /* Mengeluarkan TOP dari Stack S. TOP disimpan ke v */
 
+/* *** DESTRUKTOR *** */
+void clearStack(STACK *S);
+/* Menghapus keseluruhan isi STACK. Membuat TOP(S) menjadi idx_undef */
+
 #endif
