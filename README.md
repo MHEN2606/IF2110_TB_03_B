@@ -5,6 +5,7 @@ Simulator Memasak BNMO
 
 # Anggota Kelompok
 | Nama | NIM |
+| ----------- | ----------- |
 | Matthew Mahendra | 13521007 |
 | Henry Anand Septian Radityo | 13521004 |
 | Syarifa Dwi Purnamasari | 13521018 |
