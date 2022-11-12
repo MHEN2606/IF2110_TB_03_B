@@ -61,6 +61,9 @@ Setelah memasukkan username, program sudah dapat dijalankan. Ada beberapa perint
 13. `Cookbook` untuk melihat resep makanan
 14. `Exit` untuk keluar dari program
 
+Adapun tambahan seperti
+1. `Kulkas` untuk melihat sebuah kulkas dimana waktu kedaluwarsa dari makanan tidak berlaku jika makanan dimasukkan ke kulkas
+
 Perintah yang diinput tidak case-sensitive dan untuk perintah nomor 2-6, harus dilakukan pada lokasi yang bertetanggaan dengan simbolnya pada peta.
 
 Untuk setiap perintah yang berhasil dijalankan, maka waktu pada program bertambah. Waktu pada program akan memengaruhi waktu pengantaran dan waktu kedaluwarsa tiap makanan. Untuk setiap makanan yang sudah selesai diantar dan kedaluwarsa, program akan mengirimkan notifikasi.

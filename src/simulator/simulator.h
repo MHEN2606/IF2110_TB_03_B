@@ -74,5 +74,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q);
 /* Melakukan proses mix */
 void boil(ListStatik fc, ListStatik f, PrioQueueTime *q);
 /* Melakukan proses boil */
+void ProcKulkas(Kulkas *kulkas, PrioQueueTime *inv);
+/* Memanggil prosedur kulkas */
 
 #endif

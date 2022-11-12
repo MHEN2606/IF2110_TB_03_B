@@ -242,61 +242,9 @@ int main(){
                 }
 
                 /* Kulkas */
-                if(gameval == 20)
+                if(gameval == 22)
                 {
-                    int pil;
-                    printf("Pilih aksi di kulkas: \n1. Melakukan insersi\n 2. Melakukan pengeluaran\n0 untuk cancel\nCommand: ");
-                    STARTWORD();
-                    pil = charToInt(currentWord);
-                    while(pil != 0)
-                    {
-                        if (pil != 1 && pil != 2)
-                        {
-                            printf("\nPilihan tidak valid! Silakan pilih kembali!\n");
-                            printf("Pilih aksi di kulkas: \n1. Melakukan insersi\n2. Melakukan pengeluaran\n0 untuk cancel\nCommand: ");
-                            STARTWORD();
-                            pil = charToInt(currentWord);
-                        }
-                        else
-                        {
-                            if(pil == 1)
-                            {
-                                /* Proses insersi makanan */
-                                if(!IsEmpty(INV(sim)))
-                                {
-                                    insertFood(&kulkas, &INV(sim));
-                                }
-                                else
-                                {
-                                    printf("Inventory Anda kosong, tidak ada yang bisa dimasukkan\n");
-                                }
-                            }
-                            else if (pil == 2)
-                            {
-                                displayKulkas(kulkas);
-                                if(!isKulkasKosong(kulkas))
-                                {    
-                                    /* Proses pengeluaran makanan */
-                                    displayKulkas(kulkas);
-                                    int i,j;
-                                    printf("Masukkan baris dari kulkas yang akan diambil makanannya! ");
-                                    STARTWORD();
-                                    i = charToInt(currentWord);
-                                    printf("\n");
-                                    printf("Masukkan kolom dari kulkas yang akan diambil makanannya! ");
-                                    STARTWORD();
-                                    j = charToInt(currentWord);
-                                    removeFood(&kulkas, i,j, &INV(sim));
-                                }
-                                else
-                                {
-                                    printf("Kulkas kosong. Tidak ada yang bisa dikeluarkan!\n");
-                                }
-                            }
-                        }
-                        printf("Command: ");STARTWORD();
-                        pil = charToInt(currentWord);printf("\n");
-                    }
+                    ProcKulkas(&kulkas, &INV(sim));
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
                 reduceExpTime(&INV(sim),&commands,rTime, &notification);

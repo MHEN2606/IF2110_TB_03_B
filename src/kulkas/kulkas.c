@@ -32,14 +32,6 @@ void displayKulkas(Kulkas k)
 {
     int i;
     int j;
-    for (i = 0; i < MAKS_KOLOM+2; i++){
-        if (i != MAKS_KOLOM+1){
-            printf("- ");
-        }else{
-            printf("-\n");
-        }
-    }
-
     for (i = 0; i < MAKS_BARIS; i++)
     {
         printf("| ");
@@ -49,7 +41,7 @@ void displayKulkas(Kulkas k)
             {
                 if(IDFood(IsiKulkas(k,i,j)) == ID_KOSONG)
                 {
-                    printf("kos ");
+                    printf("- ");
                 }
                 else
                 {
@@ -60,7 +52,7 @@ void displayKulkas(Kulkas k)
             {
                 if(IDFood(IsiKulkas(k,i,j)) == ID_KOSONG)
                 {
-                    printf("kos");
+                    printf("-");
                 }
                 else
                 {
@@ -68,15 +60,7 @@ void displayKulkas(Kulkas k)
                 }
             }
         }
-        printf("|\n");
-    }
-
-    for (i = 0; i < MAKS_KOLOM+2; i++){
-        if (i != MAKS_KOLOM+1){
-            printf("- ");
-        }else{
-            printf("-\n");
-        }
+        printf(" |\n");
     }
 }
 
@@ -102,6 +86,7 @@ boolean isKulkasKosong(Kulkas k)
     boolean kosong;
     kosong = true;
     int i,j;
+    i = 0;j = 0;
     while(i < MAKS_BARIS && kosong)
     {
         while(j < MAKS_KOLOM && kosong)
@@ -151,7 +136,9 @@ void insertFood(Kulkas *k, PrioQueueTime *inv)
     }
     if(found)
     {
-        printf("Proses memasukkan makanan berhasil!\n");
+        printf("Proses memasukkan makanan ");
+        tulisKata(Info(food));
+        printf(" berhasil!\n");
     }
     else
     {
@@ -164,6 +151,8 @@ void removeFood(Kulkas *k, int i, int j, PrioQueueTime *inv)
    dan kolom j ke inventory. Makanan dimasukkan 
    ke inventory diurutkan berdasarkan waktu */
 {
+    i = i-1;
+    j = j-1;
     if(isValid(i,j))
     {
         infotype food;
@@ -174,10 +163,18 @@ void removeFood(Kulkas *k, int i, int j, PrioQueueTime *inv)
         kosong.time = 0;
         kosong.id = ID_KOSONG;
 
+        if(IDFood(IsiKulkas(*k, i, j)) == ID_KOSONG)
+        {
+            printf("Lokasi yang dipilih kosong\n");
+        }
+        else
+        {
         food = IsiKulkas(*k, i, j);
         IsiKulkas(*k, i, j) = kosong;
 
         Enqueue(inv, food, false);
+        printf("Sukses mengeluakran makanan dari kulkas!\n");
+        }
     }
     else
     {

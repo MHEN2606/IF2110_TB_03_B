@@ -143,9 +143,9 @@ int cmdParser(Word command){
     Word EAST = {"EAST", 4}; // Mengeluarkan 17
     Word WEST = {"WEST", 4}; // Mengeluarkan 18
     Word WAIT = {"WAIT", 4}; //Mengeluarkan 19
-    Word KULKAS = {"KULKAS", 6}; // Mengeluarkan 20
+    Word KULKAS = {"KULKAS", 6}; // Mengeluarkan 22
 
-    // 0 untuk error silakan ulangi
+    // 0 untuk error silakan ulangi; 20 21 reserved untuk kalau ada makanan yang didequeue dari queue inv/del
 
     if (isSameWord(START, command)){
         return 1 ;
@@ -186,7 +186,7 @@ int cmdParser(Word command){
     }else if(isSameWord(WAIT, command)){
         return 19;
     }else if(isSameWord(KULKAS,command)){
-        return 20;
+        return 22;
     }else{
         return 0;
     }
@@ -227,6 +227,8 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
             Pop(S, &menit);
             int detik = jam * 3600 + menit * 60;
             *t = reduceTime(t,detik);
+            Push(OUT, menit);
+            Push(OUT, jam);
         }else if(v == 3){
             int N;
             Pop(S, &N);
@@ -314,6 +316,51 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
         else if (v == 18)
         {
             moveWest(&POSISI(*sim), map);
+        }
+        else if (v == 12)
+        {
+            bukuResep(resep,fd);
+        }
+        else if (v == 5)
+        {
+            printf("List Makanan\n");
+            printf("(nama - waktu sisa delivery)\n");
+            if(IsEmpty(*delivery))
+            {
+                printf("Delivery Kosong. Silakan melakukan BUY\n");
+            }
+            else
+            {
+                PrintDelivery(*delivery);printf("\n");
+            }
+        }
+        else if (v == 19)
+        {
+            /* Tambahin waktunya lagi time */
+            int jam, menit;
+            Pop(S, &jam);
+            Pop(S, &menit);
+            int detik = jam * 3600 + menit * 60;
+            *t = addTime(t,detik);
+            Push(OUT, menit);
+            Push(OUT, jam);
+        }
+        else if (v == 11)
+        {
+            printf("List Makanan\n");
+            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+            displayList(fd);printf("\n");
+        }
+        else if (v == 13)
+        {
+            printf("List Makanan di Inventory\n");
+            printf("(nama - waktu sisa kedaluwarsa)\n");
+            if(IsEmpty(INV(*sim))){
+                printf("Inventory Kosong. Silakan melakukan BUY\n");
+            }else{
+                PrintInventory(INV(*sim));
+                printf("\n");
+            }
         }
         Push(OUT, v);
     }
@@ -743,4 +790,67 @@ void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-
+void ProcKulkas(Kulkas *kulkas, PrioQueueTime *inv)
+/* Memanggil prosedur kulkas */
+{
+    int pil;
+    printf("Pilih aksi di kulkas: \n1. Melakukan insersi\n2. Melakukan pengeluaran\n3. Display kulkas\n0 untuk cancel\nCommand: ");
+    STARTWORD();
+    pil = charToInt(currentWord);
+    while(pil != 0)
+    {
+        if (pil != 1 && pil != 2 && pil != 3)
+        {
+            printf("\nPilihan tidak valid! Silakan pilih kembali!\n");
+            printf("Pilih aksi di kulkas: \n1. Melakukan insersi\n2. Melakukan pengeluaran\n3. Display kulkas\n0 untuk cancel\nCommand: ");
+            STARTWORD();
+            pil = charToInt(currentWord);
+        }
+        else
+        {
+            if(pil == 1)
+            {
+                /* Proses insersi makanan */
+                if(!IsEmpty(*inv))
+                {
+                    insertFood(kulkas, inv);
+                }
+                else
+                {
+                    printf("Inventory Anda kosong, tidak ada yang bisa dimasukkan\n");
+                }
+            }
+            else if (pil == 2)
+            {
+                if(!isKulkasKosong(*kulkas))
+                {    
+                    /* Proses pengeluaran makanan */
+                    displayKulkas(*kulkas);
+                    int i,j;
+                    printf("Masukkan baris dari kulkas yang akan diambil makanannya! ");
+                    STARTWORD();
+                    i = charToInt(currentWord);
+                    printf("\n");
+                    printf("Masukkan kolom dari kulkas yang akan diambil makanannya! ");
+                    STARTWORD();
+                    j = charToInt(currentWord);
+                    removeFood(kulkas, i,j, inv);
+                }
+                else
+                {
+                    printf("Kulkas kosong. Tidak ada yang bisa dikeluarkan!\n");
+                }
+            }
+            else if(pil == 3)
+            {
+                printf("========================\n");
+                printf("===      KULKAS      ===\n");
+                printf("========================\n");
+                displayKulkas(*kulkas);
+            }
+            printf("Command: ");
+            STARTWORD();
+            pil = charToInt(currentWord);
+        }
+    }
+}
