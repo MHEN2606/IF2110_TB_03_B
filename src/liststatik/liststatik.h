@@ -5,6 +5,7 @@
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
 #include "../tree/tree.h"
+#include "../set/set.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
 
@@ -16,22 +17,23 @@ typedef struct
     Word foodname;
 }Notifikasi;
 
-
 typedef struct{
     union{
         ElType container[100];
         Node * resep[100];
         int num[100];
         Notifikasi notif[100];
+        set set[100];
     } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
 
 /* *** SELEKTOR *** */
-#define ELMT(l,i) (l).ltype.container[(i)]
+#define ELMT(l,i) (l).ltype.container[(i)] //Selektor untuk list makanan
 #define NEFF(l) (l).NEFF
-#define RINFO(l,i) (l).ltype.resep[(i)]
-#define IINFO(l,i) (l).ltype.num[(i)]
+#define RINFO(l,i) (l).ltype.resep[(i)] //selektor untuk list resep
+#define IINFO(l,i) (l).ltype.num[(i)] // selektor untuk list integer
+#define SETN(l,i) (l).ltype.set[(i)] // selektor untuk list set
 #define NTF(l,i) (l).ltype.notif[(i)]
 #define AKSINOTIF(n) (n).aksi
 #define NAMANOTIF(n) (n).foodname

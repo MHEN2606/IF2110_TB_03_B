@@ -210,7 +210,7 @@ void undo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
             moveEast(&POSISI(*sim), map);
         }else if(v == 11){
             printf("List Makanan\n");
-            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
             displayList(fd);printf("\n");
         }else if(v == 13){
             printf("List Makanan di Inventory\n");
@@ -348,7 +348,7 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
         else if (v == 11)
         {
             printf("List Makanan\n");
-            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)");
+            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
             displayList(fd);printf("\n");
         }
         else if (v == 13)
@@ -360,6 +360,16 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
             }else{
                 PrintInventory(INV(*sim));
                 printf("\n");
+            }
+        }
+        else if(v == 3)
+        {
+            int N;
+            Push(S, N);
+            for(int i = 0; i < N; i++){
+                // Enqueue 3 kali elemen pada delivery
+                infotype m;
+                Enqueue(delivery, m, true);
             }
         }
         Push(OUT, v);
