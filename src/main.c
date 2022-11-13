@@ -50,8 +50,10 @@ int main(){
 
         while(gameval != 2){
             /*rTime untuk mengurangi waktu pada Queue delivery dan Queue Inventory*/
-            int rTime = 0;
+            int rTime;
+            rTime = 0;
             int nambah;
+            nambah = 0;
             if (gameval == 0 || gameval == 1)
             {
                 printf("Perintah tidak valid! Silakan ulangi\n");
@@ -252,7 +254,7 @@ int main(){
                 {
                     makeInvTree(&resep,INV(sim));
                     printf("SUKSES");
-                    // displayRekomendasi(resep,fd);
+                    displayRekomendasi(resep,fd);
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
                 reduceExpTime(&INV(sim),&commands,rTime, &notification);
