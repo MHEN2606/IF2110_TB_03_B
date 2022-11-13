@@ -144,6 +144,7 @@ int cmdParser(Word command){
     Word WEST = {"WEST", 4}; // Mengeluarkan 18
     Word WAIT = {"WAIT", 4}; //Mengeluarkan 19
     Word KULKAS = {"KULKAS", 6}; // Mengeluarkan 22
+    Word REKOMENDASI = {"REKOMENDASI",11}; //Mengeluarkan 23
 
     // 0 untuk error silakan ulangi; 20 21 reserved untuk kalau ada makanan yang didequeue dari queue inv/del
 
@@ -187,6 +188,8 @@ int cmdParser(Word command){
         return 19;
     }else if(isSameWord(KULKAS,command)){
         return 22;
+    }else if(isSameWord(REKOMENDASI,command)){
+        return 23;
     }else{
         return 0;
     }

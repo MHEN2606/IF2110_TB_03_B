@@ -159,6 +159,40 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
     }
 }
 
+void displayRekomendasi(ListStatik resep,ListStatik fd)
+/*Memunculkan apa saja yang dapat dibuat dari bahan
+bahan yang ada di inventory pengguna menurut resep*/
+{
+    Node tempNode;
+    Word tempName;
+    for (int i = 0; i<NEFF(resep);i++)
+    {
+        // printf("%d",*RINFO(resep,i));
+        if(isExist(*RINFO(resep,i)))
+        {
+            tempName = findFdName(tInfo(*RINFO(resep,i)),fd);
+            // printf("%d",tInfo(*RINFO(resep,i)));
+            tulisKata(tempName);
+        }
+    }
+}
+
+boolean isExist(Node x)
+/*Mengembalikan true jika semua yang menjadi child dari node x 
+memiliki exist = 1*/
+{
+    Node temp;
+    temp = *firstChild(&x);
+    while(&temp != NULL)
+    {
+        if (exist(temp) != 1)
+        {
+            return false;
+        }
+        temp = *nextSibling(&temp);
+    }
+    return true;
+}
 Word findFdName(int N, ListStatik l)
 /*Mengembalikan nama makanan dengan id = N*/
 {

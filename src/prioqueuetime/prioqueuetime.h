@@ -70,7 +70,11 @@ void DeAlokasi(PrioQueueTime *Q);
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
-
+void makeInvTree(ListStatik *resep, PrioQueueTime inv);
+/*Melakukan modifikasi pada list of tree resep dengan menambahkan
+struktur data baru yaitu exist, exist akan bernilai 1 apabila 
+user memiliki item tersebut dalam inventory nya dan bernilai
+0 apabila barang tidak dimiliki oleh user*/
 /* *** Primitif Add/Delete *** */
 void Enqueue(PrioQueueTime *Q, infotype X, boolean select);
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut membesar berdasarkan time */

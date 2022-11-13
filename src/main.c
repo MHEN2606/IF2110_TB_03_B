@@ -247,6 +247,13 @@ int main(){
                 {
                     ProcKulkas(&kulkas, &INV(sim));
                 }
+                /*Cek Rekomendasi*/
+                if (gameval == 23)
+                {
+                    makeInvTree(&resep,INV(sim));
+                    printf("SUKSES");
+                    // displayRekomendasi(resep,fd);
+                }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
                 reduceExpTime(&INV(sim),&commands,rTime, &notification);
                 reduceDelTime(&delivery, &INV(sim), &commands, rTime,&notification);

@@ -5,7 +5,9 @@
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
 #include "../tree/tree.h"
-#include "../set/set.h"
+// #include "../prioqueuetime/prioqueuetime.h"
+
+// #include "../set/set.h"
 
 #define NMAX 100 // jumlah elemen maksimum list statik
 
@@ -23,7 +25,7 @@ typedef struct{
         Node * resep[100];
         int num[100];
         Notifikasi notif[100];
-        set set[100];
+        // set set[100];
     } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
@@ -33,7 +35,7 @@ typedef struct{
 #define NEFF(l) (l).NEFF
 #define RINFO(l,i) (l).ltype.resep[(i)] //selektor untuk list resep
 #define IINFO(l,i) (l).ltype.num[(i)] // selektor untuk list integer
-#define SETN(l,i) (l).ltype.set[(i)] // selektor untuk list set
+// #define SETN(l,i) (l).ltype.set[(i)] // selektor untuk list set
 #define NTF(l,i) (l).ltype.notif[(i)]
 #define AKSINOTIF(n) (n).aksi
 #define NAMANOTIF(n) (n).foodname
@@ -71,6 +73,12 @@ void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
+void displayRekomendasi(ListStatik resep,ListStatik fd);
+/*Memunculkan apa saja yang dapat dibuat dari bahan
+bahan yang ada di inventory pengguna menurut resep*/
+boolean isExist(Node x);
+/*Mengembalikan true jika semua yang menjadi child dari node x 
+memiliki exist = 1*/
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/

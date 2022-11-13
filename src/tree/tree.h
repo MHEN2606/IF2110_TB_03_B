@@ -17,6 +17,7 @@ typedef int treeinfo;
 struct Node
 {
     // treeinfo depth;
+    treeinfo exist;
     treeinfo info;
     struct Node *firstChild;
     struct Node *nextSibling;
@@ -24,6 +25,7 @@ struct Node
 
 typedef struct Node Node;
 #define tInfo(P) (P).info
+#define exist(P) (P).exist
 #define firstChild(P) (P)-> firstChild
 #define nextSibling(P) (P)-> nextSibling
 // #define Depth(P) (P).depth
