@@ -51,6 +51,7 @@ int main(){
         while(gameval != 2){
             /*rTime untuk mengurangi waktu pada Queue delivery dan Queue Inventory*/
             int rTime = 0;
+            int nambah;
             if (gameval == 0 || gameval == 1)
             {
                 printf("Perintah tidak valid! Silakan ulangi\n");
@@ -141,10 +142,10 @@ int main(){
                 {
                     if(isAdjacent(POSISI(sim), map, 'F'))
                     {
-                        fry(resep, fd, &INV(sim));
+                        fry(resep, fd, &INV(sim), &nambah);
                         Push(&commands, gameval);
-                        t = addTime(&t,60);
-                        rTime += 60;
+                        t = addTime(&t,nambah);
+                        rTime += nambah;
                     }
                     else
                     {
@@ -155,10 +156,10 @@ int main(){
                 {
                     if(isAdjacent(POSISI(sim), map, 'C'))
                     {
-                        chop(resep, fd, &INV(sim));
+                        chop(resep, fd, &INV(sim), &nambah);
                         Push(&commands, gameval);
-                        t = addTime(&t,60);
-                        rTime += 60;
+                        t = addTime(&t,nambah);
+                        rTime += nambah;
                     }
                     else
                     {
@@ -169,10 +170,10 @@ int main(){
                 {
                     if(isAdjacent(POSISI(sim), map, 'B'))
                     {
-                        boil(resep, fd, &INV(sim));
+                        boil(resep, fd, &INV(sim), &nambah);
                         Push(&commands, gameval);
-                        t = addTime(&t,60);
-                        rTime += 60;
+                        t = addTime(&t,nambah);
+                        rTime += nambah;
                     }
                     else
                     {
@@ -183,10 +184,10 @@ int main(){
                 {
                     if(isAdjacent(POSISI(sim), map, 'M'))
                     {
-                        mix(resep, fd, &INV(sim));
+                        mix(resep, fd, &INV(sim), &nambah);
                         Push(&commands, gameval);
-                        t = addTime(&t,60);
-                        rTime += 60;
+                        t = addTime(&t,nambah);
+                        rTime += nambah;
                     }
                     else
                     {

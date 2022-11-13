@@ -195,6 +195,18 @@ int findFdExp(int N, ListStatik l)
         }
     }
 }
+int findFdDel(int N, ListStatik l)
+/*Mengembalikan waktu delivery/masak dari makanan dengan id = N*/
+{
+    int i;
+    for (i = 0; i<NEFF(l) ; i++)
+    {
+        if(ID(ELMT(l,i)) == N)
+        {
+            return timeToSecond(SEND(ELMT(l,i)));
+        }
+    }
+}
 void bukuResep(ListStatik l, ListStatik f)
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)

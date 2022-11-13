@@ -63,6 +63,8 @@ Word findFdName(int N, ListStatik l);
 /*Mengembalikan nama makanan dengan id = N*/
 int findFdExp(int N, ListStatik l);
 /*Mengembalikan waktu exp dari makanan dengan id = N*/
+int findFdDel(int N, ListStatik l);
+/*Mengembalikan waktu delivery/masak dari makanan dengan id = N*/
 void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)

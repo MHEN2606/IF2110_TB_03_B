@@ -419,7 +419,7 @@ void buy(PrioQueueTime *q, ListStatik fd){
         }
     }
 }
-void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
+void chop(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah){
     int tempInfo;
     PrioQueueTime temp, R;
     MakeEmpty(&temp,100);
@@ -479,6 +479,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 ExpTime(Q) = findFdExp(tpInfo,f);
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
+                *tTambah = findFdDel(tpInfo, f);
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
@@ -512,7 +513,7 @@ void chop(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-void fry(ListStatik fc, ListStatik f, PrioQueueTime *q){
+void fry(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah){
     int tempInfo;
     PrioQueueTime temp, R;
     MakeEmpty(&temp,100);
@@ -572,6 +573,7 @@ void fry(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 ExpTime(Q) = findFdExp(tpInfo,f);
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
+                *tTambah = findFdDel(tpInfo, f);
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
@@ -605,7 +607,7 @@ void fry(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
+void mix(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah){
     int tempInfo;
     PrioQueueTime temp, R;
     MakeEmpty(&temp,100);
@@ -666,6 +668,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 ExpTime(Q) = findFdExp(tpInfo,f);
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
+                *tTambah = findFdDel(tpInfo, f);
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
@@ -699,7 +702,7 @@ void mix(ListStatik fc, ListStatik f, PrioQueueTime *q){
     }
 }
 
-void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
+void boil(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah){
     int tempInfo;
     PrioQueueTime temp, R;
     MakeEmpty(&temp,100);
@@ -760,6 +763,7 @@ void boil(ListStatik fc, ListStatik f, PrioQueueTime *q){
                 ExpTime(Q) = findFdExp(tpInfo,f);
                 IDFood(Q) = tpInfo;
                 Info(Q) = findFdName(tpInfo,f);
+                *tTambah = findFdDel(tpInfo, f);
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);

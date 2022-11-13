@@ -66,13 +66,13 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
 /* Melakukan proses redo */
 void buy(PrioQueueTime *q, ListStatik fd);
 /* Melakukan proses buy */
-void chop(ListStatik fc, ListStatik f, PrioQueueTime *q);
+void chop(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah);
 /* Melakukan proses chop */
-void fry(ListStatik fc, ListStatik f, PrioQueueTime *q);
+void fry(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah);
 /* Melakukan proses fry */
-void mix(ListStatik fc, ListStatik f, PrioQueueTime *q);
+void mix(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah);
 /* Melakukan proses mix */
-void boil(ListStatik fc, ListStatik f, PrioQueueTime *q);
+void boil(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah);
 /* Melakukan proses boil */
 void ProcKulkas(Kulkas *kulkas, PrioQueueTime *inv);
 /* Memanggil prosedur kulkas */
