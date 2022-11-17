@@ -44,53 +44,6 @@ void MakeEmpty (PrioQueueTime * Q, int Max)
     }
 }
 
-void makeInvTree(ListStatik *resep, PrioQueueTime inv)
-/*Melakukan modifikasi pada list of tree resep dengan menambahkan
-struktur data baru yaitu exist, exist akan bernilai 1 apabila 
-user memiliki item tersebut dalam inventory nya dan bernilai
-0 apabila barang tidak dimiliki oleh user*/
-{
-    PrioQueueTime tempInv;
-    tempInv = inv;
-    infotype out;
-    Node tempNode;
-    while (!IsEmpty(tempInv))
-    {
-        Dequeue(&tempInv,&out);
-        /*Cari bagian dari tree resep yang memiliki id = id dari out*/
-        for (int i = 0; i<NEFF(*resep);i++)
-        {
-            tempNode = *RINFO(*resep,i);
-            if (tInfo(tempNode) == IDFood(out))
-            {
-                exist(tempNode) = 1;
-                printf("masuk:%d",tInfo(tempNode));
-            }
-            else
-            {
-                exist(tempNode) = 0;
-                tempNode = *firstChild(&tempNode);
-                printf("Smpe sini");
-                //ERROR DISNI
-                while (&tempNode)
-                {
-                    printf("%d-",tInfo(tempNode));
-                    printf("%d",IDFood(out));
-                    if (tInfo(tempNode)==IDFood(out))
-                    {
-                        exist(tempNode) = 1;
-                        printf("masuk:%d",tInfo(tempNode));
-                    }
-                    else 
-                    {
-                        exist(tempNode) = 0;
-                    }
-                    tempNode = *nextSibling(&tempNode);
-                }
-            }
-        }
-    }
-}
 /* *** Destruktor *** */
 void DeAlokasi(PrioQueueTime * Q)
 /* Proses: Mengembalikan memori Q */
@@ -467,4 +420,18 @@ dalam prioqueue q.
         }
     }
     return found;
+}
+
+void makeSetOfInv(Set *S,PrioQueueTime P)
+/*Membuat suatu set yang terdiri atas id makanan di dalam inventory
+karena tipe data set maka id yang berulang hanya akan masuk sekali*/
+{
+    infotype out;
+    PrioQueueTime temp;
+    temp = P;
+    while (!IsEmpty(temp))
+    {
+        Dequeue(&temp,&out);
+        insert(S,IDFood(out));
+    }
 }

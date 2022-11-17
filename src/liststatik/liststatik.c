@@ -159,40 +159,6 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
     }
 }
 
-void displayRekomendasi(ListStatik resep,ListStatik fd)
-/*Memunculkan apa saja yang dapat dibuat dari bahan
-bahan yang ada di inventory pengguna menurut resep*/
-{
-    Node tempNode;
-    Word tempName;
-    for (int i = 0; i<NEFF(resep);i++)
-    {
-        // printf("%d",*RINFO(resep,i));
-        if(isExist(*RINFO(resep,i)))
-        {
-            tempName = findFdName(tInfo(*RINFO(resep,i)),fd);
-            // printf("%d",tInfo(*RINFO(resep,i)));
-            tulisKata(tempName);
-        }
-    }
-}
-
-boolean isExist(Node x)
-/*Mengembalikan true jika semua yang menjadi child dari node x 
-memiliki exist = 1*/
-{
-    Node temp;
-    temp = *firstChild(&x);
-    while(&temp != NULL)
-    {
-        if (exist(temp) != 1)
-        {
-            return false;
-        }
-        temp = *nextSibling(&temp);
-    }
-    return true;
-}
 Word findFdName(int N, ListStatik l)
 /*Mengembalikan nama makanan dengan id = N*/
 {
@@ -345,5 +311,43 @@ void displayNotif(ListStatik *notif){
             }
         }
         destruktor(notif);
+    }
+}
+
+void createMap(ListStatik *M)
+/*Membuat map kosong, map kosong dengan length = 0*/
+{
+    NEFF(*M) = 0;
+}
+void insertElMap(ListStatik *M,Set S,int key)
+/*Memasukkan elemen set dengan key "key" ke dalam map*/
+{
+    ElMap temp;
+    KEY(temp) = key;
+    SET(temp) = S;
+    MINFO(*M,NEFF(*M)) = temp;
+    NEFF(*M)++;
+}
+void makeMapOfResep(ListStatik resep, ListStatik *Map)
+/*Membuat liststatik dengan tipe data sesuai dengan map
+key merepresentasikan parent pada resep
+set merepresentasikan bahan pada resep
+Makanan akan dapat dibuat apabila merupakan subset dari set inventory*/
+{
+    int key;
+    ListStatik tempList;
+    Set tempSet;
+    createSet(&tempSet);
+    for(int i = 0; i<NEFF(resep); i++)
+    {
+        key = tInfo(*RINFO(resep,i));
+        tempList = findChild(key,resep);
+        /*Buat set untuk semua child dari resep*/
+        for (int i = 0; i<NEFF(tempList);i++)
+        {
+            insert(&tempSet,IINFO(tempList,i));
+        }
+        insertElMap(Map,tempSet,key);
+        LENST(tempSet) = 0;
     }
 }

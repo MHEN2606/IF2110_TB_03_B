@@ -5,6 +5,7 @@
 #include "../charmachine/charmachine.h"
 #include "../wordmachine/wordmachine.h"
 #include "../tree/tree.h"
+#include "../set/set.h"
 // #include "../prioqueuetime/prioqueuetime.h"
 
 // #include "../set/set.h"
@@ -19,13 +20,20 @@ typedef struct
     Word foodname;
 }Notifikasi;
 
+typedef struct
+{
+    int key;
+    Set set;
+}ElMap;
+
 typedef struct{
     union{
         ElType container[100];
         Node * resep[100];
         int num[100];
         Notifikasi notif[100];
-        // set set[100];
+        Set set[100];
+        ElMap elemen[100];
     } ltype;
     int NEFF; // Jumlah efektif list
 }ListStatik;
@@ -35,7 +43,14 @@ typedef struct{
 #define NEFF(l) (l).NEFF
 #define RINFO(l,i) (l).ltype.resep[(i)] //selektor untuk list resep
 #define IINFO(l,i) (l).ltype.num[(i)] // selektor untuk list integer
-// #define SETN(l,i) (l).ltype.set[(i)] // selektor untuk list set
+#define SETINFO(l,i) (l).ltype.set[(i)] // selektor untuk list set
+
+/*Definisikan selektor map disini*/
+#define KEY(M) (M).key
+#define SET(M) (M).set
+#define MINFO(M,i) (M).ltype.elemen[(i)]
+
+/*Definisikan selektor notifikasi disini*/
 #define NTF(l,i) (l).ltype.notif[(i)]
 #define AKSINOTIF(n) (n).aksi
 #define NAMANOTIF(n) (n).foodname
@@ -73,12 +88,6 @@ void bukuResep(ListStatik l, ListStatik f);
 /*  ListStatik *l = list yang berisi tree yang mengandung resep
     ListStatik f = list yang berisi makanan (untuk ubah id menjadi word makanan)
 */
-void displayRekomendasi(ListStatik resep,ListStatik fd);
-/*Memunculkan apa saja yang dapat dibuat dari bahan
-bahan yang ada di inventory pengguna menurut resep*/
-boolean isExist(Node x);
-/*Mengembalikan true jika semua yang menjadi child dari node x 
-memiliki exist = 1*/
 ListStatik findChild(int id, ListStatik resep);
 /*Membuat suatu list statik yang berisi child dari
 makanan dengan id = "id"*/
@@ -93,4 +102,21 @@ void displayNotif(ListStatik *notif);
 
 void insertNotif(ListStatik *n, Notifikasi val);
 /* Menambahkan elemen kedalam list notif*/
+
+/**PRIMITIF UNTUK STRUKTUR DATA MAP**/
+/*Map merupakan liststatik dengan yang terdiri dari elemen ElMap
+ElMap mempunyai key yang nantinya dapat dikombinasikan dengan 
+struktur data Set untuk operasi rekomendasi*/
+
+void createMap(ListStatik *M);
+/*Membuat map kosong, map kosong dengan length = 0*/
+
+void insertElMap(ListStatik *M,Set S,int key);
+/*Memasukkan elemen set dengan key "key" ke dalam map*/
+
+void makeMapOfResep(ListStatik resep, ListStatik *Map);
+/*Membuat liststatik dengan tipe data sesuai dengan map
+key merepresentasikan parent pada resep
+set merepresentasikan bahan pada resep
+Makanan akan dapat dibuat apabila merupakan subset dari set inventory*/
 #endif

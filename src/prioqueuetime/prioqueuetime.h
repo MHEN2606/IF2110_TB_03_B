@@ -138,4 +138,7 @@ mengembalikan true apabila terdapat id yang sama dengan "id"
 menghapus elemen yang memiliki id == "id" dan melakukan enqueue ke
 dalam prioqueue q.
 */
+void makeSetOfInv(Set *S,PrioQueueTime P);
+/*Membuat suatu set yang terdiri atas id makanan di dalam inventory
+karena tipe data set maka id yang berulang hanya akan masuk sekali*/
 #endif

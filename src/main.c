@@ -252,9 +252,47 @@ int main(){
                 /*Cek Rekomendasi*/
                 if (gameval == 23)
                 {
-                    makeInvTree(&resep,INV(sim));
-                    printf("SUKSES");
-                    displayRekomendasi(resep,fd);
+                    Set setinv;
+                    Set tempSet;
+                    ListStatik map;
+                    Word tempOut;
+                    boolean valid;
+                    int count = 0;
+                    valid = false;
+                    createSet(&setinv);
+                    createMap(&map);
+                    makeMapOfResep(resep,&map);
+                    makeSetOfInv(&setinv,INV(sim));
+                    //DEBUG
+                    // displaySet(setinv);
+                    // displaySet(SET(MINFO(map,1)));
+                    // displaySet(SET(MINFO(map,0)));
+                    printf("List Makanan yang dapat dibuat : \n");
+                    for (int i = 0 ;i<NEFF(map);i++)
+                    {
+                        if (isSubset(SET(MINFO(map,i)),setinv))
+                        {
+                            insert(&setinv,KEY(MINFO(map,i)));
+                        }
+                    }
+                    for (int i = 0 ;i<NEFF(map);i++)
+                    {
+                        if (isSubset(SET(MINFO(map,i)),setinv))
+                        {
+                            count++;
+                            tempOut = findFdName(KEY(MINFO(map,i)),fd);
+                            printf("    %d. ",count);
+                            tulisKata(tempOut);
+                            printf("\n");
+                            valid = true;
+                        }
+                    }
+                    if (!valid)
+                    {
+                        printf("\n");
+                        printf("    Tidak ada makanan yang dapat dibuat\n");
+                        printf("    ~Harap membeli bahan terlebih dahulu~\n");
+                    }
                 }
                 /*UPDATE QUEUE INVENTORY & DELIVERY*/
                 reduceExpTime(&INV(sim),&commands,rTime, &notification);
