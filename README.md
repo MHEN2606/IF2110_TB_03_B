@@ -11,7 +11,7 @@ Simulator Memasak BNMO
 | Syarifa Dwi Purnamasari | 13521018 |
 | Eunice Sarah Siregar | 13521013 |
 | Kartini Copa | 13521026
-| Varraz Hazzandra Abrar | 13521020
+| Varraz Hazzandra Abrar | 13521020|
 
 # Deskripsi Program
 Simulator Memasak BNMO merupakan sebuah simulator memasak. Program ini dapat membuat
@@ -42,6 +42,16 @@ gcc main.c liststatik.o charmachine.o wordmachine.o food.o time.o simulator.o ma
 
 4. Pada windows, jalankan perintah `./a` untuk menjalankan. Pada linux, `./a.out`
 
+# Pembagian Tugas
+| Nama                           |   NIM    |                                         Workload management                                                   |
+| ------------------------------ | :------: | :-----------------------------------------------------------------------------------------------------------------: |
+| Matthew Mahendra   | 13521007 | ADT Food, ADT Simulator, Command Parser, Inisiasi (START/EXIT, Splash Screen), Undo, Inventory, Catalog, Buy, Main File, Konfigurasi Food dari file, Modifikasi Charmachine dan Wordmachine, Bonus 1, Bonus 2|
+| Henry Anand Septian Radityo  | 13521004 |Pengurangan waktu pada inventory dan delivery, Waktu yang bertambah pada BNMO, Wait, ADT Tree, Inventory, Konfigurasi resep dari file, Cookbook, Bonus 3 |
+| Syarifa Dwi Purnamasari | 13521013 | Move North, Move south, Pengurangan waktu pada inventory dan delivery, Konfigurasi resep dari peta, Chop, Mix |
+| Eunice Sarah Siregar | 13521018 |Notifikasi, ADT Tree, Fungsi ‘Cek if is adjacent’, Fry, Redo |
+| Kartini Copa| 13521026 | Notifikasi, Buy, Delivery, Catalog, CookBook |
+| Varraz Hazzandra Abrar| 13521020 | Move west, move east, Waktu yang bertambah pada BNMO, Boil, Redo|
+
 # Alur Program
 Ketika memulai program, akan diberikan splash screen. Lalu diminta untuk menjalankan START/EXIT. Ketikkan
 kata 'START' untuk memulai dan 'EXIT' untuk keluar program. Setelahnya akan diminta username pada program.
@@ -66,6 +76,6 @@ Adapun tambahan seperti
 1. `Kulkas` untuk melihat sebuah kulkas dimana waktu kedaluwarsa dari makanan tidak berlaku jika makanan dimasukkan ke kulkas
 2. `Rekomendasi` untuk melihat daftar makanan yang dapat dibuat berdasarkan makanan yang dimiliki di inventory
 
-Perintah yang diinput tidak case-sensitive dan untuk perintah nomor 2-6, harus dilakukan pada lokasi yang bertetanggaan dengan simbolnya pada peta.
+Perintah yang diinput tidak case-sensitive dan untuk perintah nomor 2-6, harus dilakukan pada lokasi yang bertetanggaan dengan simbolnya pada peta. `BUY` dapat dilakukan di simbol `T`, `MIX` dapat dilakukan di simbol `M`, `CHOP` dapat dilakukan di simbol `C`, `FRY` dapat dilakukan di simbol `F`, dan `BOIL` dapat dilakukan di simbol `B`
 
 Untuk setiap perintah yang berhasil dijalankan, maka waktu pada program bertambah. Waktu pada program akan memengaruhi waktu pengantaran dan waktu kedaluwarsa tiap makanan. Untuk setiap makanan yang sudah selesai diantar dan kedaluwarsa, program akan mengirimkan notifikasi.
