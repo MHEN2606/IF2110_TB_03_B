@@ -18,7 +18,7 @@ input dilakukan dari sebuah file (implementasi input dari file pada food.h)*/
     /* Buat List Food l */
     createList(l);
 
-    STARTCONFIGWORD("../../config/makanan.txt");// buka file konfigurasi
+    STARTCONFIGWORD("../config/makanan.txt");// buka file konfigurasi
 
     // baca line pertama simpan sebagai N
     N = charToInt(currentWord);
@@ -133,7 +133,7 @@ x memiliki beberapa child (tidak ada sibling karena pertama)*/
 {
     Node x;
     Node y;
-    STARTCONFIGWORD("../../config/resep.txt");
+    STARTCONFIGWORD("../config/resep.txt");
     int n = charToInt(currentWord);
     //printf("%d",n);
     NEFF(*l) = n;
