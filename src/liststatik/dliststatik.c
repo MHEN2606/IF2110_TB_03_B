@@ -24,6 +24,9 @@ int main()
     ../../config/makanan.txt
     ../../config/resep.txt
     */
+    printf("================================\n");
+    printf("||******DRIVER LISTSTATIK*****||\n");
+    printf("================================\n");
     inputListFood(&fd);
     displayList(fd);
     readResep(&resep);
@@ -39,12 +42,13 @@ int main()
     temp1 = findFdAksi(11,fd);
     tulisKata(temp1);
     printf("\nWaktu exp untuk makanan dengan id 11\n");
-    printf("%d\n",findFdExp(11,fd));
+    printf("%d detik\n",findFdExp(11,fd));
     printf("Waktu delivery untuk makanan dengan id 11\n");
-    printf("%d\n",findFdDel(11,fd));
+    printf("%d detik\n",findFdDel(11,fd));
     printf("BUKU RESEP\n");
     bukuResep(resep,fd);
     child = findChild(37,resep);
+    printf("Isi child dari id 37\n");
     for (int i = 0;i <NEFF(child);i++)
     {
         printf("|%d|",IINFO(child,i));
@@ -58,10 +62,15 @@ int main()
     NAMANOTIF(tempNotif) = ElNotif2;
     insertNotif(&notif,tempNotif);
     displayNotif(&notif);
+    printf("\n");
+    printf("Buat Map dan isi Dengan Set\n");
     createMap(&map);
     createSet(&S);
     insert(&S,11);
     insert(&S,12);
     insertElMap(&map,S,11);
     makeMapOfResep(resep,&mapresep);
+    printf("KEY : %d\n",KEY(MINFO(map,0)));
+    printf("SET : ");
+    displaySet(SET(MINFO(map,0)));
 }
