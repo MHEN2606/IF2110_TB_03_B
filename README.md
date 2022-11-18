@@ -35,8 +35,9 @@ gcc -c "./point/point.c" -o point.o
 gcc -c "./prioqueuetime/prioqueuetime.c" -o prioqueuetime.o
 gcc -c "./stack/stack.c" -o stack.o
 gcc -c "./tree/tree.c" -o tree.o
+gcc -c "./set/set.c" -o set.o
 gcc -c "./kulkas/kulkas.c" -o kulkas.o
-gcc main.c liststatik.o charmachine.o wordmachine.o food.o time.o simulator.o matrix.o point.o prioqueuetime.o stack.o tree.o kulkas.o
+gcc main.c liststatik.o charmachine.o wordmachine.o food.o time.o simulator.o matrix.o point.o prioqueuetime.o stack.o tree.o kulkas.o set.o
 ```
 
 4. Pada windows, jalankan perintah `./a` untuk menjalankan. Pada linux, `./a.out`
@@ -63,6 +64,7 @@ Setelah memasukkan username, program sudah dapat dijalankan. Ada beberapa perint
 
 Adapun tambahan seperti
 1. `Kulkas` untuk melihat sebuah kulkas dimana waktu kedaluwarsa dari makanan tidak berlaku jika makanan dimasukkan ke kulkas
+2. `Rekomendasi` untuk melihat daftar makanan yang dapat dibuat berdasarkan makanan yang dimiliki di inventory
 
 Perintah yang diinput tidak case-sensitive dan untuk perintah nomor 2-6, harus dilakukan pada lokasi yang bertetanggaan dengan simbolnya pada peta.
 
