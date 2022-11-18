@@ -17,8 +17,10 @@ Simulator Memasak BNMO
 Simulator Memasak BNMO merupakan sebuah simulator memasak. Program ini dapat membuat
 simulasi memasak dari berbagai makanan seperti melakukan aksi potong, aksi merebus,
 aksi menggoreng, dll. Program ini berbasis bahasa C.
-
-# Instalasi
+# Run Program tanpa GCC
+1. Pergi ke direkotori src. 
+2. Untuk pengguna dengan sistem operasi windows cukup run file `main.exe` untuk menjalankan program dan untuk pengguna dengan sistem operasi linux cukup run file `main.out` untuk menjalankan program.
+# Instalasi dengan GCC
 1. Pastikan pada OS Anda sudah terpasang gcc
 2. Lakukan <i>change directory</i> ke src dengan cara `cd src`
 3. Jalankan perintah ini
