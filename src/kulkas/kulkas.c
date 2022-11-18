@@ -173,7 +173,7 @@ void removeFood(Kulkas *k, int i, int j, PrioQueueTime *inv)
         IsiKulkas(*k, i, j) = kosong;
 
         Enqueue(inv, food, false);
-        printf("Sukses mengeluakran makanan dari kulkas!\n");
+        printf("Sukses mengeluarkan makanan dari kulkas!\n");
         }
     }
     else
