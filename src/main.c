@@ -268,11 +268,15 @@ int main(){
                     // displaySet(SET(MINFO(map,1)));
                     // displaySet(SET(MINFO(map,0)));
                     printf("List Makanan yang dapat dibuat : \n");
-                    for (int i = 0 ;i<NEFF(map);i++)
+                    //For dilakukan dua kali untuk mengatasi depth yang banyak
+                    for (int j = 0; j<NEFF(map);j++)
                     {
-                        if (isSubset(SET(MINFO(map,i)),setinv))
+                        for (int i = 0 ;i<NEFF(map);i++)
                         {
-                            insert(&setinv,KEY(MINFO(map,i)));
+                            if (isSubset(SET(MINFO(map,i)),setinv))
+                            {
+                                insert(&setinv,KEY(MINFO(map,i)));
+                            }
                         }
                     }
                     for (int i = 0 ;i<NEFF(map);i++)
