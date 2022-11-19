@@ -81,3 +81,27 @@ Adapun tambahan seperti
 Perintah yang diinput tidak case-sensitive dan untuk perintah nomor 2-6, harus dilakukan pada lokasi yang bertetanggaan dengan simbolnya pada peta. `BUY` dapat dilakukan di simbol `T`, `MIX` dapat dilakukan di simbol `M`, `CHOP` dapat dilakukan di simbol `C`, `FRY` dapat dilakukan di simbol `F`, dan `BOIL` dapat dilakukan di simbol `B`
 
 Untuk setiap perintah yang berhasil dijalankan, maka waktu pada program bertambah. Waktu pada program akan memengaruhi waktu pengantaran dan waktu kedaluwarsa tiap makanan. Untuk setiap makanan yang sudah selesai diantar dan kedaluwarsa, program akan mengirimkan notifikasi.
+
+
+# Daftar Fitur dan Status Pengerjaan
+| Fitur | Status |
+| ----------- | ----------- |
+| Splash Screen | Selesai |
+| START | Selesai |
+| Move | Selesai |
+| Buy | Selesai |
+| Chop | Selesai |
+| Mix | Selesai |
+| Fry | Selesai
+| Boil | Selesai |
+| Undo | Selesai |
+| Redo | Selesai |
+| Wait | Selesai |
+| Catalog | Selesai |
+| Inventory | Selesai |
+| Delivery | Selesai |
+|Cookbook | Selesai |
+| Kulkas | Selesai |
+| Rekomendasi | Selesai |
+| Exit | Selesai |
+
