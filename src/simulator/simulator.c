@@ -781,6 +781,9 @@ void boil(ListStatik fc, ListStatik f, PrioQueueTime *q, int *tTambah){
                 tulisKata(Info(Q));
                 printf(" telah dibuat\n\n");
                 Enqueue(q,Q,false);
+                {
+                    Dequeue(&temp,&Q);
+                }
             } else {
                 Word Info = findFdName(tpInfo,f);
                 printf("Gagal membuat ");
