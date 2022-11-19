@@ -203,13 +203,13 @@ int main(){
                     printf("List Makanan\n");
                     printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
                     displayList(fd);printf("\n");
-                    Push(&commands, gameval);
+                    // Push(&commands, gameval);
                 }
                 /* Buku Resep */
                 if(gameval == 12)
                 {
                     bukuResep(resep,fd);
-                    Push(&commands, gameval);
+                    // Push(&commands, gameval);
                 }
                 /* Delivery */
                 if (gameval == 5)
@@ -224,7 +224,7 @@ int main(){
                     {
                         PrintDelivery(delivery);printf("\n");
                     }
-                    Push(&commands, gameval);
+                    // Push(&commands, gameval);
                 }
 
                 /* Inventory */
@@ -241,7 +241,7 @@ int main(){
                         PrintInventory(INV(sim));
                         printf("\n");
                     }
-                    Push(&commands, gameval);
+                    // Push(&commands, gameval);
                 }
 
                 /* Kulkas */

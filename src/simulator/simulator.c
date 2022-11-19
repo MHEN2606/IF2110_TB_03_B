@@ -375,6 +375,7 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
                 Enqueue(delivery, m, true);
             }
         }
+       
         Push(OUT, v);
     }
 }
