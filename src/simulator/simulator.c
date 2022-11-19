@@ -304,21 +304,24 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
     {
         perintah v;
         Pop(S, &v);
-        if (v == 15)
-        {
-            moveNorth(&POSISI(*sim), map);
-        }
-        else if (v == 16)
-        {
-            moveSouth(&POSISI(*sim), map);
-        }
-        else if (v == 17)
-        {
-            moveEast(&POSISI(*sim), map);
-        }
-        else if (v == 18)
-        {
-            moveWest(&POSISI(*sim), map);
+        if (v == 14)
+        {   
+            if (v == 15)
+            {
+                moveNorth(&POSISI(*sim), map);
+            }
+            else if (v == 16)
+            {
+                moveSouth(&POSISI(*sim), map);
+            }
+            else if (v == 17)
+            {
+                moveEast(&POSISI(*sim), map);
+            }
+            else if (v == 18)
+            {
+                moveWest(&POSISI(*sim), map);
+            }
         }
         else if (v == 12)
         {
@@ -374,6 +377,42 @@ void redo(STACK *S, STACK *OUT, SIMULATOR *sim, Matrix *map, PrioQueueTime *deli
                 infotype m;
                 Enqueue(delivery, m, true);
             }
+        }
+        else if (v==20){
+            // Perintah Terjadi Proses Delesi pada Queue Delivery
+            int N;
+            Push(S, N);
+            int i;
+            for (i=0; i<N; i++){
+                int id;
+                infotype eq, bin;
+                Push(S, id);
+                eq.info = findFdName(id,fd);
+                eq.time = 0;
+                eq.exp = findFdExp(id, fd);
+                eq.id = id ;
+                removeEl(&INV(*sim), eq.info, &bin);
+                Dequeue(delivery, &eq);
+            }
+            redo (S, OUT, sim, map, delivery, fd, t, resep);
+
+        }
+        else if (v==21){
+            // Perintah Terjadi Proses Delesi pada Queue Inventory
+            int N;
+            Push(S, N);
+            int i;
+            for(i = 0; i < N; i++){
+                int id;
+                infotype eq;
+                Push(S, id);
+                eq.info = findFdName(id, fd);
+                eq.time = findFdDel(id, fd);
+                eq.exp = findFdExp(id,fd);
+                eq.id = id;
+                Dequeue(&INV(*sim), &eq);
+            }
+            redo (S, OUT, sim, map, delivery, fd, t, resep);
         }
         Push(OUT, v);
     }
